@@ -13,23 +13,23 @@ import UserPage from '../pages/UserPage';
 
 const Router = () => {
   return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/post" element={<PostPage />} />
-        <Route path="/board" element={<BoardPage />} />
-        <Route path="/detail/:id" element={<DetailPage />} />
-        <Route path="/user/:id" element={<UserPage />} />
-        <Route path="/report" element={<ReportPage />} />
-      </Routes>
-      <Footer />
-      <Routes>
-        <Route path="/*" element={<NotFoundPage />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/post" element={<PostPage />} />
+          <Route path="/board" element={<BoardPage />} />
+          <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path="/user/:id" element={<UserPage />} />
+          <Route path="/report" element={<ReportPage />} />
+          <Route path="/*" element={<NotFoundPage />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </>
   );
 };
 
