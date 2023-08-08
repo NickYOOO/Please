@@ -10,12 +10,14 @@ import SignUpPage from '../pages/SignUpPage';
 import PostPage from '../pages/PostPage';
 import ReportPage from '../pages/ReportPage';
 import UserPage from '../pages/UserPage';
+import Layout from '../components/layout/Layout';
 
 const Router = () => {
   return (
     <>
       <BrowserRouter>
         <Header />
+        <Layout>
         <Routes>
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
@@ -26,7 +28,8 @@ const Router = () => {
           <Route path="/user/:id" element={<UserPage />} />
           <Route path="/report" element={<ReportPage />} />
           <Route path="/*" element={<NotFoundPage />} />
-        </Routes>
+          </Routes>
+          </Layout>
         <Footer />
       </BrowserRouter>
     </>

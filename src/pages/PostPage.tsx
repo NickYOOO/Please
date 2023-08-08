@@ -1,20 +1,7 @@
-import { useRef } from "react";
-import { styled } from "styled-components";
-
-const CategoryLi = styled.li`
-  
-`
+import React from 'react';
 
 const PostPage = () => {
-  const BoxRef = useRef(null);
-  const categorys: string[] = ["배달", "청소", "조립", "역할대행", "동행,돌봄", "반려동물", "벌레퇴치", "기타"]
-  return (
-    <>
-      <ul ref={BoxRef}>
-        {categorys.map((item, i) => <li key="i">{item}</li> )}
-      </ul>
-    </>
-  );
+  return <div>PostPage</div>;
 };
 
 export default PostPage;
