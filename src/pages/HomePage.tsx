@@ -10,7 +10,7 @@ const HomePage = () => {
         <StyledH1>부탁해</StyledH1>
         <StyledH2>도움이 필요할 때,</StyledH2>
         <StyledH2>쉽고 빠르게 대신 해결해 드려요!</StyledH2>
-        <StyledLink to="/boardPage">
+        <StyledLink to="/board">
           <StyledButton>부탁하러 가기</StyledButton>
         </StyledLink>
       </StyledTitleBox>
@@ -33,11 +33,14 @@ const StyledBox = styled.div`
   height: calc(100vh - 148px);
 `;
 const StyledTitleBox = styled.div`
-  width: 25%;
+  /* width: 25%; */
+  margin-left: 110px;
 `;
 const StyledPhotoBox = styled.div`
   display: flex;
   align-items: center;
+
+  padding-left: 180px;
 `;
 const StyledImg = styled.img`
   width: 600px;
