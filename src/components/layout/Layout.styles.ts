@@ -1,8 +1,8 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 export const Container = styled.div`
   max-width: 1200px;
-  height: 2000px;
+
   margin: 0 auto;
   background-color: beige;
 `;
@@ -23,4 +23,4 @@ export const StTopBtn = styled.button`
   padding: 10px;
   border-radius: 20px;
   transition: all 0.4s;
-`
+`;

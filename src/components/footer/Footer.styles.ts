@@ -5,20 +5,23 @@ export const FooterLayout = styled.footer`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 213;
-  padding-top: 50px;
-  background: #f8f0e5;
+  /* height: 213; */
+  padding-top: 20px;
+  background: #ffefab;
 
   & > p {
     line-height: 2;
-    color: #ff6f2c;
-    font-size: 16px;
+    /* color: #ff6f2c; */
+    /* color: #ff004c; */
+    color: #444444;
+    /* color: #0074dd; */
+    font-size: 13px;
   }
 `;
 
 export const FooterBox = styled.div`
   display: inline-flex;
-  margin-top: 20px;
+  margin: 10px 0;
   gap: 20px;
 
   & > a {
