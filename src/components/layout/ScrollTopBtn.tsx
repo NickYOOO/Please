@@ -39,5 +39,3 @@ const ScrollTopBtn = () => {
 };
 
 export default ScrollTopBtn;
-
-;
