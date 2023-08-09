@@ -6,7 +6,7 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  if (['/'].includes(window.location.pathname)) return <>{children}</>;
+  if ('/' === window.location.pathname) return <>{children}</>;
 
   return (
     <>

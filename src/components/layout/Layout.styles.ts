@@ -4,7 +4,7 @@ export const Container = styled.div`
   max-width: 1200px;
 
   margin: 0 auto;
-  background-color: beige;
+  padding-top: 40px;
 `;
 
 export const StTopBtn = styled.button`

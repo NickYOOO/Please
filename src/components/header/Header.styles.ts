@@ -9,9 +9,9 @@ export const Header = styled.header`
   align-items: center;
   box-sizing: border-box;
   width: 100%;
-  height: 100px;
+  height: 40px;
   padding: 15px;
-  background-color: #f8f0e5;
+  background: #ffefab;
   z-index: 999;
 `;
 
@@ -21,18 +21,18 @@ export const TitleBox = styled.div`
   align-items: center;
   cursor: pointer;
   & > h1 {
-    font-size: 38px;
-    color: #ff6f2c;
+    font-size: 25px;
+    color: #0074dd;
 
+    padding-top: 5px;
     @media screen and (max-width: 576px) {
       display: none;
     }
   }
 
   & > img {
-    width: 80px;
-    height: 80px;
-    margin-right: 24px;
+    width: 30px;
+    margin-right: 12px;
     cursor: pointer;
   }
 `;
@@ -41,22 +41,30 @@ export const UserBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ff6f2c;
+  /* background-color: #ff6f2c; */
+  /* background-color: #ffce00; */
+  background-color: #0074dd;
+  /* border: 2px solid #0074dd; */
   border-radius: 15px;
   width: 200px;
-  height: 50px;
+  height: 25px;
 
   & > a {
+    line-height: 25px;
     color: #fff;
+    /* color: black; */
+    /* color: #0074dd; */
     outline: inherit;
     text-decoration: none;
     padding: 0 20px;
     background: none;
     border: none;
-    font-size: 16px;
+
+    font-size: 14px;
+
     cursor: pointer;
     &:hover {
-      text-decoration: underline;
+      text-decoration: none;
     }
   }
 
