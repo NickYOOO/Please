@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Input } from 'antd';
 import * as Styled from './SignUp.styles';
 import { Link, useNavigate } from 'react-router-dom';
@@ -16,8 +16,13 @@ type FieldType = {
 const SignUp = () => {
   const { formState, validationMsg, validationState, handleJoinInputChange } = useFormValidation();
   const [cookies, setCookie, removeCookie] = useCookies();
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setSubmitButtonDisabled(!(validationState.usernameState && validationState.emailState && validationState.passwordState && validationState.confirmPasswordState));
+  }, [validationState.usernameState, validationState.emailState, validationState.passwordState, validationState.confirmPasswordState]);
 
   const HandleSubmit = async () => {
     try {
@@ -63,7 +68,7 @@ const SignUp = () => {
         </Form.Item>
         <Styled.ValidationMessage color={validationState.confirmPasswordState ? '#0074dd' : '#ff004c'}>{validationMsg.confirmPasswordMsg}</Styled.ValidationMessage>
 
-        <Styled.SignUpButton htmlType="submit">Submit</Styled.SignUpButton>
+        {submitButtonDisabled ? <Styled.SignUpButton disabled>Submit</Styled.SignUpButton> : <Styled.SignUpButton htmlType="submit">Submit</Styled.SignUpButton>}
 
         <Styled.SignUpBox>
           <p>이미 회원이시라면?</p>
