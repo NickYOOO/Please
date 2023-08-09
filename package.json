@@ -15,10 +15,12 @@
     "@types/react-router-dom": "^5.3.3",
     "antd": "^5.8.2",
     "dayjs": "^1.11.9",
+    "axios": "^1.4.0",
     "firebase": "^10.1.0",
     "json-server": "^0.17.3",
     "json-server-auth": "^2.1.0",
     "react": "^18.2.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
     "react-icons": "^4.10.1",
@@ -37,7 +39,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "json": "json-server --watch db.json --port 3001"
+    "json": "json-server --watch db.json --port 3001",
+    "server": "json-server-auth --watch db.json --port 3002"
   },
   "eslintConfig": {
     "extends": [
@@ -56,5 +59,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }
