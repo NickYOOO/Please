@@ -1,10 +1,9 @@
-import React from 'react';
 import { Form, Input } from 'antd';
-import * as Styled from './SignUp.styles';
-import { Link, useNavigate } from 'react-router-dom';
-import useFormValidation from '../../hooks/useFormValidation';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { Link, useNavigate } from 'react-router-dom';
+import useFormValidation from '../../hooks/useFormValidation';
+import * as Styled from './SignUp.styles';
 
 type FieldType = {
   username?: string;
@@ -40,7 +39,7 @@ const SignUp = () => {
   };
 
   return (
-    <div>
+    <Styled.StyledBox>
       <Styled.SignUpForm name="basic" labelCol={{ flex: '110px' }} labelAlign="left" onFinish={HandleSubmit}>
         <Styled.SignUpH1>회원가입</Styled.SignUpH1>
         <Form.Item<FieldType> label="닉네임" name="username" rules={[{ required: true, message: '' }]}>
@@ -63,14 +62,14 @@ const SignUp = () => {
         </Form.Item>
         <Styled.ValidationMessage color={validationState.confirmPasswordState ? '#0074dd' : '#ff004c'}>{validationMsg.confirmPasswordMsg}</Styled.ValidationMessage>
 
-        <Styled.SignUpButton htmlType="submit">Submit</Styled.SignUpButton>
+        <Styled.SignUpButton htmlType="submit">회원가입</Styled.SignUpButton>
 
         <Styled.SignUpBox>
           <p>이미 회원이시라면?</p>
           <Link to="/login">로그인</Link>
         </Styled.SignUpBox>
       </Styled.SignUpForm>
-    </div>
+    </Styled.StyledBox>
   );
 };
 
