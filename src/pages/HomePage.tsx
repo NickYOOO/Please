@@ -30,20 +30,31 @@ const StyledBox = styled.div`
 
   background-color: #ffce00;
 
-  height: calc(100vh - 148px);
+  margin-top: 40px;
+  height: calc(100vh - 178px);
 `;
 const StyledTitleBox = styled.div`
-  /* width: 25%; */
-  margin-left: 110px;
+  width: 100%;
+  max-width: 300px;
+
+  margin-left: 68px;
+  @media (max-width: 760px) {
+    max-width: 100%;
+  }
 `;
 const StyledPhotoBox = styled.div`
   display: flex;
   align-items: center;
 
-  padding-left: 180px;
+  padding-left: 50px;
 `;
 const StyledImg = styled.img`
-  width: 600px;
+  width: 100%;
+  max-width: 600px;
+
+  @media (max-width: 760px) {
+    display: none;
+  }
 `;
 const StyledPtag = styled.p`
   font-size: 27px;
@@ -70,6 +81,7 @@ const StyledButton = styled.button`
   justify-content: center;
   align-items: center;
 
+  padding-top: 5px;
   margin-top: 30px;
 
   width: 200px;

@@ -1,7 +1,6 @@
-import React from 'react';
-import * as Styled from './Header.styles';
-import Logo from '../../assets/img/logo.svg';
 import { Link } from 'react-router-dom';
+import Logo from '../../assets/img/logo.svg';
+import * as Styled from './Header.styles';
 
 const Header = () => {
   if (!['/signup', '/login', '/', '/post', '/board', '/detail/:id', '/user/:id', '/report'].includes(window.location.pathname)) return null;

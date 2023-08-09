@@ -6,7 +6,7 @@ export const FooterLayout = styled.footer`
   align-items: center;
   width: 100%;
   /* height: 213; */
-  padding-top: 20px;
+  padding-top: 15px;
   background: #ffefab;
 
   & > p {
