@@ -7,7 +7,20 @@
       "id": 1
     }
   ],
-  "posts": [{}],
+  "posts": [
+    {
+      "uid": 1,
+      "email": "email",
+      "category": "category",
+      "title": "title",
+      "content": "content",
+      "postImgUrl": "postImgUrl",
+      "location": {
+        "lat": "lat",
+        "lng": "lat"
+      }
+    }
+  ],
   "messages": [{}],
   "likes": [
     {
