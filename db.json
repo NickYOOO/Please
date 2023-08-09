@@ -1,5 +1,12 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "kitae@kitae.kitae",
+      "password": "$2a$10$GQgtYHFn8r3DTSIcVEEQB.aoDR1x/lv8wVkgraGpaeD4NFUlx.0Wq",
+      "username": "kitae",
+      "id": 1
+    }
+  ],
   "posts": [
     {
       "uid": 1,
@@ -14,5 +21,17 @@
       }
     }
   ],
-  "messages": [{}]
+  "messages": [{}],
+  "likes": [
+    {
+      "id": 1,
+      "likes": 77
+    }
+  ],
+  "bookmark": [
+    {
+      "email": "kitae@kitae.kitae",
+      "postid": 1
+    }
+  ]
 }
