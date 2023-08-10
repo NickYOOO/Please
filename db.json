@@ -1,5 +1,27 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "kitae@kitae.kitae",
+      "password": "$2a$10$GQgtYHFn8r3DTSIcVEEQB.aoDR1x/lv8wVkgraGpaeD4NFUlx.0Wq",
+      "username": "kitae",
+      "id": 1
+    }
+  ],
+
+  "messages": [{}],
+  "likes": [
+    {
+      "id": 1,
+      "likes": 77
+    }
+  ],
+  "bookmark": [
+    {
+      "email": "kitae@kitae.kitae",
+      "postid": 1
+    }
+  ],
+
   "posts": [
     { "category": "배달", "title": "바퀴벌레 너무 무서워요. 제발 잡아주세요", "location": "서울특별시", "date": "8월 10일 PM9:00" },
     { "category": "배달", "title": "잠깐 강아지좁 봐주세요", "location": "광주" },
@@ -69,6 +91,5 @@
     { "category": "배달", "title": "5", "location": "광주" },
     { "category": "배달", "title": "5", "location": "광주" },
     { "category": "배달", "title": "5", "location": "광주" }
-  ],
-  "messages": [{}]
+  ]
 }

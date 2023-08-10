@@ -1,5 +1,6 @@
 import { Form, Input } from 'antd';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
 import useFormValidation from '../../hooks/useFormValidation';
@@ -15,18 +16,23 @@ type FieldType = {
 const SignUp = () => {
   const { formState, validationMsg, validationState, handleJoinInputChange } = useFormValidation();
   const [cookies, setCookie, removeCookie] = useCookies();
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setSubmitButtonDisabled(!(validationState.usernameState && validationState.emailState && validationState.passwordState && validationState.confirmPasswordState));
+  }, [validationState.usernameState, validationState.emailState, validationState.passwordState, validationState.confirmPasswordState]);
+
   const HandleSubmit = async () => {
     try {
-      const { data } = await axios.post('http://localhost:3002/users', {
+      const { data } = await axios.post('http://localhost:3001/users', {
         username: formState.username,
         email: formState.email,
         password: formState.password,
       });
 
-      const response = await axios.post('http://localhost:3002/login', {
+      const response = await axios.post('http://localhost:3001/login', {
         email: formState.email,
         password: formState.password,
       });
@@ -62,7 +68,7 @@ const SignUp = () => {
         </Form.Item>
         <Styled.ValidationMessage color={validationState.confirmPasswordState ? '#0074dd' : '#ff004c'}>{validationMsg.confirmPasswordMsg}</Styled.ValidationMessage>
 
-        <Styled.SignUpButton htmlType="submit">회원가입</Styled.SignUpButton>
+        {submitButtonDisabled ? <Styled.SignUpButton disabled>Submit</Styled.SignUpButton> : <Styled.SignUpButton htmlType="submit">Submit</Styled.SignUpButton>}
 
         <Styled.SignUpBox>
           <p>이미 회원이시라면?</p>
