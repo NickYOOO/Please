@@ -5,6 +5,7 @@ export const DetailContentsTopBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 30px;
   padding: 0 16px;
 
   & > .ant-select .ant-select-arrow {
@@ -95,7 +96,7 @@ export const DetailButtons = styled.div`
   align-items: center;
   max-width: 960px;
   margin: 0 auto;
-  padding: 20px 10px 0 10px;
+  padding: 30px 10px 0 10px;
   text-align: center;
 `;
 
