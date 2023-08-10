@@ -119,7 +119,7 @@ const BoardPage = () => {
                   <StyledImg src={caring} alt="caring" />
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <StyledH2tag>{post.category || 'No Category'}</StyledH2tag>
-                    <StyledH2tag>시간당 15,000원</StyledH2tag>
+                    <StyledH2tag style={{ borderBottom: '1px solid black' }}>시간당 15,000원</StyledH2tag>
                   </div>
                   <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
                     <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No Title'}</h1>
@@ -261,7 +261,7 @@ const StyledPtag = styled.p`
 `;
 const StyledH2tag = styled.h2`
   margin-bottom: 5px;
-  color: #ff004c;
+  /* color: #ff004c; */
   font-size: '13px';
   font-family: 'Pretendard-Regular';
 `;

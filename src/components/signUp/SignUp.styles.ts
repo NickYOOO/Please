@@ -6,7 +6,7 @@ export const StyledBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  margin-top: 40px;
+  /* margin-top: 40px; */
   height: calc(100vh - 178px);
 `;
 export const SignUpForm = styled(Form)`
