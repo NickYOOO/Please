@@ -1,12 +1,21 @@
 import { Button, Form } from 'antd';
 import { styled } from 'styled-components';
 
+export const StyledBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* margin-top: 40px; */
+  height: calc(100vh - 178px);
+`;
 export const SignUpForm = styled(Form)`
   max-width: 800px;
   margin: 16px;
-  padding: 30px 150px;
+  padding: 55px 120px;
   background-color: #ffefab;
-  border-radius: 16px;
+  /* border: 5px solid #ffefab; */
+  border-radius: 50px;
   text-align: center;
 
   & > .ant-form-item {
@@ -20,13 +29,18 @@ export const SignUpH1 = styled.h1`
 `;
 
 export const ValidationMessage = styled.p`
-  margin: 10px 0;
+  display: flex;
+  text-align: left;
+
+  width: 300px;
+  padding: 10px 0 10px 110px;
+
   font-size: 13px;
   color: ${props => props.color};
 `;
 
 export const SignUpButton = styled(Button)`
-  margin-top: 70px;
+  margin-top: 25px;
   background-color: #0074dd;
   color: #ffffff;
 
@@ -39,7 +53,7 @@ export const SignUpButton = styled(Button)`
 export const SignUpBox = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 35px;
   gap: 15px;
 
   & > a {

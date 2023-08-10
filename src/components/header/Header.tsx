@@ -3,7 +3,12 @@ import Logo from '../../assets/img/logo.svg';
 import * as Styled from './Header.styles';
 
 const Header = () => {
-  if (!['/signup', '/login', '/', '/post', '/board', '/detail/:id', '/user/:id', '/report'].includes(window.location.pathname)) return null;
+  const paths = ['/signup', '/login', '/', '/post', '/board', '/report'];
+  const dynamicPaths = /^\/detail|user\/[\w\d]+$/;
+
+  if (!paths.includes(window.location.pathname) && !dynamicPaths.test(window.location.pathname)) {
+    return null;
+  }
 
   return (
     <Styled.Header>

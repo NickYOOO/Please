@@ -6,7 +6,7 @@ export const FullPageBox = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #fff;
+  margin-top: -40px;
   padding: 10px;
 
   & > h1 {
