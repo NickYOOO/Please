@@ -16,7 +16,6 @@ export const Inner = styled.div`
   display: flex;
   flex-direction: column;
   justify-items: center;
-  align-items: center;
   height: fit-content;
   width: 800px;
   margin: 100px 16px 0 16px;
@@ -24,4 +23,14 @@ export const Inner = styled.div`
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 5px 5px 12px rgba(33, 33, 33, 0.7);
+`;
+
+export const InnerBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  & > button {
+    background: none;
+    border: none;
+  }
 `;
