@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import * as Styled from './Layout.styles';
 import ScrollTopBtn from './ScrollTopBtn';
 
@@ -6,7 +7,9 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  if ('/' === window.location.pathname) return <>{children}</>;
+  const location = useLocation();
+  // console.log(location.pathname);
+  if ('/' === location.pathname) return <>{children}</>;
 
   return (
     <>
