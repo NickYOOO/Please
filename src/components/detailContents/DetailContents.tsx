@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as Styled from './DetailContents.style';
 import { BsThreeDots } from 'react-icons/bs';
 import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
 import { FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import { getPost } from '../../api/post';
+import Modal from '../common/modal/Modal';
 
 const DetailContents = () => {
   const { isLoading, isError, data } = useQuery('post', getPost);
@@ -31,6 +32,16 @@ const DetailContents = () => {
 
   const onClick: MenuProps['onClick'] = ({ key }) => {
     console.log(`Click on item ${key}`);
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -96,10 +107,14 @@ const DetailContents = () => {
           해줄게요&nbsp;
           <FaHandRock />
         </Styled.DetailButton>
-        <Styled.DetailButton>
+        <Styled.DetailButton onClick={openModal}>
           쪽지 보내기&nbsp;
           <FaPaperPlane />
         </Styled.DetailButton>
+        <Modal isModalOpen={isModalOpen}>
+          <div>내용</div>
+          <button onClick={closeModal}>닫기</button>
+        </Modal>
         <Styled.DetailButton>
           찜하기 &nbsp;0&nbsp;
           <FaRegBookmark />
