@@ -3,10 +3,10 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getLikes, patchLikes } from '../../api/likes';
 
 import type { Like } from '../types';
-import { FaRegBookmark } from 'react-icons/fa';
-import { FaBookmark } from 'react-icons/fa';
+import { AiOutlineHeart } from 'react-icons/ai';
+import { AiTwotoneHeart } from 'react-icons/ai';
 
-const Bookmark: React.FC = () => {
+const Likes: React.FC = () => {
   const queryClient = useQueryClient();
   const email = 'kitae@kitae.kitae';
   // auth.current.email을 뽑아서 활용하라.
@@ -31,11 +31,11 @@ const Bookmark: React.FC = () => {
       <ul>
         {likes?.map(like => (
           <li key={like.id}>
-            Like: {like.likes} <button onClick={() => handleLike(like)}>{like.likes % 2 !== 0 ? <FaRegBookmark size="20" color="#0074DD" /> : <FaBookmark size="20" color="#0074DD" />}</button>
+            Like: {like.likes} <button onClick={() => handleLike(like)}>{like.likes % 2 !== 0 ? <AiOutlineHeart size="20" color="#0074DD" /> : <AiTwotoneHeart size="20" color="#0074DD" />}</button>
           </li>
         ))}
       </ul>
     </div>
   );
 };
-export default Bookmark;
+export default Likes;

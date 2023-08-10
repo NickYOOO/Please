@@ -11,6 +11,8 @@ import PostPage from '../pages/PostPage';
 import ReportPage from '../pages/ReportPage';
 import SignUpPage from '../pages/SignUpPage';
 import UserPage from '../pages/UserPage';
+import Bookmark from '../components/bookmark/Bookmark';
+import Likes from '../components/likes/Likes';
 
 const Router = () => {
   return (
@@ -28,6 +30,8 @@ const Router = () => {
             <Route path="/user/:id" element={<UserPage />} />
             <Route path="/report" element={<ReportPage />} />
             <Route path="/*" element={<NotFoundPage />} />
+            <Route path="/bookmark" element={<Bookmark />} />
+            <Route path="/likes" element={<Likes />} />
           </Routes>
         </Layout>
         <Footer />

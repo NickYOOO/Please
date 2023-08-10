@@ -6,3 +6,8 @@ export interface Like {
 export interface GetLikesResponse {
   likes: Like[];
 }
+
+export interface Bookmark {
+  email: string;
+  postid: number;
+}
