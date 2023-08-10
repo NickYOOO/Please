@@ -8,7 +8,7 @@ import { getPost } from '../../api/post';
 
 const DetailContents = () => {
   const { isLoading, isError, data } = useQuery('post', getPost);
-  console.log(data);
+  // console.log(data);
 
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
