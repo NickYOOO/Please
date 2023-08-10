@@ -26,13 +26,13 @@ const SignUp = () => {
 
   const HandleSubmit = async () => {
     try {
-      const { data } = await axios.post('http://localhost:3002/users', {
+      const { data } = await axios.post('http://localhost:3001/users', {
         username: formState.username,
         email: formState.email,
         password: formState.password,
       });
 
-      const response = await axios.post('http://localhost:3002/login', {
+      const response = await axios.post('http://localhost:3001/login', {
         email: formState.email,
         password: formState.password,
       });
