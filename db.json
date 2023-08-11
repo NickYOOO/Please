@@ -1,5 +1,53 @@
 {
-  "users": [],
-  "posts": [{}],
-  "messages": [{}]
+  "users": [
+    {
+      "username": "aa",
+      "email": "choiys1103@naver.com",
+      "password": "qwe123!@#",
+      "id": 1
+    },
+    {
+      "username": "test",
+      "email": "test@test.com",
+      "password": "123456Aa!",
+      "id": 2
+    },
+    {
+      "username": "test3",
+      "email": "test3@test.com",
+      "password": "123456Aa!",
+      "id": 3
+    },
+    {
+      "username": "test4",
+      "email": "test4@test.com",
+      "password": "123456Aa!",
+      "id": 4
+    },
+    {
+      "email": "test5@test.com",
+      "password": "$2a$10$Qpy6s7TEqmCBQq9563QVHe03yHW2dxnjttjfmjYGEWUcr.I4U4JJC",
+      "username": "test5",
+      "id": 5
+    },
+    {
+      "email": "test6@test.com",
+      "password": "$2a$10$4jrGiisC5ZbHfZFtN1mCau5qi.TAqor2KihXythYgT1qB/uPcC/Z2",
+      "username": "test6",
+      "id": 6
+    }
+  ],
+  "posts": [
+    {}
+  ],
+  "messages": [
+    {}
+  ],
+  "login": [
+    {
+      "email": "test@test.com",
+      "password": "123456Aa!",
+      "id": 1
+    }
+  ]
 }
