@@ -5,6 +5,7 @@ export const ContentsBox = styled.div`
   width: 50%;
   min-width: 400px;
 `;
+
 export const DetailContentsTopBox = styled.div`
   display: flex;
   justify-content: space-between;
@@ -14,7 +15,7 @@ export const DetailContentsTopBox = styled.div`
   /* padding: 0 16px; */
 
   & > .ant-select .ant-select-arrow {
-    color: #f9f7f1;
+    color: #000000;
   }
 `;
 
@@ -32,11 +33,18 @@ export const UserBox = styled.div`
 `;
 
 export const DetailContentsLayout = styled.div`
-  height: 300px;
+  width: 100%;
+  /* height: 100%; */
+  min-height: 310px;
   margin-top: 10px;
   padding: 20px;
   background-color: #f9f7f1;
   border-radius: 10px;
+
+  // @media (max-width: 1111px) {
+  //   width: 100%;
+  //   height: 70%;
+  // }
 `;
 
 export const DetailBox = styled.div`
@@ -65,10 +73,18 @@ export const DetailContentsBox = styled.div`
 
   & > img {
     /* margin-right: 35px; */
-    width: 200px;
+    width: 100%;
+    max-width: 200px;
+    /* height: 215px; */
+  }
 
-    @media (max-width: 1111px) {
-      display: none;
+  @media (max-width: 1000px) {
+    /* display: none; */
+    flex-direction: column;
+    align-items: center;
+
+    & > img {
+      margin: 20px 0;
     }
   }
 
@@ -83,6 +99,7 @@ export const DetailTitleParagraph = styled.p`
 `;
 
 export const DetailContentParagraph = styled.p`
+  min-height: 130px;
   margin-top: 24px;
   max-width: 340px;
   font-size: 16px;
@@ -95,18 +112,23 @@ export const DetailLabelBox = styled.div`
 
   width: 100%;
   gap: 10px;
-  margin-top: 90px;
+  margin-top: 10px;
 
   & > label {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+
     width: 100%;
     padding: 5px 7px;
     background-color: #ffffff;
-    /* border: 2px solid #0074dd; */
     border-radius: 10px;
-    text-align: center;
+
+    font-size: 13px;
   }
-  @media (max-width: 1111px) {
-    margin-top: 80px;
+  @media (max-width: 1000px) {
+    flex-direction: column;
   }
 `;
 
@@ -119,7 +141,7 @@ export const DetailButtons = styled.div`
 
   text-align: center;
 
-  padding: 30px 10px;
+  padding: 30px 0;
 `;
 
 export const DetailButton = styled(Button)`
