@@ -30,15 +30,20 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
         });
         setMarker(newMarker);
       }
-      let lat = clickedPosition.getLat()
-      let lng = clickedPosition.getLng()
-      const message = `클릭한 위치의 위도는 ${clickedPosition.getLat()} 이고, 경도는 ${clickedPosition.getLng()} 입니다`;
+      let lat: number = clickedPosition.getLat()
+      let lng: number = clickedPosition.getLng()
+
+      setClickInfo(`${lat},${lng} `)
 
       if (previousOverlay) {
         previousOverlay.setMap(null);
         setAddressOverlay(null);
       }
+      function addrFunc(input: string): string {
+        const addr = input.replace(/[^\s가-힣]|산/g, '');
 
+        return addr;
+      }
       const ps = new kakao.maps.services.Geocoder();
       ps.coord2Address(clickedPosition.getLng(), clickedPosition.getLat(), (result: any, status: any) => {
         if (status === kakao.maps.services.Status.OK) {
@@ -50,7 +55,9 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
           `;
 
 
+          const addr = addrFunc(fullAddress)
 
+          onChangeFormHandler("position", { lat, lng, addr })
           const overlayPosition = new kakao.maps.LatLng(clickedPosition.getLat() + 0.0001, clickedPosition.getLng()); // 마커 위로 조금 올린 위치
 
           const newOverlay = new kakao.maps.CustomOverlay({
@@ -74,7 +81,7 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
       }
       kakao.maps.event.removeListener(map, 'click', clickListener);
     };
-  }, [map, marker, addressOverlay]);
+  }, [map]);
 
   const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(event.target.value);
@@ -119,8 +126,8 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
       <button onClick={handleSearch}>검색</button>
       <Map
         center={{
-          lat: 33.450701,
-          lng: 126.570667,
+          lat: 37.18610826882379,
+          lng: 128.45149303027506,
         }}
         style={{
           width: '100%',
@@ -129,7 +136,7 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
         level={3}
         onCreate={setMap}
       />
-      <div id="clickLatlng">{clickInfo}</div>
+
     </div>
   );
 };
