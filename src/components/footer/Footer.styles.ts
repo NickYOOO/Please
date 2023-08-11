@@ -6,8 +6,8 @@ export const FooterLayout = styled.footer`
   align-items: center;
   width: 100%;
   /* height: 213; */
-  padding-top: 15px;
-  background: #ffefab;
+  padding-top: 13px;
+  background: #f9f7f1;
 
   & > p {
     line-height: 2;

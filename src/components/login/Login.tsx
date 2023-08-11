@@ -1,10 +1,10 @@
-import React, { useState, ChangeEvent } from 'react';
 import { Form, Input } from 'antd';
-import * as Styled from './Login.styles';
-import { Link, useNavigate } from 'react-router-dom';
-import { useMutation } from 'react-query';
 import axios from 'axios';
+import { ChangeEvent, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import { useMutation } from 'react-query';
+import { Link, useNavigate } from 'react-router-dom';
+import * as Styled from './Login.styles';
 
 type FieldType = {
   email?: string;
@@ -51,10 +51,11 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <Styled.StyledBox>
       <Styled.LoginForm name="basic" labelCol={{ flex: '110px' }} labelAlign="left">
         <Styled.LoginH1>로그인</Styled.LoginH1>
-        <Form.Item<FieldType> label="이메일" name="email" rules={[{ required: true, message: '' }]}>
+
+        <Form.Item<FieldType> label="이메일" name="email" rules={[{ required: true, message: '' }]} style={{ marginBottom: '20px' }}>
           <Input name="email" onChange={handleLoginInputChange} />
         </Form.Item>
 
@@ -71,7 +72,7 @@ const Login = () => {
           <Link to="/signup">회원가입</Link>
         </Styled.LoginBox>
       </Styled.LoginForm>
-    </div>
+    </Styled.StyledBox>
   );
 };
 

@@ -149,8 +149,8 @@ const StyledBox = styled.div`
   /* justify-content: center; */
   align-items: center;
 
-  padding-top: 50px;
-  /* height: calc(100vh - 178px); */
+  padding-top: 100px;
+  min-height: calc(100vh - 186px);
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -164,7 +164,7 @@ const StyledOptionListBox = styled.div`
   width: 600px;
   /* height: 170px; */
 
-  margin: 10px 0 50px;
+  margin: 10px 0 90px;
 `;
 const StyledButtonBox = styled.div`
   display: flex;
@@ -183,11 +183,10 @@ const StyledRequestButton = styled.button`
 
   cursor: pointer;
 
-  color: #0074dd;
-  /* background-color: #0074dd;
-  color: white; */
+  color: #3382d9;
+
   background-color: white;
-  border: 3px solid #0074dd;
+  border: 3px solid #3382d9;
   border-radius: 30px;
 
   font-size: 17px;
@@ -195,8 +194,8 @@ const StyledRequestButton = styled.button`
   transition: 0.4s;
   &:hover {
     color: white;
-    background-color: #0074dd;
-    border: 2px solid #0074dd;
+    background-color: #3382d9;
+    border: 3px solid #3382d9;
   }
 `;
 const StyledListBox = styled.div`
@@ -219,14 +218,14 @@ const StyledOptionBox = styled.button`
   cursor: pointer;
 
   background-color: white;
-  border: 3px solid #fdefab;
+  border: 3px solid #f9f7f1;
   border-radius: 50px;
 
   font-size: 17px;
 
   transition: 0.4s;
   &:hover {
-    background-color: #ffefab;
+    background-color: #f9f7f1;
   }
 `;
 const StyledList = styled.div`
