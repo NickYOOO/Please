@@ -1,122 +1,43 @@
 {
   "users": [
-    {
-      "email": "kitae@kitae.kitae",
-      "password": "$2a$10$GQgtYHFn8r3DTSIcVEEQB.aoDR1x/lv8wVkgraGpaeD4NFUlx.0Wq",
-      "username": "kitae",
-      "id": 1
-    },
-    {
-      "email": "test@test.com",
-      "password": "$2a$10$.KCxI94dHxB3m7Sux.b8Oux9i9afxfZtCWLoC0hYL9rVPUVAAtrFC",
-      "username": "aa",
-      "id": 2
-    },
-    {
-      "email": "test2@test.com",
-      "password": "$2a$10$YalhQy8j9G3NjC7T3Aplb.kesMx4vOmvIkEf69SsVIcI5wiopdo4m",
-      "username": "test2",
-      "id": 3
-    },
-    {
-      "email": "choiys1103@naver.com",
-      "password": "$2a$10$uI8L1CTgElRHF578EjX9p.laW4ajGKcc.cE14JRh8KTqhzi4K14Wi",
-      "username": "aa",
-      "id": 4
-    }
+  {
+  "email": "kitae@kitae.kitae",
+  "password": "$2a$10$GQgtYHFn8r3DTSIcVEEQB.aoDR1x/lv8wVkgraGpaeD4NFUlx.0Wq",
+  "username": "kitae",
+  "id": 1
+  },
+  {
+  "email": "test@test.com",
+  "password": "$2a$10$.KCxI94dHxB3m7Sux.b8Oux9i9afxfZtCWLoC0hYL9rVPUVAAtrFC",
+  "username": "aa",
+  "id": 2
+  },
+  {
+  "email": "test2@test.com",
+  "password": "$2a$10$YalhQy8j9G3NjC7T3Aplb.kesMx4vOmvIkEf69SsVIcI5wiopdo4m",
+  "username": "test2",
+  "id": 3
+  },
+  {
+  "email": "choiys1103@naver.com",
+  "password": "$2a$10$uI8L1CTgElRHF578EjX9p.laW4ajGKcc.cE14JRh8KTqhzi4K14Wi",
+  "username": "aa",
+  "id": 4
+  }
   ],
   "login": [],
   "messages": [{}],
   "likes": [
-    {
-      "id": 1,
-      "likes": 77
-    }
+  {
+  "id": 1,
+  "likes": 77
+  }
   ],
   "bookmark": [
-    {
-      "email": "kitae@kitae.kitae",
-      "postid": 1
-    }
+  {
+  "email": "kitae@kitae.kitae",
+  "postid": 1
+  }
   ],
-  "posts": [
-    {
-      "title": "1",
-      "content": "1",
-      "category": "배달",
-      "date": null,
-      "price": 11,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image?alt=media&token=79d2f6f4-2d64-4cdd-97e2-bd154f8c4e35",
-      "id": 1
-    },
-    {
-      "title": "11",
-      "content": "111",
-      "category": "배달",
-      "date": null,
-      "price": 111,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Ff4f56b42-2be7-ded9-8f2b-d1a8c013b2e1?alt=media&token=e6095387-4c7b-4fc2-b8a4-ffa18bdfed48",
-      "id": 2
-    },
-    {
-      "title": "22",
-      "content": "122",
-      "category": "반려동물",
-      "date": "2023년 8월 15일",
-      "price": 222,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Feea06e3d-36f5-6242-fec3-009c49f37911?alt=media&token=a938922f-5349-4ea7-b47b-9dcdd7ae5ed5",
-      "id": 3
-    },
-    {
-      "title": "dd",
-      "content": "dd",
-      "category": "조립",
-      "date": "2023년 8월 30일",
-      "price": 11111,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "",
-      "id": 5
-    },
-    {
-      "title": "22",
-      "content": "22",
-      "category": "동행·돌봄",
-      "date": "2023년 8월 28일",
-      "price": 11,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "",
-      "id": 6
-    },
-    {
-      "title": "w",
-      "content": "w",
-      "category": "",
-      "date": "2023년 8월 22일",
-      "price": 112421,
-      "position": {
-        "lat": 37.5665,
-        "lng": 126.978
-      },
-      "img": "",
-      "id": 7
-    }
-  ]
-}
+  "posts": []
+  }
