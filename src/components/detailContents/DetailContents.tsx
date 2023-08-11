@@ -3,15 +3,15 @@ import * as Styled from './DetailContents.style';
 import { BsThreeDots } from 'react-icons/bs';
 import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
 import { FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
-import { useQuery } from 'react-query';
-import { getPost } from '../../api/post';
 import Modal from '../common/modal/Modal';
 import SendText from '../sendText/SendText';
+import { IFormData } from '../Post/PostForm';
 
-const DetailContents = () => {
-  const { isLoading, isError, data } = useQuery('post', getPost);
-  // console.log(data);
+interface DetailContentsProps {
+  data: IFormData | undefined;
+}
 
+const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
@@ -84,18 +84,15 @@ const DetailContents = () => {
 
         <Styled.DetailContentsBox>
           <div>
-            <Styled.DetailTitleParagraph>바퀴벌레 잡아주실분</Styled.DetailTitleParagraph>
-            <Styled.DetailContentParagraph>
-              제 머리만한데 맨손으로 잡아주실분 계신가요 <br />
-              옆에서 햄버거도 먹고 있어요
-            </Styled.DetailContentParagraph>
+            <Styled.DetailTitleParagraph>{data?.title}</Styled.DetailTitleParagraph>
+            <Styled.DetailContentParagraph>{data?.content}</Styled.DetailContentParagraph>
           </div>
-          <img src="https://i.pinimg.com/474x/34/81/5e/34815e190497759f259c6c45e69b0c46.jpg" alt="" />
+          <img src={data?.img} alt="" />
         </Styled.DetailContentsBox>
 
         <Styled.DetailLabelBox>
-          <label>40만원</label>
-          <label>21:00 이후</label>
+          <label>{data?.price} 원</label>
+          <label>{data?.date}</label>
         </Styled.DetailLabelBox>
       </Styled.DetailContentsLayout>
 

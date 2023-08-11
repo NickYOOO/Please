@@ -6,7 +6,7 @@ export const MapLayout = styled.div`
   align-items: center;
   width: 100%;
   height: 400px;
-  margin: 30px 0;
+  margin: 0 0 30px 0;
   background: #ffefab;
   border-radius: 10px;
 `;

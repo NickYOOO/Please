@@ -96,7 +96,7 @@ export const DetailButtons = styled.div`
   align-items: center;
   max-width: 960px;
   margin: 0 auto;
-  padding: 30px 10px 0 10px;
+  padding: 30px 10px;
   text-align: center;
 `;
 
