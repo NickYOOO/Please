@@ -20,7 +20,9 @@
     }
   ],
   "login": [],
-  "messages": [{}],
+  "messages": [
+    {}
+  ],
   "likes": [
     {
       "id": 1,
@@ -85,6 +87,19 @@
       },
       "img": "",
       "id": 4
+    },
+    {
+      "title": "dd",
+      "content": "dd",
+      "category": "동행·돌봄",
+      "date": "2023년 8월 20일",
+      "price": 6000,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "img": "",
+      "id": 5
     }
   ]
 }

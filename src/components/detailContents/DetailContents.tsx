@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import * as Styled from './DetailContents.style';
-import { BsThreeDots } from 'react-icons/bs';
 import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
+import { useState } from 'react';
+import { BsThreeDots } from 'react-icons/bs';
 import { FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import { getPost } from '../../api/post';
 import Modal from '../common/modal/Modal';
 import SendText from '../sendText/SendText';
+import * as Styled from './DetailContents.style';
 
 const DetailContents = () => {
   const { isLoading, isError, data } = useQuery('post', getPost);
@@ -42,7 +42,7 @@ const DetailContents = () => {
   };
 
   return (
-    <div>
+    <Styled.ContentsBox>
       <Styled.DetailContentsTopBox>
         <Styled.UserBox>
           <img src="https://cdn-icons-png.flaticon.com/512/95/95641.png" alt="" />
@@ -89,14 +89,13 @@ const DetailContents = () => {
               제 머리만한데 맨손으로 잡아주실분 계신가요 <br />
               옆에서 햄버거도 먹고 있어요
             </Styled.DetailContentParagraph>
+            <Styled.DetailLabelBox>
+              <label>40만원</label>
+              <label>21:00 이후</label>
+            </Styled.DetailLabelBox>
           </div>
           <img src="https://i.pinimg.com/474x/34/81/5e/34815e190497759f259c6c45e69b0c46.jpg" alt="" />
         </Styled.DetailContentsBox>
-
-        <Styled.DetailLabelBox>
-          <label>40만원</label>
-          <label>21:00 이후</label>
-        </Styled.DetailLabelBox>
       </Styled.DetailContentsLayout>
 
       <Styled.DetailButtons>
@@ -116,7 +115,7 @@ const DetailContents = () => {
           <FaRegBookmark />
         </Styled.DetailButton>
       </Styled.DetailButtons>
-    </div>
+    </Styled.ContentsBox>
   );
 };
 
