@@ -14,7 +14,7 @@ import UserPage from '../pages/UserPage';
 import Bookmark from '../components/bookmark/Bookmark';
 import Likes from '../components/likes/Likes';
 
-const Router = () => {
+const Router: React.FC = () => {
   return (
     <>
       <BrowserRouter>
