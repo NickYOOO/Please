@@ -11,6 +11,7 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@types/react-js-pagination": "^3.0.4",
     "@types/react-router-dom": "^5.3.3",
     "antd": "^5.8.2",
     "axios": "^1.4.0",
@@ -22,7 +23,9 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.4",
     "react-icons": "^4.10.1",
+    "react-js-pagination": "^3.0.3",
     "react-kakao-maps-sdk": "^1.1.11",
+    "react-loading": "^2.0.3",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
@@ -37,8 +40,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "json": "json-server --watch db.json --port 3001",
-    "server": "json-server-auth --watch db.json --port 3002"
+    "json": "json-server-auth --watch db.json --port 3001"
   },
   "eslintConfig": {
     "extends": [

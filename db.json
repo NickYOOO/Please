@@ -1,53 +1,95 @@
 {
   "users": [
     {
-      "username": "aa",
-      "email": "choiys1103@naver.com",
-      "password": "qwe123!@#",
+      "email": "kitae@kitae.kitae",
+      "password": "$2a$10$GQgtYHFn8r3DTSIcVEEQB.aoDR1x/lv8wVkgraGpaeD4NFUlx.0Wq",
+      "username": "kitae",
       "id": 1
-    },
-    {
-      "username": "test",
-      "email": "test@test.com",
-      "password": "123456Aa!",
-      "id": 2
-    },
-    {
-      "username": "test3",
-      "email": "test3@test.com",
-      "password": "123456Aa!",
-      "id": 3
-    },
-    {
-      "username": "test4",
-      "email": "test4@test.com",
-      "password": "123456Aa!",
-      "id": 4
-    },
-    {
-      "email": "test5@test.com",
-      "password": "$2a$10$Qpy6s7TEqmCBQq9563QVHe03yHW2dxnjttjfmjYGEWUcr.I4U4JJC",
-      "username": "test5",
-      "id": 5
-    },
-    {
-      "email": "test6@test.com",
-      "password": "$2a$10$4jrGiisC5ZbHfZFtN1mCau5qi.TAqor2KihXythYgT1qB/uPcC/Z2",
-      "username": "test6",
-      "id": 6
     }
   ],
+
+  "messages": [{}],
+  "likes": [
+    {
+      "id": 1,
+      "likes": 77
+    }
+  ],
+  "bookmark": [
+    {
+      "email": "kitae@kitae.kitae",
+      "postid": 1
+    }
+  ],
+
   "posts": [
-    {}
-  ],
-  "messages": [
-    {}
-  ],
-  "login": [
-    {
-      "email": "test@test.com",
-      "password": "123456Aa!",
-      "id": 1
-    }
+    { "category": "배달", "title": "바퀴벌레 너무 무서워요. 제발 잡아주세요", "location": "서울특별시", "date": "8월 10일 PM9:00" },
+    { "category": "배달", "title": "잠깐 강아지좁 봐주세요", "location": "광주" },
+    { "category": "역할 대행", "title": "3", "location": "광주" },
+    { "category": "벌레 퇴치", "title": "4", "location": "인천" },
+    { "category": "청소", "title": "5", "location": "광주" },
+    { "category": "동행 · 돌봄", "title": "6", "location": "광주" },
+    { "category": "기타", "title": "7", "location": "광주" },
+    { "category": "기타", "title": "8", "location": "광주" },
+    { "category": "벌레 퇴치", "title": "9", "location": "광주" },
+    { "category": "배달", "title": "10", "location": "광주" },
+    { "category": "배달", "title": "11", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "1", "location": "서울특별시" },
+    { "category": "배달", "title": "2", "location": "광주" },
+    { "category": "배달", "title": "3", "location": "광주" },
+    { "category": "배달", "title": "4", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "1", "location": "서울특별시" },
+    { "category": "배달", "title": "2", "location": "광주" },
+    { "category": "배달", "title": "3", "location": "광주" },
+    { "category": "배달", "title": "4", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "1", "location": "서울특별시" },
+    { "category": "배달", "title": "2", "location": "광주" },
+    { "category": "배달", "title": "3", "location": "광주" },
+    { "category": "배달", "title": "4", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" },
+    { "category": "배달", "title": "5", "location": "광주" }
   ]
 }
