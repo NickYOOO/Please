@@ -12,7 +12,7 @@ import ReportPage from '../pages/ReportPage';
 import SignUpPage from '../pages/SignUpPage';
 import UserPage from '../pages/UserPage';
 
-const Router = () => {
+const Router: React.FC = () => {
   return (
     <>
       <BrowserRouter>
