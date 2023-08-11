@@ -10,9 +10,7 @@ export const DetailContentsTopBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   margin-top: 30px;
-  /* padding: 0 16px; */
 
   & > .ant-select .ant-select-arrow {
     color: #000000;
@@ -29,22 +27,17 @@ export const UserBox = styled.div`
   & > img {
     width: 30px;
     border-radius: 50%;
+    object-fit: cover;
   }
 `;
 
 export const DetailContentsLayout = styled.div`
   width: 100%;
-  /* height: 100%; */
   min-height: 310px;
   margin-top: 10px;
   padding: 20px;
   background-color: #f9f7f1;
   border-radius: 10px;
-
-  // @media (max-width: 1111px) {
-  //   width: 100%;
-  //   height: 70%;
-  // }
 `;
 
 export const DetailBox = styled.div`
@@ -72,19 +65,18 @@ export const DetailContentsBox = styled.div`
   margin-top: 20px;
 
   & > img {
-    /* margin-right: 35px; */
     width: 100%;
     max-width: 200px;
-    /* height: 215px; */
+    object-fit: cover;
   }
 
   @media (max-width: 1000px) {
-    /* display: none; */
     flex-direction: column;
     align-items: center;
 
     & > img {
       margin: 20px 0;
+      object-fit: cover;
     }
   }
 
@@ -138,10 +130,8 @@ export const DetailButtons = styled.div`
   align-items: center;
   min-width: 400px;
   margin: 0 auto;
-
-  text-align: center;
-
   padding: 30px 0;
+  text-align: center;
 `;
 
 export const DetailButton = styled(Button)`
