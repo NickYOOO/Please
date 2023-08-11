@@ -10,9 +10,13 @@ const Header = () => {
     return null;
   }
 
+  const moveToMain = () => {
+    window.location.href = '/';
+  };
+
   return (
     <Styled.Header>
-      <Styled.TitleBox>
+      <Styled.TitleBox onClick={moveToMain}>
         <img src={Logo} alt="logo" />
         <h1>부탁해</h1>
       </Styled.TitleBox>
