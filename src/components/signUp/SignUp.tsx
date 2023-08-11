@@ -27,12 +27,12 @@ const SignUp = () => {
         password: formState.password,
       });
 
-      const response = await axios.post('http://localhost:3002/login', {
-        email: formState.email,
-        password: formState.password,
-      });
-      console.log(response.data.accessToken);
-      setCookie('accessToken', data['accessToken'], { path: '/' });
+      // const response = await axios.post('http://localhost:3001/login', {
+      //   email: formState.email,
+      //   password: formState.password,
+      // });
+      // console.log(response.data.accessToken);
+      // setCookie('accessToken', data['accessToken'], { path: '/' });
       navigate('/');
     } catch (error) {
       console.log(error);
