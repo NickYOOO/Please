@@ -9,9 +9,9 @@ export const Header = styled.header`
   align-items: center;
   box-sizing: border-box;
   width: 100%;
-  height: 40px;
+  height: 50px;
   padding: 15px;
-  background: #ffefab;
+  background: #f9f7f1;
   z-index: 999;
 `;
 
@@ -22,7 +22,7 @@ export const TitleBox = styled.div`
   cursor: pointer;
   & > h1 {
     font-size: 25px;
-    color: #0074dd;
+    color: #3382d9;
 
     padding-top: 5px;
     @media screen and (max-width: 576px) {
@@ -41,10 +41,9 @@ export const UserBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: #ff6f2c; */
-  /* background-color: #ffce00; */
-  background-color: #0074dd;
-  /* border: 2px solid #0074dd; */
+
+  background-color: #3382d9;
+
   border-radius: 15px;
   width: 200px;
   height: 25px;
@@ -52,8 +51,7 @@ export const UserBox = styled.div`
   & > a {
     line-height: 25px;
     color: #fff;
-    /* color: black; */
-    /* color: #0074dd; */
+
     outline: inherit;
     text-decoration: none;
     padding: 0 20px;
