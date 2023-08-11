@@ -39,40 +39,20 @@
   ],
   "posts": [
     {
-      "title": "1",
-      "content": "1",
-      "category": "배달",
-      "date": null,
-      "price": 11,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image?alt=media&token=79d2f6f4-2d64-4cdd-97e2-bd154f8c4e35",
-      "id": 1
-    },
-    {
-      "title": "11",
-      "content": "111",
-      "category": "배달",
-      "date": null,
-      "price": 111,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Ff4f56b42-2be7-ded9-8f2b-d1a8c013b2e1?alt=media&token=e6095387-4c7b-4fc2-b8a4-ffa18bdfed48",
-      "id": 2
-    },
-    {
-      "title": "22",
-      "content": "122",
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691744242379,
+      "title": "ㅎㅇ",
+      "content": "ㅎㅇ",
       "category": "반려동물",
-      "date": "2023년 8월 15일",
-      "price": 222,
+      "date": null,
+      "time": "",
+      "price": 123214214,
       "position": {
-        "lat": 0,
-        "lng": 0
+        "lat": 37.511103551052734,
+        "lng": 127.0981423862268,
+        "addr": "서울 송파구 잠실동 "
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Feea06e3d-36f5-6242-fec3-009c49f37911?alt=media&token=a938922f-5349-4ea7-b47b-9dcdd7ae5ed5",
       "id": 3

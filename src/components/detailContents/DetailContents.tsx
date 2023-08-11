@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import * as Styled from './DetailContents.style';
-import { BsThreeDots } from 'react-icons/bs';
 import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
+import { useState } from 'react';
+import { BsThreeDots } from 'react-icons/bs';
 import { FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getPost } from '../../api/post';
@@ -14,6 +13,7 @@ import { FaBookmark } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
 import { IFormData } from '../Post/PostForm';
 import { deletePost } from '../../api/post';
+import * as Styled from './DetailContents.style';
 
 interface DetailContentsProps {
   data: IFormData | undefined;
@@ -84,7 +84,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   };
 
   return (
-    <div>
+    <Styled.ContentsBox>
       <Styled.DetailContentsTopBox>
         <Styled.UserBox>
           <img src="https://cdn-icons-png.flaticon.com/512/95/95641.png" alt="" />
@@ -128,14 +128,13 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
           <div>
             <Styled.DetailTitleParagraph>{data?.title}</Styled.DetailTitleParagraph>
             <Styled.DetailContentParagraph>{data?.content}</Styled.DetailContentParagraph>
+            <Styled.DetailLabelBox>
+              <label>{data?.price} 원</label>
+              <label>{data?.date}</label>
+            </Styled.DetailLabelBox>
           </div>
           <img src={data?.img} alt="" />
         </Styled.DetailContentsBox>
-
-        <Styled.DetailLabelBox>
-          <label>{data?.price} 원</label>
-          <label>{data?.date}</label>
-        </Styled.DetailLabelBox>
       </Styled.DetailContentsLayout>
 
       <Styled.DetailButtons>
@@ -159,7 +158,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
           </div>
         ))}
       </Styled.DetailButtons>
-    </div>
+    </Styled.ContentsBox>
   );
 };
 
