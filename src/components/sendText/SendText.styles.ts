@@ -34,7 +34,7 @@ export const StyledBox = styled.div`
 
 export const ReceiveUser = styled.div`
   display: flex;
-  margin: 20px 0 30px 0;
+  margin: 30px 0 50px 0;
 `;
 
 export const SendBox = styled.div`

@@ -35,9 +35,10 @@ export default DetailPage;
 const StyledBox = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-
-  /* padding-top: 100px; */
   height: calc(100vh - 186px);
+
+  @media (max-width: 1000px) {
+    height: 100%;
+  }
 `;
