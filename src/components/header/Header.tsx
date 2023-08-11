@@ -14,6 +14,8 @@ const Header = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const { pathname } = useLocation();
+
   useEffect(() => {
     const storedResponse = localStorage.getItem('response');
     if (storedResponse) {
@@ -21,11 +23,15 @@ const Header = () => {
       const username = parsedResponse.user.username;
       setUser({ userName: username });
       setIsLoggedIn(true);
+      console.log('2');
     }
     console.log(storedResponse);
-  }, []);
+  }, [pathname]);
+
+  console.log('1');
 
   if (!paths.includes(window.location.pathname) && !dynamicPaths.test(window.location.pathname)) {
+    console.log('-3');
     return null;
   }
   const moveToMain = () => {
@@ -42,6 +48,7 @@ const Header = () => {
       console.error('로그아웃 오류:', error);
     }
   };
+  console.log('-1');
   return (
     <Styled.Header>
       <Styled.TitleBox onClick={moveToMain}>
