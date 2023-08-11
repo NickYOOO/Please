@@ -1,12 +1,21 @@
 import { Button, Form } from 'antd';
 import { styled } from 'styled-components';
 
+export const StyledBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 60px;
+  height: calc(100vh - 186px);
+`;
+
 export const LoginForm = styled(Form)`
   max-width: 800px;
-  margin: 16px auto;
-  padding: 30px 150px;
-  background-color: #ffefab;
-  border-radius: 16px;
+  margin: 16px;
+  padding: 55px 120px;
+
+  border-radius: 50px;
   text-align: center;
 
   & > .ant-form-item {
@@ -15,18 +24,12 @@ export const LoginForm = styled(Form)`
 `;
 
 export const LoginH1 = styled.h1`
-  margin-bottom: 50px;
+  margin-bottom: 70px;
   font-size: 25px;
 `;
 
-export const ValidationMessage = styled.p`
-  margin: 10px 0;
-  font-size: 13px;
-  color: ${props => props.color};
-`;
-
 export const LoginButton = styled(Button)`
-  margin-top: 70px;
+  margin-top: 45px;
   background-color: #0074dd;
   color: #ffffff;
 
@@ -39,7 +42,7 @@ export const LoginButton = styled(Button)`
 export const LoginBox = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 50px;
   gap: 15px;
 
   & > a {

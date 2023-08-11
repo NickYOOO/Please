@@ -52,27 +52,27 @@ const SignUp = () => {
         <Form.Item<FieldType> label="닉네임" name="username" rules={[{ required: true, message: '' }]}>
           <Input name="username" value={formState.username} onChange={handleJoinInputChange} />
         </Form.Item>
-        <Styled.ValidationMessage color={validationState.usernameState ? '#0074dd' : '#ff004c'}>{validationMsg.usernameMsg}</Styled.ValidationMessage>
+        <Styled.ValidationMessage color={validationState.usernameState ? '#3382D9' : '#ff004c'}>{validationMsg.usernameMsg}</Styled.ValidationMessage>
 
         <Form.Item<FieldType> label="이메일" name="email" rules={[{ required: true, message: '' }]}>
           <Input name="email" value={formState.email} onChange={handleJoinInputChange} />
         </Form.Item>
-        <Styled.ValidationMessage color={validationState.emailState ? '#0074dd' : '#ff004c'}>{validationMsg.emailMsg}</Styled.ValidationMessage>
+        <Styled.ValidationMessage color={validationState.emailState ? '#3382D9' : '#ff004c'}>{validationMsg.emailMsg}</Styled.ValidationMessage>
 
         <Form.Item<FieldType> label="비밀번호" name="password" rules={[{ required: true, message: '' }]}>
           <Input.Password name="password" type="password" value={formState.password} onChange={handleJoinInputChange} />
         </Form.Item>
-        <Styled.ValidationMessage color={validationState.passwordState ? '#0074dd' : '#ff004c'}>{validationMsg.passwordMsg}</Styled.ValidationMessage>
+        <Styled.ValidationMessage color={validationState.passwordState ? '#3382D9' : '#ff004c'}>{validationMsg.passwordMsg}</Styled.ValidationMessage>
 
         <Form.Item<FieldType> label="비밀번호 확인" name="confirmPassword" rules={[{ required: true, message: '' }]}>
           <Input.Password name="confirmPassword" value={formState.confirmPassword} onChange={handleJoinInputChange} />
         </Form.Item>
-        <Styled.ValidationMessage color={validationState.confirmPasswordState ? '#0074dd' : '#ff004c'}>{validationMsg.confirmPasswordMsg}</Styled.ValidationMessage>
+        <Styled.ValidationMessage color={validationState.confirmPasswordState ? '#3382D9' : '#ff004c'}>{validationMsg.confirmPasswordMsg}</Styled.ValidationMessage>
 
-        {submitButtonDisabled ? <Styled.SignUpButton disabled>Submit</Styled.SignUpButton> : <Styled.SignUpButton htmlType="submit">Submit</Styled.SignUpButton>}
+        {submitButtonDisabled ? <Styled.SignUpButton disabled>회원가입</Styled.SignUpButton> : <Styled.SignUpButton htmlType="submit">회원가입</Styled.SignUpButton>}
 
         <Styled.SignUpBox>
-          <p>이미 회원이시라면?</p>
+          <p>이미 회원이신가요?</p>
           <Link to="/login">로그인</Link>
         </Styled.SignUpBox>
       </Styled.SignUpForm>

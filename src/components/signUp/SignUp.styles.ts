@@ -6,15 +6,14 @@ export const StyledBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  /* margin-top: 40px; */
-  height: calc(100vh - 178px);
+  padding-top: 60px;
+  height: calc(100vh - 186px);
 `;
 export const SignUpForm = styled(Form)`
   max-width: 800px;
   margin: 16px;
   padding: 55px 120px;
-  background-color: #ffefab;
-  /* border: 5px solid #ffefab; */
+
   border-radius: 50px;
   text-align: center;
 
@@ -24,7 +23,7 @@ export const SignUpForm = styled(Form)`
 `;
 
 export const SignUpH1 = styled.h1`
-  margin-bottom: 50px;
+  margin-bottom: 70px;
   font-size: 25px;
 `;
 
@@ -53,7 +52,7 @@ export const SignUpButton = styled(Button)`
 export const SignUpBox = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 35px;
+  margin-top: 50px;
   gap: 15px;
 
   & > a {
