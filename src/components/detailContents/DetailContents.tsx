@@ -12,15 +12,24 @@ import SendText from '../sendText/SendText';
 import type { Like } from '../types';
 import { FaBookmark } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
+import { IFormData } from '../Post/PostForm';
+import { deletePost } from '../../api/post';
 
-const DetailContents = () => {
-  const queryClient = useQueryClient();
-  const { isLoading, isError, data } = useQuery('post', getPost);
-  // console.log(data);
+interface DetailContentsProps {
+  data: IFormData | undefined;
+}
 
+const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
+
+  const queryClient = useQueryClient();
+  const deletePostMutate = useMutation(deletePost, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['post']);
+    },
+  });
 
   const items: MenuProps['items'] = [
     {
@@ -38,7 +47,13 @@ const DetailContents = () => {
   ];
 
   const onClick: MenuProps['onClick'] = ({ key }) => {
-    console.log(`Click on item ${key}`);
+    switch (key) {
+      case 'delete':
+        deletePost(data?.id);
+        console.log(`삭제`);
+        window.location.href = '/board';
+      // 컨펌 모달
+    }
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -111,18 +126,15 @@ const DetailContents = () => {
 
         <Styled.DetailContentsBox>
           <div>
-            <Styled.DetailTitleParagraph>바퀴벌레 잡아주실분</Styled.DetailTitleParagraph>
-            <Styled.DetailContentParagraph>
-              제 머리만한데 맨손으로 잡아주실분 계신가요 <br />
-              옆에서 햄버거도 먹고 있어요
-            </Styled.DetailContentParagraph>
+            <Styled.DetailTitleParagraph>{data?.title}</Styled.DetailTitleParagraph>
+            <Styled.DetailContentParagraph>{data?.content}</Styled.DetailContentParagraph>
           </div>
-          <img src="https://i.pinimg.com/474x/34/81/5e/34815e190497759f259c6c45e69b0c46.jpg" alt="" />
+          <img src={data?.img} alt="" />
         </Styled.DetailContentsBox>
 
         <Styled.DetailLabelBox>
-          <label>40만원</label>
-          <label>21:00 이후</label>
+          <label>{data?.price} 원</label>
+          <label>{data?.date}</label>
         </Styled.DetailLabelBox>
       </Styled.DetailContentsLayout>
 

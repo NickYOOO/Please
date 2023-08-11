@@ -17,22 +17,14 @@
       "password": "$2a$10$YalhQy8j9G3NjC7T3Aplb.kesMx4vOmvIkEf69SsVIcI5wiopdo4m",
       "username": "test2",
       "id": 3
-    },
-    {
-      "email": "gata@gata.gata",
-      "password": "$2a$10$I8m4gbNF.gSIZotUJPZFA.4T0bB50daXtacm3arj0OdFTkGzVq1w2",
-      "username": "gata",
-      "id": 4
     }
   ],
   "login": [],
-  "messages": [
-    {}
-  ],
+  "messages": [{}],
   "likes": [
     {
       "id": 1,
-      "likes": 145
+      "likes": 154
     }
   ],
   "bookmark": [
@@ -86,24 +78,11 @@
       "id": 3
     },
     {
-      "title": "",
-      "content": "",
-      "category": "",
-      "date": null,
-      "price": 0,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "",
-      "id": 4
-    },
-    {
-      "title": "저 조립하고 싶어요",
-      "content": "조립!!",
+      "title": "dd",
+      "content": "dd",
       "category": "조립",
-      "date": "2023년 8월 16일",
-      "price": 324,
+      "date": "2023년 8월 30일",
+      "price": 11111,
       "position": {
         "lat": 0,
         "lng": 0
@@ -112,30 +91,30 @@
       "id": 5
     },
     {
-      "title": "123",
+      "title": "22",
+      "content": "22",
+      "category": "동행·돌봄",
+      "date": "2023년 8월 28일",
+      "price": 11,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "img": "",
+      "id": 4
+    },
+    {
+      "title": "323",
       "content": "123",
       "category": "청소",
-      "date": "2023년 8월 15일",
-      "price": 223,
+      "date": "2023년 8월 22일",
+      "price": 23333,
       "position": {
         "lat": 0,
         "lng": 0
       },
       "img": "",
       "id": 6
-    },
-    {
-      "title": "청소를 부탁해",
-      "content": "청소!",
-      "category": "청소",
-      "date": "2023년 8월 14일",
-      "price": 22222222,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "",
-      "id": 7
     }
   ]
 }

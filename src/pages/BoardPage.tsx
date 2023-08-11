@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
 import { useInfiniteQuery } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import caring from '../assets/img/caring.jpeg';
 
@@ -22,6 +22,7 @@ const LIMIT = 30; //페이지 스크롤
 
 const BoardPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
+  const navigation = useNavigate();
 
   const fetchPosts = ({ pageParam = 1 }) =>
     axios.get<AxiosResponse<{ posts: Post[] }>>(`http://localhost:3001/posts`, {
@@ -83,6 +84,10 @@ const BoardPage = () => {
 
   // console.log(allPosts);
 
+  const itemClickHandler = (id: number) => {
+    navigation(`/detail/${id}`);
+  };
+
   return (
     <StyledBox>
       <div style={{ display: 'flex', width: '750px' }}>
@@ -113,9 +118,14 @@ const BoardPage = () => {
         {allPosts
           .filter(post => selectedCategory === '전체' || post.category === selectedCategory)
           .map((post: Post, postIndex) => (
-            <StyledListItemBox key={postIndex}>
+            <StyledListItemBox
+              key={postIndex}
+              onClick={() => {
+                itemClickHandler(post.id);
+              }}
+            >
               {post && (
-                <>
+                <div>
                   <StyledImg src={caring} alt="caring" />
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <StyledH2tag>{post.category || 'No Category'}</StyledH2tag>
@@ -126,7 +136,7 @@ const BoardPage = () => {
                   </div>
                   <StyledPtag>{post.location || 'No Location'}</StyledPtag>
                   <StyledPtag>{post.date || 'No data'}</StyledPtag>
-                </>
+                </div>
               )}
             </StyledListItemBox>
           ))}
