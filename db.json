@@ -26,9 +26,7 @@
   }
   ],
   "login": [],
-  "messages": [
-  {}
-  ],
+  "messages": [{}],
   "likes": [
   {
   "id": 1,
@@ -41,8 +39,5 @@
   "postid": 1
   }
   ],
-  "posts": [
-    
-  ]
+  "posts": []
   }
-  

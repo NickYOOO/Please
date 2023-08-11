@@ -26,7 +26,7 @@ export interface IFormData {
   title: string;
   content: string;
   category: string;
-  date: null | string | Date;
+  date: null | string;
   time: string;
   price: number;
   position: {
@@ -34,7 +34,7 @@ export interface IFormData {
     lng: number;
     address: string;
   },
-  img: string | null | undefined;
+  img: string | undefined;
   id: string | undefined;
 }
 
