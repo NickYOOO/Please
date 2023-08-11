@@ -65,7 +65,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
         </Styled.UserBox>
         <Select
           defaultValue="요청중"
-          style={{ width: 120 }}
+          style={{ width: 100 }}
           onChange={handleChange}
           options={[
             { value: 'help', label: '요청중' },
@@ -103,7 +103,9 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
             <Styled.DetailContentParagraph>{data?.content}</Styled.DetailContentParagraph>
             <Styled.DetailLabelBox>
               <label>{data?.price} 원</label>
-              <label>{data?.date}</label>
+              <label>
+                {data?.date} {data?.time}
+              </label>
             </Styled.DetailLabelBox>
           </div>
           <img src={data?.img} alt="" />

@@ -1,27 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import DropBox from '../DropBox/DropBox';
-import PostDatePicker from './PostDatePicker';
 import { Input, InputNumber, TimePicker } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
-import { storage } from '../../firebase';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { useMutation, useQueryClient } from 'react-query';
-import { addPost } from '../../api/post';
-import { useNavigate } from 'react-router-dom';
-import PostMap from '../Map/PostMap'
-import uuid from 'react-uuid'
 import dayjs from 'dayjs';
-
-
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import React, { useEffect, useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import uuid from 'react-uuid';
+import { addPost } from '../../api/post';
+import { storage } from '../../firebase';
+import DropBox from '../DropBox/DropBox';
+import PostMap from '../Map/PostMap';
+import PostDatePicker from './PostDatePicker';
 
 export interface onChangeFormfuncType {
-  (type: string, data: string | number | null | { lat: number, lng: number, addr: string }): void
+  (type: string, data: string | number | null | { lat: number; lng: number; addr: string }): void;
 }
 
 export interface IFormData {
-  email: string,
-  nickName: string,
-  status: string,
+  email: string;
+  nickName: string;
+  status: string;
   timeStamp: number;
   title: string;
   content: string;
@@ -33,7 +31,7 @@ export interface IFormData {
     lat: number;
     lng: number;
     address: string;
-  },
+  };
   img: string | undefined;
   id: string | undefined;
 }
@@ -51,9 +49,9 @@ const PostForm: React.FC = () => {
 
   const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '반려동물', '벌레 퇴치', '기타'];
   const [formData, setFormData] = useState<IFormData>({
-    email: "",
-    nickName: "",
-    status: "진행중",
+    email: '',
+    nickName: '',
+    status: '진행중',
     timeStamp: new Date().getTime(),
     title: '',
     content: '',
@@ -64,7 +62,7 @@ const PostForm: React.FC = () => {
     position: {
       lat: 0,
       lng: 0,
-      address: ""
+      address: '',
     },
     img: '',
     id: '',
@@ -79,15 +77,12 @@ const PostForm: React.FC = () => {
     if (event.target.files) setImgFile(event.target.files[0]);
   };
 
-
-
-
   const updateImg = async (file: File) => {
     try {
       const imageRef = ref(storage, `Image/${uuid()}`);
       await uploadBytes(imageRef, file);
       const url = await getDownloadURL(imageRef);
-      onChangeFormHandler("img", url)
+      onChangeFormHandler('img', url);
     } catch (error) {
       console.log(error);
     }
@@ -98,18 +93,17 @@ const PostForm: React.FC = () => {
   }, [imgFile]);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+    event.preventDefault();
     if (!formData.category) {
-      setErrMsg("카테고리를 선택해주세요")
-      return
+      setErrMsg('카테고리를 선택해주세요');
+      return;
     } else if (!formData.title.trim() || !formData.content.trim()) {
-      setErrMsg("제목과 내용을 모두 입력해주세요")
-      return
+      setErrMsg('제목과 내용을 모두 입력해주세요');
+      return;
     }
-    postsMutation.mutate(formData)
-    navigate('/board')
-  }
-
+    postsMutation.mutate(formData);
+    navigate('/board');
+  };
 
   // const handleImgUpload = (event: ChangeEventHandler) => {
   //   updateImg(event.target.files[0]);
@@ -120,7 +114,7 @@ const PostForm: React.FC = () => {
   //   setFormData({ ...formData, [name]: value })
   // }
   const onChange = (time: dayjs.Dayjs | null, timeString: string) => {
-    onChangeFormHandler("time", timeString)
+    onChangeFormHandler('time', timeString);
   };
   const onChangePrice = (value: number | null) => {
     if (value == null) value = 0
@@ -152,10 +146,9 @@ const PostForm: React.FC = () => {
           onChange={onChangeAddFile}
         />
         <PostMap onChangeFormHandler={onChangeFormHandler} />
-        <button type="submit" >작성</button>
-        <h1 style={{ color: "red" }}>{errMsg}</h1>
-      </form>
-
+        <button type="submit">작성</button>
+        <h1 style={{ color: 'red' }}>{errMsg}</h1>
+      </form >
     </>
   );
 };
