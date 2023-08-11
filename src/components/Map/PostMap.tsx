@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Map } from 'react-kakao-maps-sdk';
+import { onChangeFormfuncType } from '../Post/PostForm';
 
-const ClickableMapWithSearchAndOverlay: React.FC = () => {
+interface PostDatePickerProps {
+  onChangeFormHandler: onChangeFormfuncType
+}
+
+const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
   const [map, setMap] = useState<kakao.maps.Map | null>(null);
   const [marker, setMarker] = useState<kakao.maps.Marker | null>(null);
   const [clickInfo, setClickInfo] = useState<string>('');
@@ -25,9 +30,9 @@ const ClickableMapWithSearchAndOverlay: React.FC = () => {
         });
         setMarker(newMarker);
       }
-
+      let lat = clickedPosition.getLat()
+      let lng = clickedPosition.getLng()
       const message = `클릭한 위치의 위도는 ${clickedPosition.getLat()} 이고, 경도는 ${clickedPosition.getLng()} 입니다`;
-      setClickInfo(message);
 
       if (previousOverlay) {
         previousOverlay.setMap(null);
@@ -129,4 +134,4 @@ const ClickableMapWithSearchAndOverlay: React.FC = () => {
   );
 };
 
-export default ClickableMapWithSearchAndOverlay;
+export default PostMap;
