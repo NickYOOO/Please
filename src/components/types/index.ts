@@ -10,4 +10,6 @@ export interface GetLikesResponse {
 export interface Bookmark {
   email: string;
   postid: number;
+  id: string;
+  postTitle: string;
 }

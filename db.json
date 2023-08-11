@@ -17,13 +17,30 @@
   "bookmark": [
     {
       "email": "kitae@kitae.kitae",
-      "postid": 1
+      "postId": 1,
+      "id": "jin",
+      "postTitle": "hihi"
+    },
+    {
+      "email": "kitae@kitae.kitae",
+      "postId": 2,
+      "id": "kitae",
+      "postTitle": "hihi"
     }
   ],
 
   "posts": [
-    { "category": "배달", "title": "바퀴벌레 너무 무서워요. 제발 잡아주세요", "location": "서울특별시", "date": "8월 10일 PM9:00" },
-    { "category": "배달", "title": "잠깐 강아지좁 봐주세요", "location": "광주" },
+    {
+      "category": "배달",
+      "title": "바퀴벌레 너무 무서워요. 제발 잡아주세요",
+      "location": "서울특별시",
+      "date": "8월 10일 PM9:00"
+    },
+    {
+      "category": "배달",
+      "title": "잠깐 강아지좁 봐주세요",
+      "location": "광주"
+    },
     { "category": "역할 대행", "title": "3", "location": "광주" },
     { "category": "벌레 퇴치", "title": "4", "location": "인천" },
     { "category": "청소", "title": "5", "location": "광주" },
