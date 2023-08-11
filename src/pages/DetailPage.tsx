@@ -1,22 +1,32 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getPost } from '../api/post';
+import { IFormData } from '../components/Post/PostForm';
 import DetailContents from '../components/detailContents/DetailContents';
 import DetailMap from '../components/detailMap/DetailMap';
 
-const DetailPage: React.FC = () => {
-  const { isLoading, isError, data } = useQuery('post', getPost);
-  console.log(data);
+type DetailParams = {
+  id: string;
+};
 
-  const latitude = 37.5665;
-  const longitude = 126.978;
+const DetailPage: React.FC = () => {
+  const param = useParams<DetailParams>();
+  const { isLoading, isError, data } = useQuery<boolean, boolean, any[]>('post', getPost);
+  const detailData: IFormData | undefined = data?.find(item => {
+    return item.id == param.id;
+  });
+  console.log(detailData);
+
+  const latitude = detailData?.position.lat ? detailData?.position.lat : 0;
+  const longitude = detailData?.position.lng ? detailData?.position.lng : 0;
 
   return (
-    <StyledBox>
-      <DetailContents />
-      <DetailMap latitude={latitude} longitude={longitude} />
-    </StyledBox>
+    <div>
+      <DetailContents data={detailData} />
+      {latitude !== 0 && longitude !== 0 ? <DetailMap latitude={latitude} longitude={longitude} /> : null}
+    </div>
   );
 };
 
