@@ -1,7 +1,7 @@
 import React from 'react';
-import * as Styled from './Modal.style';
 import { createPortal } from 'react-dom';
 import { AiOutlineCloseSquare } from 'react-icons/ai';
+import * as Styled from './Modal.style';
 
 export const PORTAL_MODAL = 'portal-root';
 
@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> = ({ children, isModalOpen, setIsModalOpen }) 
             <Styled.InnerBox>
               <div></div>
               <button onClick={HandleToClose}>
-                <AiOutlineCloseSquare size={20} color="#ff004c" />
+                <AiOutlineCloseSquare size={20} color="#3382D9" cursor={'pointer'} />
               </button>
             </Styled.InnerBox>
             {children}

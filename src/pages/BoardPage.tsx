@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import ReactLoading from 'react-loading';
 import { useInfiniteQuery } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import caring from '../assets/img/caring.jpeg';
 
@@ -22,6 +22,7 @@ const LIMIT = 30; //페이지 스크롤
 
 const BoardPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
+  const navigation = useNavigate();
 
   const fetchPosts = ({ pageParam = 1 }) =>
     axios.get<AxiosResponse<{ posts: Post[] }>>(`http://localhost:3001/posts`, {
@@ -42,7 +43,7 @@ const BoardPage = () => {
     getNextPageParam: (lastPage, allPages) => {
       // 마지막 페이지의 데이터에서 data 속성 중 posts 속성 가져옴
       // 만약 data가 존재하지 않으면 undefined를 반환
-      console.log(lastPage, allPages);
+      // console.log(lastPage, allPages);
 
       const nextPage = allPages.length + 1;
       return nextPage;
@@ -83,6 +84,10 @@ const BoardPage = () => {
 
   // console.log(allPosts);
 
+  const itemClickHandler = (id: number) => {
+    navigation(`/detail/${id}`);
+  };
+
   return (
     <StyledBox>
       <div style={{ display: 'flex', width: '750px' }}>
@@ -113,20 +118,25 @@ const BoardPage = () => {
         {allPosts
           .filter(post => selectedCategory === '전체' || post.category === selectedCategory)
           .map((post: Post, postIndex) => (
-            <StyledListItemBox key={postIndex}>
+            <StyledListItemBox
+              key={postIndex}
+              onClick={() => {
+                itemClickHandler(post.id);
+              }}
+            >
               {post && (
-                <>
+                <div>
                   <StyledImg src={caring} alt="caring" />
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <StyledH2tag>{post.category || 'No Category'}</StyledH2tag>
+                    <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
                     <StyledH2tag style={{ borderBottom: '1px solid black' }}>시간당 15,000원</StyledH2tag>
                   </div>
                   <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
-                    <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No Title'}</h1>
+                    <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
                   </div>
-                  <StyledPtag>{post.location || 'No Location'}</StyledPtag>
+                  <StyledPtag>{post.location || 'No data'}</StyledPtag>
                   <StyledPtag>{post.date || 'No data'}</StyledPtag>
-                </>
+                </div>
               )}
             </StyledListItemBox>
           ))}
@@ -149,8 +159,8 @@ const StyledBox = styled.div`
   /* justify-content: center; */
   align-items: center;
 
-  padding-top: 50px;
-  /* height: calc(100vh - 178px); */
+  padding-top: 100px;
+  min-height: calc(100vh - 186px);
 `;
 const StyledLink = styled(Link)`
   text-decoration: none;
@@ -164,7 +174,7 @@ const StyledOptionListBox = styled.div`
   width: 600px;
   /* height: 170px; */
 
-  margin: 10px 0 50px;
+  margin: 10px 0 90px;
 `;
 const StyledButtonBox = styled.div`
   display: flex;
@@ -183,11 +193,10 @@ const StyledRequestButton = styled.button`
 
   cursor: pointer;
 
-  color: #0074dd;
-  /* background-color: #0074dd;
-  color: white; */
+  color: #3382d9;
+
   background-color: white;
-  border: 3px solid #0074dd;
+  border: 3px solid #3382d9;
   border-radius: 30px;
 
   font-size: 17px;
@@ -195,8 +204,8 @@ const StyledRequestButton = styled.button`
   transition: 0.4s;
   &:hover {
     color: white;
-    background-color: #0074dd;
-    border: 2px solid #0074dd;
+    background-color: #3382d9;
+    border: 3px solid #3382d9;
   }
 `;
 const StyledListBox = styled.div`
@@ -219,14 +228,14 @@ const StyledOptionBox = styled.button`
   cursor: pointer;
 
   background-color: white;
-  border: 3px solid #fdefab;
+  border: 3px solid #f9f7f1;
   border-radius: 50px;
 
   font-size: 17px;
 
   transition: 0.4s;
   &:hover {
-    background-color: #ffefab;
+    background-color: #f9f7f1;
   }
 `;
 const StyledList = styled.div`

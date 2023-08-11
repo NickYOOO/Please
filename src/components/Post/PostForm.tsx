@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import DropBox from '../DropBox/DropBox';
 import PostDatePicker from './PostDatePicker';
 import { Input, InputNumber, TimePicker } from 'antd';
@@ -34,7 +34,8 @@ export interface IFormData {
     lng: number;
     address: string;
   },
-  img: string | null | undefined
+  img: string | null | undefined;
+  id: string | undefined;
 }
 
 const PostForm: React.FC = () => {
@@ -47,7 +48,7 @@ const PostForm: React.FC = () => {
     },
   });
 
-  const categories = ["배달", "청소", "조립", "역할 대행", "동행·돌봄", "반려동물", "벌레 퇴치", "기타"]
+  const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '반려동물', '벌레 퇴치', '기타'];
   const [formData, setFormData] = useState<IFormData>({
     email: "",
     nickName: "",
@@ -64,8 +65,9 @@ const PostForm: React.FC = () => {
       lng: 0,
       address: ""
     },
-    img: ""
-  })
+    img: '',
+    id: '',
+  });
 
   const onChangeFormHandler: onChangeFormfuncType = (type, data): void => {
     setFormData(prev => ({ ...prev, [type]: data }));
@@ -76,7 +78,7 @@ const PostForm: React.FC = () => {
 
   const [imgFile, setImgFile] = useState<File>();
   const onChangeAddFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) setImgFile(event.target.files[0])
+    if (event.target.files) setImgFile(event.target.files[0]);
   };
 
 
@@ -94,8 +96,8 @@ const PostForm: React.FC = () => {
   };
 
   useEffect(() => {
-    if (imgFile) updateImg(imgFile)
-  }, [imgFile])
+    if (imgFile) updateImg(imgFile);
+  }, [imgFile]);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -152,7 +154,7 @@ const PostForm: React.FC = () => {
       </form>
 
     </>
-  )
-}
+  );
+};
 
-export default PostForm
+export default PostForm;
