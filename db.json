@@ -54,47 +54,8 @@
         "lng": 127.0981423862268,
         "addr": "서울 송파구 잠실동 "
       },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Feea06e3d-36f5-6242-fec3-009c49f37911?alt=media&token=a938922f-5349-4ea7-b47b-9dcdd7ae5ed5",
-      "id": 3
-    },
-    {
-      "title": "dd",
-      "content": "dd",
-      "category": "조립",
-      "date": "2023년 8월 30일",
-      "price": 11111,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "",
-      "id": 5
-    },
-    {
-      "title": "22",
-      "content": "22",
-      "category": "동행·돌봄",
-      "date": "2023년 8월 28일",
-      "price": 11,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "",
-      "id": 4
-    },
-    {
-      "title": "323",
-      "content": "123",
-      "category": "청소",
-      "date": "2023년 8월 22일",
-      "price": 23333,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "",
-      "id": 6
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F3efbfe94-12aa-0bfb-235e-e76d0e101baa?alt=media&token=50924607-9887-49d4-a5dc-ea25b39cdd9e",
+      "id": 1
     }
   ]
 }
