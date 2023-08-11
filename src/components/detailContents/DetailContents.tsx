@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import * as Styled from './DetailContents.style';
-import { BsThreeDots } from 'react-icons/bs';
 import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
+import { useState } from 'react';
+import { BsThreeDots } from 'react-icons/bs';
 import { FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
-import Modal from '../common/modal/Modal';
-import SendText from '../sendText/SendText';
-import { IFormData } from '../Post/PostForm';
 import { useMutation, useQueryClient } from 'react-query';
 import { deletePost } from '../../api/post';
+import { IFormData } from '../Post/PostForm';
+import Modal from '../common/modal/Modal';
+import SendText from '../sendText/SendText';
+import * as Styled from './DetailContents.style';
 
 interface DetailContentsProps {
   data: IFormData | undefined;
@@ -57,7 +57,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   };
 
   return (
-    <div>
+    <Styled.ContentsBox>
       <Styled.DetailContentsTopBox>
         <Styled.UserBox>
           <img src="https://cdn-icons-png.flaticon.com/512/95/95641.png" alt="" />
@@ -128,7 +128,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
           <FaRegBookmark />
         </Styled.DetailButton>
       </Styled.DetailButtons>
-    </div>
+    </Styled.ContentsBox>
   );
 };
 

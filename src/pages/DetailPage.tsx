@@ -1,10 +1,11 @@
 import React from 'react';
+import { useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import { styled } from 'styled-components';
+import { getPost } from '../api/post';
+import { IFormData } from '../components/Post/PostForm';
 import DetailContents from '../components/detailContents/DetailContents';
 import DetailMap from '../components/detailMap/DetailMap';
-import { useQuery } from 'react-query';
-import { getPost } from '../api/post';
-import { useParams } from 'react-router-dom';
-import { IFormData } from '../components/Post/PostForm';
 
 type DetailParams = {
   id: string;
@@ -30,3 +31,13 @@ const DetailPage: React.FC = () => {
 };
 
 export default DetailPage;
+
+const StyledBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+
+  /* padding-top: 100px; */
+  height: calc(100vh - 186px);
+`;

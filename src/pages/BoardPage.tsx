@@ -43,7 +43,7 @@ const BoardPage = () => {
     getNextPageParam: (lastPage, allPages) => {
       // 마지막 페이지의 데이터에서 data 속성 중 posts 속성 가져옴
       // 만약 data가 존재하지 않으면 undefined를 반환
-      console.log(lastPage, allPages);
+      // console.log(lastPage, allPages);
 
       const nextPage = allPages.length + 1;
       return nextPage;
@@ -128,13 +128,13 @@ const BoardPage = () => {
                 <div>
                   <StyledImg src={caring} alt="caring" />
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <StyledH2tag>{post.category || 'No Category'}</StyledH2tag>
+                    <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
                     <StyledH2tag style={{ borderBottom: '1px solid black' }}>시간당 15,000원</StyledH2tag>
                   </div>
                   <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
-                    <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No Title'}</h1>
+                    <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
                   </div>
-                  <StyledPtag>{post.location || 'No Location'}</StyledPtag>
+                  <StyledPtag>{post.location || 'No data'}</StyledPtag>
                   <StyledPtag>{post.date || 'No data'}</StyledPtag>
                 </div>
               )}
