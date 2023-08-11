@@ -37,345 +37,56 @@
   ],
   "posts": [
     {
+      "title": "1",
+      "content": "1",
       "category": "배달",
-      "title": "바퀴벌레 너무 무서워요. 제발 잡아주세요",
-      "location": "서울특별시",
-      "date": "8월 10일 PM9:00"
+      "date": null,
+      "price": 11,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image?alt=media&token=79d2f6f4-2d64-4cdd-97e2-bd154f8c4e35",
+      "id": 1
     },
     {
-      "category": "배달",
-      "title": "잠깐 강아지좁 봐주세요",
-      "location": "광주"
-    },
-    {
-      "category": "역할 대행",
-      "title": "3",
-      "location": "광주"
-    },
-    {
-      "category": "벌레 퇴치",
-      "title": "4",
-      "location": "인천"
-    },
-    {
-      "category": "청소",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "동행 · 돌봄",
-      "title": "6",
-      "location": "광주"
-    },
-    {
-      "category": "기타",
-      "title": "7",
-      "location": "광주"
-    },
-    {
-      "category": "기타",
-      "title": "8",
-      "location": "광주"
-    },
-    {
-      "category": "벌레 퇴치",
-      "title": "9",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "10",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
       "title": "11",
-      "location": "광주"
+      "content": "111",
+      "category": "배달",
+      "date": null,
+      "price": 111,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Ff4f56b42-2be7-ded9-8f2b-d1a8c013b2e1?alt=media&token=e6095387-4c7b-4fc2-b8a4-ffa18bdfed48",
+      "id": 2
     },
     {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
+      "title": "22",
+      "content": "122",
+      "category": "반려동물",
+      "date": "2023년 8월 15일",
+      "price": 222,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Feea06e3d-36f5-6242-fec3-009c49f37911?alt=media&token=a938922f-5349-4ea7-b47b-9dcdd7ae5ed5",
+      "id": 3
     },
     {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "1",
-      "location": "서울특별시"
-    },
-    {
-      "category": "배달",
-      "title": "2",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "3",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "4",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "1",
-      "location": "서울특별시"
-    },
-    {
-      "category": "배달",
-      "title": "2",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "3",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "4",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "1",
-      "location": "서울특별시"
-    },
-    {
-      "category": "배달",
-      "title": "2",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "3",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "4",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
-    },
-    {
-      "category": "배달",
-      "title": "5",
-      "location": "광주"
+      "title": "",
+      "content": "",
+      "category": "",
+      "date": null,
+      "price": 0,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "img": "",
+      "id": 4
     }
   ]
 }

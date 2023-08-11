@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import PostForm from '../components/Post/PostForm';
 
 const PostPage = () => {
-  return <div>PostPage</div>;
+  return (
+    <PostForm/>
+  );
 };
 
 export default PostPage;
