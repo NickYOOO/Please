@@ -30,7 +30,7 @@ const Login = () => {
   };
 
   const loginMutation = useMutation(async (formData: FieldType) => {
-    const response = await axios.post('http://localhost:3002/login', {
+    const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, {
       email: formData.email,
       password: formData.password,
     });
