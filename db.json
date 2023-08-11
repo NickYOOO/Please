@@ -17,6 +17,12 @@
       "password": "$2a$10$YalhQy8j9G3NjC7T3Aplb.kesMx4vOmvIkEf69SsVIcI5wiopdo4m",
       "username": "test2",
       "id": 3
+    },
+    {
+      "email": "aaaa@aaaa.com",
+      "password": "$2a$10$g5/abe5SmUdOWZzkSrE/8OzRfHIen446rmrVoMcIPd6PKCQ4FL6mq",
+      "username": "aa",
+      "id": 4
     }
   ],
   "login": [],
@@ -37,56 +43,191 @@
   ],
   "posts": [
     {
-      "title": "1",
-      "content": "1",
-      "category": "배달",
-      "date": null,
-      "price": 11,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image?alt=media&token=79d2f6f4-2d64-4cdd-97e2-bd154f8c4e35",
-      "id": 1
-    },
-    {
-      "title": "11",
-      "content": "111",
-      "category": "배달",
-      "date": null,
-      "price": 111,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Ff4f56b42-2be7-ded9-8f2b-d1a8c013b2e1?alt=media&token=e6095387-4c7b-4fc2-b8a4-ffa18bdfed48",
-      "id": 2
-    },
-    {
-      "title": "22",
-      "content": "122",
-      "category": "반려동물",
-      "date": "2023년 8월 15일",
-      "price": 222,
-      "position": {
-        "lat": 0,
-        "lng": 0
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Feea06e3d-36f5-6242-fec3-009c49f37911?alt=media&token=a938922f-5349-4ea7-b47b-9dcdd7ae5ed5",
-      "id": 3
-    },
-    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691736773516,
       "title": "",
       "content": "",
       "category": "",
       "date": null,
+      "time": "",
       "price": 0,
       "position": {
         "lat": 0,
         "lng": 0
       },
+      "address": "",
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F166aaf98-8334-96cd-1d39-cba0e5b912ce?alt=media&token=6c86fba5-ea70-4d4a-9b65-220c69573778",
+      "id": 1
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691736960292,
+      "title": "",
+      "content": "",
+      "category": "",
+      "date": "2023년 8월 15일",
+      "time": "15:56",
+      "price": 0,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "address": "",
+      "img": "",
+      "id": 2
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691737798579,
+      "title": "",
+      "content": "",
+      "category": "",
+      "date": null,
+      "time": "",
+      "price": 0,
+      "position": "강원특별자치도 영월군 영월읍 방절리 산 25-4",
+      "address": "",
+      "img": "",
+      "id": 3
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691738842043,
+      "title": "",
+      "content": "",
+      "category": "",
+      "date": null,
+      "time": "",
+      "price": 0,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "address": "",
       "img": "",
       "id": 4
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691738897719,
+      "title": "",
+      "content": "",
+      "category": "벌레 퇴치",
+      "date": null,
+      "time": "",
+      "price": 0,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "address": "",
+      "img": "",
+      "id": 5
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691738968310,
+      "title": "",
+      "content": "",
+      "category": "",
+      "date": null,
+      "time": "",
+      "price": 0,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "address": "강원특별자치도 삼척시 도계읍 구사리  ",
+      "img": "",
+      "id": 6
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691740013360,
+      "title": "",
+      "content": "",
+      "category": "",
+      "date": null,
+      "time": "",
+      "price": 0,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "address": "강원특별자치도 영월군 영월읍 방절리 ",
+      "img": "",
+      "id": 7
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691740868907,
+      "title": "",
+      "content": "",
+      "category": "",
+      "date": null,
+      "time": "",
+      "price": 0,
+      "position": {
+        "lat": 37.18534410356488,
+        "lng": 128.453561668093,
+        "addr": "강원특별자치도 영월군 영월읍 방절리  "
+      },
+      "img": "",
+      "id": 8
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691741095397,
+      "title": "1122",
+      "content": "22222",
+      "category": "배달",
+      "date": "2023년 8월 17일",
+      "time": "02:01",
+      "price": 11111111,
+      "position": {
+        "lat": 37.174568329213194,
+        "lng": 128.21078168587678,
+        "addr": "충북 제천시 모동 "
+      },
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Faaac314a-56ef-01de-ab94-c39514152b67?alt=media&token=913812c4-8a0f-42c3-825e-dba1ee0ee932",
+      "id": 9
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691741306903,
+      "title": "ㅁ",
+      "content": "ㅁ",
+      "category": "청소",
+      "date": "2023년 8월 15일",
+      "time": "",
+      "price": 111111,
+      "position": {
+        "lat": 37.28663859746095,
+        "lng": 127.10116553837804,
+        "addr": "경기 용인시 기흥구 신갈동 "
+      },
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Fdcaa45a1-9e80-b0fa-81d5-12889450eb44?alt=media&token=2d6c01da-8195-4c82-8ad6-96fc33e4e50d",
+      "id": 10
     }
   ]
 }
