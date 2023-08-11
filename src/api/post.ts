@@ -9,3 +9,7 @@ export const getPost = async () => {
 export const addPost = async (newPost: IFormData) => {
   await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, newPost);
 };
+
+export const deletePost = async (id: string | undefined) => {
+  await axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`);
+};

@@ -6,6 +6,8 @@ import { FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
 import Modal from '../common/modal/Modal';
 import SendText from '../sendText/SendText';
 import { IFormData } from '../Post/PostForm';
+import { useMutation, useQueryClient } from 'react-query';
+import { deletePost } from '../../api/post';
 
 interface DetailContentsProps {
   data: IFormData | undefined;
@@ -15,6 +17,13 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
+
+  const queryClient = useQueryClient();
+  const deletePostMutate = useMutation(deletePost, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(['post']);
+    },
+  });
 
   const items: MenuProps['items'] = [
     {
@@ -32,7 +41,13 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   ];
 
   const onClick: MenuProps['onClick'] = ({ key }) => {
-    console.log(`Click on item ${key}`);
+    switch (key) {
+      case 'delete':
+        deletePost(data?.id);
+        console.log(`삭제`);
+        window.location.href = '/board';
+      // 컨펌 모달
+    }
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
