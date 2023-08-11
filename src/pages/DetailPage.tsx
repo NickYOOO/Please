@@ -23,10 +23,10 @@ const DetailPage: React.FC = () => {
   const longitude = detailData?.position.lng ? detailData?.position.lng : 0;
 
   return (
-    <div>
+    <StyledBox>
       <DetailContents data={detailData} />
       {latitude !== 0 && longitude !== 0 ? <DetailMap latitude={latitude} longitude={longitude} /> : null}
-    </div>
+    </StyledBox>
   );
 };
 
