@@ -7,7 +7,6 @@ import { useQuery } from 'react-query';
 import { getPost } from '../../api/post';
 import Modal from '../common/modal/Modal';
 import SendText from '../sendText/SendText';
-import Button from '../common/button/Button';
 
 const DetailContents = () => {
   const { isLoading, isError, data } = useQuery('post', getPost);
@@ -40,10 +39,6 @@ const DetailContents = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
   };
 
   return (

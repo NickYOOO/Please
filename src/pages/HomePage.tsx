@@ -1,18 +1,36 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import mainImage from '../assets/img/main.gif';
+import { useState } from 'react';
+import Modal from '../components/common/modal/Modal';
+import ReceiveText from '../components/receiveText/ReceiveText';
 
 const HomePage = () => {
+  // 모달 관련 코드
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  // 여기까지
+
   return (
     <StyledBox>
       <StyledTitleBox>
-        <StyledPtag>우리 동네 심부름 서비스</StyledPtag>
+        <StyledParagraph>우리 동네 심부름 서비스</StyledParagraph>
         <StyledH1>부탁해</StyledH1>
         <StyledH2>도움이 필요할 때,</StyledH2>
         <StyledH2>쉽고 빠르게 대신 해결해 드려요!</StyledH2>
         <StyledLink to="/board">
           <StyledButton>부탁하러 가기</StyledButton>
         </StyledLink>
+        {/* 모달 열기 버튼 */}
+        <button onClick={openModal}>받은 쪽지함</button>
+        {/* 여기부터 */}
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+          <ReceiveText />
+        </Modal>
+        {/* 여기까지 모달 코드 */}
       </StyledTitleBox>
       <StyledPhotoBox>
         <StyledImg src={mainImage} alt="main 이미지"></StyledImg>
@@ -56,7 +74,7 @@ const StyledImg = styled.img`
     display: none;
   }
 `;
-const StyledPtag = styled.p`
+const StyledParagraph = styled.p`
   font-size: 27px;
   padding-left: 5px;
 `;
