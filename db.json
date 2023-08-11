@@ -27,7 +27,14 @@
   ],
   "login": [],
   "messages": [
-    {}
+    {
+      "id": 1,
+      "toUser": "kitae@kitae.kitae",
+      "fromUser": "test@test.com",
+      "postId": 0,
+      "time": "111",
+      "content": "ㅎㅇ"
+    }
   ],
   "likes": [
     {
@@ -60,6 +67,63 @@
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F3efbfe94-12aa-0bfb-235e-e76d0e101baa?alt=media&token=50924607-9887-49d4-a5dc-ea25b39cdd9e",
       "id": 1
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691760383620,
+      "title": "1",
+      "content": "111",
+      "category": "청소",
+      "date": null,
+      "time": "",
+      "price": "￦0",
+      "position": {
+        "lat": 37.18475047703531,
+        "lng": 128.45494662870155,
+        "addr": "강원특별자치도 영월군 영월읍 방절리  "
+      },
+      "img": "",
+      "id": 2
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691760417139,
+      "title": "1",
+      "content": "1",
+      "category": "배달",
+      "date": null,
+      "time": "",
+      "price": "￦0",
+      "position": {
+        "lat": 0,
+        "lng": 0,
+        "address": ""
+      },
+      "img": "",
+      "id": 3
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "진행중",
+      "timeStamp": 1691760506190,
+      "title": "11",
+      "content": "11",
+      "category": "청소",
+      "date": null,
+      "time": "",
+      "price": "₩111,111,111",
+      "position": {
+        "lat": 0,
+        "lng": 0,
+        "address": ""
+      },
+      "img": "",
+      "id": 4
     }
   ]
 }
