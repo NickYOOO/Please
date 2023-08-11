@@ -101,14 +101,13 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
           <div>
             <Styled.DetailTitleParagraph>{data?.title}</Styled.DetailTitleParagraph>
             <Styled.DetailContentParagraph>{data?.content}</Styled.DetailContentParagraph>
+            <Styled.DetailLabelBox>
+              <label>{data?.price} 원</label>
+              <label>{data?.date}</label>
+            </Styled.DetailLabelBox>
           </div>
           <img src={data?.img} alt="" />
         </Styled.DetailContentsBox>
-
-        <Styled.DetailLabelBox>
-          <label>{data?.price} 원</label>
-          <label>{data?.date}</label>
-        </Styled.DetailLabelBox>
       </Styled.DetailContentsLayout>
 
       <Styled.DetailButtons>

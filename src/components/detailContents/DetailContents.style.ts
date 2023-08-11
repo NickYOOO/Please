@@ -66,13 +66,14 @@ export const DetailContentsBox = styled.div`
   & > img {
     /* margin-right: 35px; */
     width: 200px;
+
     @media (max-width: 1111px) {
       display: none;
     }
   }
 
   & > div {
-    width: 60%;
+    width: 55%;
   }
 `;
 
@@ -94,7 +95,7 @@ export const DetailLabelBox = styled.div`
 
   width: 100%;
   gap: 10px;
-  margin-top: 70px;
+  margin-top: 90px;
 
   & > label {
     width: 100%;
@@ -105,7 +106,7 @@ export const DetailLabelBox = styled.div`
     text-align: center;
   }
   @media (max-width: 1111px) {
-    margin-top: 40px;
+    margin-top: 80px;
   }
 `;
 
