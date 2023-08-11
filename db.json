@@ -17,6 +17,12 @@
       "password": "$2a$10$YalhQy8j9G3NjC7T3Aplb.kesMx4vOmvIkEf69SsVIcI5wiopdo4m",
       "username": "test2",
       "id": 3
+    },
+    {
+      "email": "choiys1103@naver.com",
+      "password": "$2a$10$uI8L1CTgElRHF578EjX9p.laW4ajGKcc.cE14JRh8KTqhzi4K14Wi",
+      "username": "aa",
+      "id": 4
     }
   ],
   "login": [],
@@ -74,17 +80,43 @@
       "id": 3
     },
     {
-      "title": "",
-      "content": "",
-      "category": "",
-      "date": null,
-      "price": 0,
+      "title": "dd",
+      "content": "dd",
+      "category": "조립",
+      "date": "2023년 8월 30일",
+      "price": 11111,
       "position": {
         "lat": 0,
         "lng": 0
       },
       "img": "",
-      "id": 4
+      "id": 5
+    },
+    {
+      "title": "22",
+      "content": "22",
+      "category": "동행·돌봄",
+      "date": "2023년 8월 28일",
+      "price": 11,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "img": "",
+      "id": 6
+    },
+    {
+      "title": "w",
+      "content": "w",
+      "category": "",
+      "date": "2023년 8월 22일",
+      "price": 112421,
+      "position": {
+        "lat": 37.5665,
+        "lng": 126.978
+      },
+      "img": "",
+      "id": 7
     }
   ]
 }
