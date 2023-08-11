@@ -5,14 +5,7 @@ import { useInfiniteQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import caring from '../assets/img/caring.jpeg';
-
-type Post = {
-  id: number;
-  category: string;
-  title: string;
-  location: string;
-  date: string;
-};
+import { IFormData } from '../components/Post/PostForm';
 
 const LIMIT = 30; //페이지 스크롤
 
@@ -25,7 +18,7 @@ const BoardPage = () => {
   const navigation = useNavigate();
 
   const fetchPosts = ({ pageParam = 1 }) =>
-    axios.get<AxiosResponse<{ posts: Post[] }>>(`http://localhost:3001/posts`, {
+    axios.get<AxiosResponse<{ posts: IFormData[] }>>(`http://localhost:3001/posts`, {
       params: {
         _page: pageParam,
         _limit: LIMIT,
@@ -58,7 +51,7 @@ const BoardPage = () => {
       if (!scrollingElement) return;
       const { scrollHeight, scrollTop, clientHeight } = scrollingElement;
       if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.2) {
-        fetching = true; //한번만 실행되도록
+        fetching = true;
         if (hasNextPage) await fetchNextPage();
         fetching = false;
       }
@@ -80,11 +73,9 @@ const BoardPage = () => {
   // console.log(data.pages[0].data);
 
   // flatMap 함수를 사용하여 모든 페이지의 데이터를 하나의 배열로 결합
-  const allPosts = data.pages.flatMap(page => page.data.map((post: Post) => post));
+  const allPosts = data.pages.flatMap(page => page.data.map((post: IFormData) => post));
 
-  // console.log(allPosts);
-
-  const itemClickHandler = (id: number) => {
+  const itemClickHandler = (id: string | undefined) => {
     navigation(`/detail/${id}`);
   };
 
@@ -117,7 +108,7 @@ const BoardPage = () => {
       <StyledList>
         {allPosts
           .filter(post => selectedCategory === '전체' || post.category === selectedCategory)
-          .map((post: Post, postIndex) => (
+          .map((post: IFormData, postIndex) => (
             <StyledListItemBox
               key={postIndex}
               onClick={() => {
@@ -126,22 +117,21 @@ const BoardPage = () => {
             >
               {post && (
                 <div>
-                  <StyledImg src={caring} alt="caring" />
+                  <StyledImg src={caring} alt="이미지" />
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
-                    <StyledH2tag style={{ borderBottom: '1px solid black' }}>시간당 15,000원</StyledH2tag>
+                    <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
                   </div>
                   <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
                     <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
                   </div>
-                  <StyledPtag>{post.location || 'No data'}</StyledPtag>
-                  <StyledPtag>{post.date || 'No data'}</StyledPtag>
+                  <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
+                  <StyledParagraph>{post.position.address || 'No data'}</StyledParagraph>
                 </div>
               )}
             </StyledListItemBox>
           ))}
       </StyledList>
-      {/* 무한 스크롤을 위한 로딩 표시 */}
       {isFetchingNextPage ? (
         <LoaderWrap>
           <ReactLoading type="spin" color="#A593E0" />
@@ -156,31 +146,29 @@ export default BoardPage;
 const StyledBox = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-
   padding-top: 100px;
   min-height: calc(100vh - 186px);
 `;
+
 const StyledLink = styled(Link)`
   text-decoration: none;
 `;
+
 const StyledOptionListBox = styled.div`
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-
   width: 600px;
-  /* height: 170px; */
-
   margin: 10px 0 90px;
 `;
+
 const StyledButtonBox = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 600px;
 `;
+
 const StyledRequestButton = styled.button`
   display: flex;
   justify-content: center;
@@ -191,89 +179,82 @@ const StyledRequestButton = styled.button`
   padding: 9px 10px 5px 10px;
   margin-top: 10px;
 
-  cursor: pointer;
-
   color: #3382d9;
-
   background-color: white;
   border: 3px solid #3382d9;
   border-radius: 30px;
-
   font-size: 17px;
-
   transition: 0.4s;
+  cursor: pointer;
+
   &:hover {
     color: white;
     background-color: #3382d9;
     border: 3px solid #3382d9;
   }
 `;
+
 const StyledListBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   width: 600px;
   margin-bottom: 10px;
-  /* height: 150px; */
-
   border: 1px solid white;
 `;
+
 const StyledOptionBox = styled.button`
   display: flex;
   justify-content: center;
   width: 130px;
   padding: 18px 20px 14px 20px;
-
-  cursor: pointer;
-
   background-color: white;
   border: 3px solid #f9f7f1;
   border-radius: 50px;
-
   font-size: 17px;
-
   transition: 0.4s;
+  cursor: pointer;
+
   &:hover {
     background-color: #f9f7f1;
   }
 `;
+
 const StyledList = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   width: 800px;
   gap: 25px;
-  /* height: 350px; */
-  margin-bottom: 50px;
-  /* background-color: #f9f9f9; */
+  margin-bottom: 30px;
 `;
 
 const StyledListItemBox = styled.div`
   width: 180px;
-  height: 250px;
+  height: 300px;
 
   cursor: pointer;
 `;
+
 const StyledImg = styled.img`
   width: 180px;
-  height: 100px;
-
+  height: 130px;
   margin-bottom: 15px;
-
   border-radius: 10px;
+  object-fit: cover;
 `;
-const StyledPtag = styled.p`
-  margin-bottom: 5px;
 
+const StyledParagraph = styled.p`
+  margin-bottom: 5px;
   font-size: 13px;
   font-family: 'Pretendard-Regular';
 `;
+
 const StyledH2tag = styled.h2`
   margin-bottom: 5px;
-  /* color: #ff004c; */
   font-size: '13px';
   font-family: 'Pretendard-Regular';
 `;
+
 const LoaderWrap = styled.div`
   width: 100%;
   height: 80%;

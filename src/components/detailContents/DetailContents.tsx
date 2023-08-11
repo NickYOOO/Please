@@ -2,7 +2,6 @@ import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
 import { useState } from 'react';
 import { BsThreeDots } from 'react-icons/bs';
 import { FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
-import { useMutation, useQueryClient } from 'react-query';
 import { deletePost } from '../../api/post';
 import { IFormData } from '../Post/PostForm';
 import Modal from '../common/modal/Modal';
@@ -14,16 +13,26 @@ interface DetailContentsProps {
 }
 
 const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
+  let postStatus = '';
 
-  const queryClient = useQueryClient();
-  const deletePostMutate = useMutation(deletePost, {
-    onSuccess: () => {
-      queryClient.invalidateQueries(['post']);
-    },
-  });
+  if (data?.status === 'help') {
+    postStatus = '부탁해요';
+  } else {
+    postStatus = '완료';
+  }
+
+  const handleChange = (value: string) => {
+    switch (value) {
+      case 'help':
+        console.log('help');
+        // post status help로 patch
+        break;
+      case 'done':
+        console.log('done');
+        // post status done으로 patch
+        break;
+    }
+  };
 
   const items: MenuProps['items'] = [
     {
@@ -44,7 +53,6 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
     switch (key) {
       case 'delete':
         deletePost(data?.id);
-        console.log(`삭제`);
         window.location.href = '/board';
       // 컨펌 모달
     }
@@ -64,19 +72,18 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
           닉네임
         </Styled.UserBox>
         <Select
-          defaultValue="요청중"
+          defaultValue={postStatus}
           style={{ width: 100 }}
           onChange={handleChange}
           options={[
-            { value: 'help', label: '요청중' },
-            { value: 'ing', label: '해결중' },
+            { value: 'help', label: '부탁해요' },
             { value: 'done', label: '완료' },
           ]}
         />
       </Styled.DetailContentsTopBox>
       <Styled.DetailContentsLayout>
         <Styled.DetailBox>
-          <p>경기도 용인시 기흥구 구갈동</p>
+          <p>{data?.position.address}</p>
           <div>
             <p>작성: 3분 전</p>
 

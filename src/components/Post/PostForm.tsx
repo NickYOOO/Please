@@ -51,7 +51,7 @@ const PostForm: React.FC = () => {
   const [formData, setFormData] = useState<IFormData>({
     email: '',
     nickName: '',
-    status: '진행중',
+    status: 'help',
     timeStamp: new Date().getTime(),
     title: '',
     content: '',
