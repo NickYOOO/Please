@@ -23,6 +23,12 @@
       "password": "$2a$10$uI8L1CTgElRHF578EjX9p.laW4ajGKcc.cE14JRh8KTqhzi4K14Wi",
       "username": "aa",
       "id": 4
+    },
+    {
+      "email": "test8@test.com",
+      "password": "$2a$10$V7p1ibIOKh6R/BZ2AWTFB.lZMPPWFYHJgC2iwgRR9QcmJ9R2r5eD2",
+      "username": "test8",
+      "id": 5
     }
   ],
   "login": [],
