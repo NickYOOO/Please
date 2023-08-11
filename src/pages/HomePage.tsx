@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import mainImage from '../assets/img/main.gif';
-import { useState } from 'react';
 import Modal from '../components/common/modal/Modal';
 import ReceiveText from '../components/receiveText/ReceiveText';
 

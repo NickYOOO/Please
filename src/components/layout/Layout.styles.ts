@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 export const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 40px;
+  padding-top: 50px;
 `;
 
 export const StTopBtn = styled.button`
