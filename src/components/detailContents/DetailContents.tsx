@@ -3,12 +3,18 @@ import * as Styled from './DetailContents.style';
 import { BsThreeDots } from 'react-icons/bs';
 import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
 import { FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { getPost } from '../../api/post';
+import { getLikes, patchLikes } from '../../api/likes';
 import Modal from '../common/modal/Modal';
 import SendText from '../sendText/SendText';
 
+import type { Like } from '../types';
+import { FaBookmark } from 'react-icons/fa';
+import { FiBookmark } from 'react-icons/fi';
+
 const DetailContents = () => {
+  const queryClient = useQueryClient();
   const { isLoading, isError, data } = useQuery('post', getPost);
   // console.log(data);
 
@@ -39,6 +45,27 @@ const DetailContents = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
+  };
+
+  // 찜하기 기능
+
+  const email = 'kitae@kitae.kitae';
+  // auth.current.email을 뽑아서 활용하라.
+
+  const { data: likes = [] } = useQuery<Like[], Error>('likes', getLikes);
+
+  const likeMutation = useMutation(patchLikes, {
+    onMutate: (like: Like) => {
+      // Optimistic Update
+      queryClient.setQueryData<Like[]>('likes', prevData => {
+        if (!prevData) return [];
+        return prevData.map(currentLike => (currentLike.id === like.id ? { ...currentLike, likes: like.likes + 1 } : currentLike));
+      });
+    },
+  });
+
+  const handleLike = (like: Like) => {
+    likeMutation.mutate(like);
   };
 
   return (
@@ -111,10 +138,14 @@ const DetailContents = () => {
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
           <SendText />
         </Modal>
-        <Styled.DetailButton>
-          찜하기 &nbsp;0&nbsp;
-          <FaRegBookmark />
-        </Styled.DetailButton>
+        {likes?.map(like => (
+          <div key={like.id}>
+            <Styled.DetailButton onClick={() => handleLike(like)}>
+              찜하기&nbsp;{like.likes}&nbsp;
+              {like.likes % 2 !== 0 ? <FiBookmark size="20" color="white" /> : <FaBookmark size="20" color="#black" />}
+            </Styled.DetailButton>
+          </div>
+        ))}
       </Styled.DetailButtons>
     </div>
   );

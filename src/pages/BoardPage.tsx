@@ -42,7 +42,7 @@ const BoardPage = () => {
     getNextPageParam: (lastPage, allPages) => {
       // 마지막 페이지의 데이터에서 data 속성 중 posts 속성 가져옴
       // 만약 data가 존재하지 않으면 undefined를 반환
-      console.log(lastPage, allPages);
+      // console.log(lastPage, allPages);
 
       const nextPage = allPages.length + 1;
       return nextPage;

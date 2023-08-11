@@ -17,28 +17,32 @@
       "password": "$2a$10$YalhQy8j9G3NjC7T3Aplb.kesMx4vOmvIkEf69SsVIcI5wiopdo4m",
       "username": "test2",
       "id": 3
+    },
+    {
+      "email": "gata@gata.gata",
+      "password": "$2a$10$I8m4gbNF.gSIZotUJPZFA.4T0bB50daXtacm3arj0OdFTkGzVq1w2",
+      "username": "gata",
+      "id": 4
     }
   ],
   "login": [],
-  "messages": [{}],
+  "messages": [
+    {}
+  ],
   "likes": [
     {
       "id": 1,
-      "likes": 87
+      "likes": 145
     }
   ],
   "bookmark": [
     {
-      "email": "kitae@kitae.kitae",
-      "postId": 1,
-      "id": "jin",
-      "postTitle": "hihi"
+      "id": 1,
+      "postTitle": "Hi"
     },
     {
-      "email": "kitae@kitae.kitae",
-      "postId": 2,
-      "id": "kitae",
-      "postTitle": "hihi"
+      "id": 1,
+      "postTitle": "Hi"
     }
   ],
   "posts": [
@@ -93,6 +97,45 @@
       },
       "img": "",
       "id": 4
+    },
+    {
+      "title": "저 조립하고 싶어요",
+      "content": "조립!!",
+      "category": "조립",
+      "date": "2023년 8월 16일",
+      "price": 324,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "img": "",
+      "id": 5
+    },
+    {
+      "title": "123",
+      "content": "123",
+      "category": "청소",
+      "date": "2023년 8월 15일",
+      "price": 223,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "img": "",
+      "id": 6
+    },
+    {
+      "title": "청소를 부탁해",
+      "content": "청소!",
+      "category": "청소",
+      "date": "2023년 8월 14일",
+      "price": 22222222,
+      "position": {
+        "lat": 0,
+        "lng": 0
+      },
+      "img": "",
+      "id": 7
     }
   ]
 }
