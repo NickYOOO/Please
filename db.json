@@ -5,8 +5,21 @@
       "password": "$2a$10$GQgtYHFn8r3DTSIcVEEQB.aoDR1x/lv8wVkgraGpaeD4NFUlx.0Wq",
       "username": "kitae",
       "id": 1
+    },
+    {
+      "email": "test@test.com",
+      "password": "$2a$10$.KCxI94dHxB3m7Sux.b8Oux9i9afxfZtCWLoC0hYL9rVPUVAAtrFC",
+      "username": "aa",
+      "id": 2
+    },
+    {
+      "email": "test2@test.com",
+      "password": "$2a$10$YalhQy8j9G3NjC7T3Aplb.kesMx4vOmvIkEf69SsVIcI5wiopdo4m",
+      "username": "test2",
+      "id": 3
     }
   ],
+  "login": [],
   "messages": [
     {}
   ],
