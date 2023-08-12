@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 
 const useFormValidation = () => {
@@ -22,9 +23,23 @@ const useFormValidation = () => {
     confirmPasswordState: false,
   });
 
-  const handleJoinInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleJoinInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
     setFormState(prev => ({ ...prev, [name]: value }));
+
+    const isEmailDuplicated = async (values: any) => {
+      const { email } = values;
+
+      try {
+        const response = await axios.get(`http://localhost:3001/users?email=${email}`);
+        console.log(response.data);
+        return response.data.length > 0;
+      } catch (error) {
+        console.error('이메일 중복 확인 오류:', error);
+        return false;
+      }
+    };
 
     switch (name) {
       case 'username':
@@ -58,8 +73,15 @@ const useFormValidation = () => {
             msg = '이메일 형식이 올바르지 않습니다.';
             currentState = false;
           } else {
-            msg = '사용 가능한 이메일 형식입니다.';
-            currentState = true;
+            // 서버에 이메일 중복 여부 확인
+            const isDuplicated = await isEmailDuplicated({ email: value });
+            if (isDuplicated) {
+              msg = '이미 존재하는 이메일입니다.';
+              currentState = false;
+            } else {
+              msg = '사용 가능한 이메일 형식입니다.';
+              currentState = true;
+            }
           }
           setValidationMsg(prev => ({
             ...prev,

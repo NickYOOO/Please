@@ -34,10 +34,17 @@ export const Inner = styled.div<InnerProps>`
         `;
       case 'small':
         return `
-          width: 300px;
-          height: fit-content;
-          padding: 5px 10px;
+          justify-content: center;
           align-items: center;
+
+          gap: 20px;
+          margin: 340px 16px 0 16px;
+          text-align: center;
+          line-height: 30px;
+          width: 360px;
+          height: 220px;
+          padding: 5px 10px;
+          
         `;
       default:
         return `

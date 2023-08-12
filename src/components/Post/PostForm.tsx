@@ -106,7 +106,15 @@ const PostForm: React.FC = () => {
 
   useEffect(() => {
     if (imgFile) updateImg(imgFile);
-  }, [imgFile]);
+
+    const storedData = localStorage.getItem('response');
+
+    if (!storedData) {
+      navigate('/login');
+    } else {
+      console.log('게시글작성하기');
+    }
+  }, [imgFile, navigate]);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -127,6 +135,7 @@ const PostForm: React.FC = () => {
   };
   const onChangePrice = (value: number | null) => {
     if (value == null) value = 0;
+
     const price = value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }).replace(/₩/g, '');
     onChangeFormHandler('price', price);
   };
