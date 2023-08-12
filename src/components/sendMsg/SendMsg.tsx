@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Styled from './SendText.styles';
+import * as Styled from './SendMsg.styles';
 import { Input } from 'antd';
 import Button from '../common/button/Button';
 
