@@ -11,8 +11,7 @@ import PostPage from '../pages/PostPage';
 import ReportPage from '../pages/ReportPage';
 import SignUpPage from '../pages/SignUpPage';
 import UserPage from '../pages/UserPage';
-import Bookmark from '../components/bookmark/Bookmark';
-import Likes from '../components/likes/Likes';
+import Update from '../components/update/Update';
 
 const Router: React.FC = () => {
   return (
@@ -25,13 +24,12 @@ const Router: React.FC = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/post" element={<PostPage />} />
+            <Route path="/update" element={<Update />} />
             <Route path="/board" element={<BoardPage />} />
             <Route path="/detail/:id" element={<DetailPage />} />
             <Route path="/user/:id" element={<UserPage />} />
             <Route path="/report" element={<ReportPage />} />
             <Route path="/*" element={<NotFoundPage />} />
-            <Route path="/bookmark" element={<Bookmark />} />
-            <Route path="/likes" element={<Likes />} />
           </Routes>
         </Layout>
         <Footer />
