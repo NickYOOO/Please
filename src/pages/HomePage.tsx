@@ -6,13 +6,16 @@ import Modal from '../components/common/modal/Modal';
 import ReceiveText from '../components/receiveText/ReceiveText';
 
 const HomePage = () => {
-  // 모달 관련 코드
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isClearModalOpen, setIsClearModalOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
   };
-  // 여기까지
+
+  const openClearModal = () => {
+    setIsClearModalOpen(true);
+  };
 
   return (
     <StyledBox>
@@ -24,13 +27,14 @@ const HomePage = () => {
         <StyledLink to="/board">
           <StyledButton>부탁하러 가기</StyledButton>
         </StyledLink>
-        {/* 모달 열기 버튼 */}
         <button onClick={openModal}>받은 쪽지함</button>
-        {/* 여기부터 */}
-        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
           <ReceiveText />
         </Modal>
-        {/* 여기까지 모달 코드 */}
+        <button onClick={openClearModal}>빈 모달</button>
+        <Modal isModalOpen={isClearModalOpen} setIsModalOpen={setIsClearModalOpen} closeButton={false} size="small">
+          <div>로그인 성공했습니다</div>
+        </Modal>
       </StyledTitleBox>
       <StyledPhotoBox>
         <StyledImg src={mainImage} alt="main 이미지"></StyledImg>
