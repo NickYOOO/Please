@@ -12,5 +12,6 @@ export interface IMsg{
   toUser: string,
   fromUser: string,
   timeStamp: number,
-  content: string
+  content: string,
+  id: string
 }
