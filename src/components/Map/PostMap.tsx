@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { BiSearchAlt } from 'react-icons/bi';
 import { Map } from 'react-kakao-maps-sdk';
+import { styled } from 'styled-components';
 import { onChangeFormfuncType } from '../Post/PostForm';
 
 interface PostDatePickerProps {
@@ -53,7 +55,7 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
 
           const addr = addrFunc(fullAddress);
 
-          onChangeFormHandler("position", { lat, lng, addr });
+          onChangeFormHandler('position', { lat, lng, addr });
 
           const overlayPosition = new kakao.maps.LatLng(clickedPosition.getLat() + 0.0001, clickedPosition.getLng());
 
@@ -95,6 +97,7 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
   };
 
   const handleSearch = () => {
+    console.log('map');
     if (!map || !searchKeyword) return;
 
     const ps = new kakao.maps.services.Places();
@@ -136,27 +139,68 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
   const [searchKeyword, setSearchKeyword] = useState<string>('');
 
   return (
-    <div>
-      <input
-        type="text"
-        value={searchKeyword}
-        onChange={handleSearchInputChange}
-      />
-      <button onClick={handleSearch}>검색</button>
-      <Map
-        center={{
-          lat: 37.18610826882379,
-          lng: 128.45149303027506,
-        }}
-        style={{
-          width: '100%',
-          height: '350px',
-        }}
-        level={3}
-        onCreate={setMap}
-      />
-    </div>
+    <MapSearchBox>
+      <MapContainer>
+        <SearchBox>
+          <input type="text" value={searchKeyword} onChange={handleSearchInputChange} />
+          <button onClick={handleSearch}>
+            <BiSearchAlt size={20} />
+          </button>
+        </SearchBox>
+
+        <Map
+          center={{
+            lat: 37.56679717075284,
+            lng: 126.97864094748478,
+          }}
+          style={{
+            width: '100%',
+            height: '220px',
+          }}
+          level={3}
+          onCreate={setMap}
+        />
+      </MapContainer>
+    </MapSearchBox>
   );
 };
 
 export default PostMap;
+
+const MapSearchBox = styled.div`
+  width: 100%;
+  position: relative;
+`;
+const MapContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+const SearchBox = styled.div`
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 2;
+
+  & > button {
+    background-color: transparent;
+    border: none;
+
+    color: #494949;
+
+    cursor: pointer;
+  }
+
+  & > input {
+    line-height: 23px;
+
+    padding-left: 10px;
+
+    border: 1px solid #494949;
+    border-radius: 20px;
+
+    &:hover {
+      border-color: #0074dd !important;
+    }
+  }
+`;

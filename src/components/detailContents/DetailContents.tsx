@@ -5,7 +5,7 @@ import { FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
 import { deletePost } from '../../api/post';
 import { IFormData } from '../Post/PostForm';
 import Modal from '../common/modal/Modal';
-import SendText from '../sendText/SendText';
+import SendText from '../sendMsg/SendMsg';
 import * as Styled from './DetailContents.style';
 
 interface DetailContentsProps {
@@ -128,7 +128,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
           쪽지 보내기&nbsp;
           <FaPaperPlane />
         </Styled.DetailButton>
-        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
           <SendText />
         </Modal>
         <Styled.DetailButton>

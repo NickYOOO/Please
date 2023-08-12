@@ -3,10 +3,13 @@ import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
+import { FaStarOfLife } from 'react-icons/fa';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import uuid from 'react-uuid';
+import { styled } from 'styled-components';
 import { addPost } from '../../api/post';
+import defaultImg from '../../assets/img/defaultImg.png';
 import { storage } from '../../firebase';
 import DropBox from '../DropBox/DropBox';
 import PostMap from '../Map/PostMap';
@@ -40,7 +43,7 @@ const PostForm: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [errMsg, setErrMsg] = useState('');
-  const [price, setPrice] = useState('￦0');
+
   const postsMutation = useMutation(addPost, {
     onSuccess: () => {
       queryClient.invalidateQueries('postsData');
@@ -58,7 +61,7 @@ const PostForm: React.FC = () => {
     category: '',
     date: null,
     time: '',
-    price,
+    price: "0",
     position: {
       lat: 0,
       lng: 0,
@@ -72,9 +75,16 @@ const PostForm: React.FC = () => {
     setFormData(prev => ({ ...prev, [type]: data }));
   };
 
-  const [imgFile, setImgFile] = useState<File>();
+  const [imgFile, setImgFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
   const onChangeAddFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) setImgFile(event.target.files[0]);
+    if (event.target.files) {
+      const theFile = event.target.files[0];
+      const _preview = URL.createObjectURL(theFile);
+
+      setPreview(_preview);
+      setImgFile(event.target.files[0]);
+    }
   };
 
   const updateImg = async (file: File) => {
@@ -126,27 +136,152 @@ const PostForm: React.FC = () => {
   };
   const onChangePrice = (value: number | null) => {
     if (value == null) value = 0;
-    onChangeFormHandler('price', value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }));
+
+    const price = value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }).replace(/₩/g, "")
+    onChangeFormHandler('price', price);
   };
 
   const format = 'HH:mm';
+
+  const moveToBoard = () => {
+    window.location.href = '/board';
+  };
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <DropBox itemList={categories} selectedState={formData.category} onChangeFormHandler={onChangeFormHandler} />
-        <PostDatePicker onChangeFormHandler={onChangeFormHandler} />
-        <TimePicker defaultValue={dayjs('00:00', format)} onChange={onChange} format={format} />
-        <InputNumber controls={false} maxLength={10} style={{ width: 200 }} min={0} defaultValue={0} onChange={value => onChangePrice(value)} />
-        <span>{formData.price}</span>
-        <Input value={formData.title} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
-        <TextArea value={formData.content} showCount maxLength={100} style={{ height: 120, resize: 'none' }} onChange={e => onChangeFormHandler('content', e.target.value)} placeholder="자세하게 설명해주세요!" />
-        <input type="file" accept="image/jpg, image/jpeg, image/png" name="img" onChange={onChangeAddFile} />
-        <PostMap onChangeFormHandler={onChangeFormHandler} />
-        <button type="submit">작성</button>
-        <h1 style={{ color: 'red' }}>{errMsg}</h1>
-      </form>
-    </>
+
+    <StyledBox>
+      <StyledContentsBox>
+        <form onSubmit={onSubmit}>
+          <div style={{ marginBottom: '15px' }}>
+            <DropBox itemList={categories} selectedState={formData.category} onChangeFormHandler={onChangeFormHandler} />
+          </div>
+          <StyledChooseBox>
+            <label>
+              <FaStarOfLife size={6} color="#FF004C" />
+              &nbsp;날짜{' '}
+            </label>
+            <PostDatePicker onChangeFormHandler={onChangeFormHandler} />
+            <label>시간 </label>
+            <TimePicker defaultValue={dayjs('00:00', format)} onChange={onChange} format={format} style={{ lineHeight: 'none' }} />
+            <label>금액 </label>
+            <InputNumber controls={false} maxLength={10} style={{ width: 135 }} min={1} defaultValue={0} onChange={value => onChangePrice(value)} />
+            {/* <span>{formData.price?.toLocaleString('ko', { style: 'currency', currency: 'KRW' })}원</span> */}
+          </StyledChooseBox>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '30px' }}>
+            <StyledRequestBox>
+              <div style={{ marginBottom: '10px' }}>
+                <FaStarOfLife size={6} color="#FF004C" />
+                &nbsp;<label>부탁내용</label>
+              </div>
+
+              <Input value={formData.title} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
+              <TextArea value={formData.content} showCount maxLength={100} style={{ height: 150, resize: 'none' }} onChange={e => onChangeFormHandler('content', e.target.value)} placeholder="자세하게 설명해주세요!" />
+            </StyledRequestBox>
+            <div>
+              <Label htmlFor="file">
+                <StyledPhotoBox>
+                  <img src={preview ?? defaultImg} alt="사진 선택" />
+                </StyledPhotoBox>
+              </Label>
+              <ImageInput id="file" type="file" accept="image/jpg, image/jpeg, image/png" name="img" onChange={onChangeAddFile} />
+            </div>
+          </div>
+        </form>
+        <PostMap onChangeFormHandler={onChangeFormHandler} /> <h1 style={{ color: 'red', marginTop: '15px' }}>{errMsg}</h1>
+        <StyledButtonBox>
+          <button type="submit" style={{ backgroundColor: '#3382D9', color: 'white' }}>
+            작성
+          </button>
+
+          <button onClick={moveToBoard}>취소</button>
+        </StyledButtonBox>
+      </StyledContentsBox>
+    </StyledBox>
   );
 };
 
 export default PostForm;
+
+const StyledBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 60px;
+
+  min-height: calc(100vh - 186px);
+`;
+const StyledContentsBox = styled.div`
+  width: 50%;
+  min-width: 600px;
+`;
+
+const StyledChooseBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 30px;
+
+  & > label {
+    color: dark;
+  }
+`;
+
+const StyledRequestBox = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 49%;
+  margin-bottom: 15px;
+
+  & > .ant-input-affix-wrapper {
+    margin-bottom: 25px;
+  }
+`;
+const StyledPhotoBox = styled.div`
+  width: 49%;
+
+  & > img {
+    width: 235px;
+    height: 235px;
+    object-fit: cover;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    transition: 0.2s;
+    &:hover {
+      border-color: #4096ff !important;
+    }
+  }
+`;
+const StyledButtonBox = styled.div`
+  display: flex;
+  justify-content: center;
+
+  margin-top: 30px;
+
+  gap: 10px;
+
+  & > button {
+    width: 70px;
+    height: 25px;
+
+    cursor: pointer;
+
+    border: none;
+    border-radius: 10px;
+
+    transition: 0.4s;
+    &:hover {
+      background-color: #a6d1ff !important;
+    }
+  }
+`;
+
+const Label = styled.label`
+  cursor: pointer;
+`;
+
+const ImageInput = styled.input`
+  display: none;
+`;
