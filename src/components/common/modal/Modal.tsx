@@ -30,6 +30,7 @@ const Modal: React.FC<ModalProps> = ({ children, isModalOpen, setIsModalOpen, cl
                 </button>
               </Styled.InnerBox>
             )}
+
             {children}
           </Styled.Inner>
         </Styled.Outer>,

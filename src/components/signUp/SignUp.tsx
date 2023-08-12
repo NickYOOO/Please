@@ -3,7 +3,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { Link, useNavigate } from 'react-router-dom';
+import check from '../../assets/img/check.svg';
 import useFormValidation from '../../hooks/useFormValidation';
+import Modal from '../common/modal/Modal';
 import * as Styled from './SignUp.styles';
 
 type FieldType = {
@@ -17,6 +19,7 @@ const SignUp = () => {
   const { formState, validationMsg, validationState, handleJoinInputChange } = useFormValidation();
   const [cookies, setCookie, removeCookie] = useCookies();
   const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+  const [isClearModalOpen, setIsClearModalOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -24,6 +27,9 @@ const SignUp = () => {
     setSubmitButtonDisabled(!(validationState.usernameState && validationState.emailState && validationState.passwordState && validationState.confirmPasswordState));
   }, [validationState.usernameState, validationState.emailState, validationState.passwordState, validationState.confirmPasswordState]);
 
+  const openClearModal = () => {
+    setIsClearModalOpen(true);
+  };
   const HandleSubmit = async () => {
     try {
       const { data } = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users`, {
@@ -39,7 +45,11 @@ const SignUp = () => {
       // console.log(response.data.accessToken);
       // setCookie('accessToken', data['accessToken'], { path: '/' });
 
-      navigate('/');
+      openClearModal();
+      setTimeout(() => {
+        setIsClearModalOpen(false);
+        navigate('/login');
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -70,6 +80,13 @@ const SignUp = () => {
         <Styled.ValidationMessage color={validationState.confirmPasswordState ? '#3382D9' : '#ff004c'}>{validationMsg.confirmPasswordMsg}</Styled.ValidationMessage>
 
         {submitButtonDisabled ? <Styled.SignUpButton disabled>회원가입</Styled.SignUpButton> : <Styled.SignUpButton htmlType="submit">회원가입</Styled.SignUpButton>}
+        <Modal isModalOpen={isClearModalOpen} setIsModalOpen={setIsClearModalOpen} closeButton={false} size="small">
+          <img src={check} alt="알림창" style={{ width: '40px' }} />
+          <div>
+            <p>회원가입이 완료되었습니다.</p>
+            <p>곧 로그인 페이지로 자동 이동됩니다.</p>
+          </div>
+        </Modal>
 
         <Styled.SignUpBox>
           <p>이미 회원이신가요?</p>

@@ -90,6 +90,7 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
   };
 
   const handleSearch = () => {
+    console.log('map');
     if (!map || !searchKeyword) return;
 
 

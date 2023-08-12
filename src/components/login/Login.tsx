@@ -4,6 +4,8 @@ import { ChangeEvent, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useMutation } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
+import check from '../../assets/img/check.svg';
+import Modal from '../common/modal/Modal';
 import * as Styled from './Login.styles';
 
 type FieldType = {
@@ -17,6 +19,8 @@ const Login = () => {
     password: '',
   });
 
+  const [isClearModalOpen, setIsClearModalOpen] = useState(false);
+  const [checkUser, setCheckUser] = useState(false); // 이 부분 추가
   const [cookies, setCookie, removeCookie] = useCookies();
   const navigate = useNavigate();
 
@@ -35,15 +39,45 @@ const Login = () => {
       password: formData.password,
     });
     localStorage.setItem('response', JSON.stringify(response.data));
+
     return response.data.accessToken;
   });
 
+  const checkUserRegisted = async (formData: FieldType) => {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users?email=${formData.email}`);
+      console.log(response);
+      return response.data.length > 0;
+    } catch (error) {
+      console.error('사용자 조회 오류:', error);
+      return false;
+    }
+  };
+
+  const openClearModal = () => {
+    setIsClearModalOpen(true);
+  };
+
   const onClickLoginHandler = async (formData: FieldType) => {
     try {
+      const checkUser = await checkUserRegisted(formData);
+      setCheckUser(checkUser);
+      console.log(checkUser);
+
+      if (!checkUser) {
+        openClearModal();
+
+        return;
+      }
       const accessToken = await loginMutation.mutateAsync(formData);
 
       setCookie('accessToken', accessToken, { path: '/' });
-      navigate('/');
+
+      openClearModal();
+      setTimeout(() => {
+        setIsClearModalOpen(false);
+        navigate('/');
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -62,9 +96,31 @@ const Login = () => {
           <Input.Password name="password" type="password" onChange={handleLoginInputChange} />
         </Form.Item>
 
-        <Styled.LoginButton htmlType="button" onClick={() => onClickLoginHandler(formState)} disabled={!isFormValid}>
+        <Styled.LoginButton
+          htmlType="submit"
+          onClick={() => {
+            onClickLoginHandler(formState);
+          }}
+          disabled={!isFormValid}
+        >
           로그인
         </Styled.LoginButton>
+        <Modal isModalOpen={isClearModalOpen} setIsModalOpen={setIsClearModalOpen} closeButton={true} size="small">
+          <img src={check} alt="알림창" style={{ width: '40px' }} />
+          <div>
+            {checkUser ? (
+              <>
+                <p>로그인 되었습니다.</p>
+                <p>곧 메인 페이지로 자동 이동됩니다.</p>
+              </>
+            ) : (
+              <>
+                <p>일치하는 회원정보가 없습니다.</p>
+                <p>아이디와 비밀번호를 확인해주세요.</p>
+              </>
+            )}
+          </div>
+        </Modal>
 
         <Styled.LoginBox>
           <p>아직 회원이 아니신가요?</p>

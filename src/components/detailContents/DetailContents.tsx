@@ -15,6 +15,26 @@ interface DetailContentsProps {
 const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   let postStatus = '';
 
+  const time = data?.timeStamp || 0;
+  const detailDate = (timestamp: number) => {
+    const milliSeconds = new Date().getTime() - timestamp;
+    const seconds = milliSeconds / 1000;
+    if (seconds < 60) return `방금 전`;
+    const minutes = seconds / 60;
+    if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+    const hours = minutes / 60;
+    if (hours < 24) return `${Math.floor(hours)}시간 전`;
+    const days = hours / 24;
+    if (days < 7) return `${Math.floor(days)}일 전`;
+    const weeks = days / 7;
+    if (weeks < 5) return `${Math.floor(weeks)}주 전`;
+    const months = days / 30;
+    if (months < 12) return `${Math.floor(months)}개월 전`;
+    const years = days / 365;
+    return `${Math.floor(years)}년 전`;
+  };
+  const nowDate = detailDate(time);
+
   if (data?.status === 'help') {
     postStatus = '부탁해요';
   } else {
@@ -64,12 +84,18 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
     setIsModalOpen(true);
   };
 
+  const MsgProps = {
+    postId: data?.id,
+    postUserName: data?.username,
+    postUserEmail: data?.email,
+  };
+
   return (
     <Styled.ContentsBox>
       <Styled.DetailContentsTopBox>
         <Styled.UserBox>
           <img src="https://cdn-icons-png.flaticon.com/512/95/95641.png" alt="" />
-          닉네임
+          {data?.username}
         </Styled.UserBox>
         <Select
           defaultValue={postStatus}
@@ -85,7 +111,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
         <Styled.DetailBox>
           <p>{data?.position.address}</p>
           <div>
-            <p>작성: 3분 전</p>
+            <p>{nowDate}</p>
 
             <Dropdown
               placement="bottomLeft"
@@ -129,7 +155,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
           <FaPaperPlane />
         </Styled.DetailButton>
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
-          <SendText />
+          <SendText postInfo={MsgProps} setIsModalOpen={setIsModalOpen} />
         </Modal>
         <Styled.DetailButton>
           찜하기 &nbsp;0&nbsp;

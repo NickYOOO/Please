@@ -11,7 +11,7 @@ const Msg: React.FC = () => {
 
   const storedResponse = localStorage.getItem('response');
   const parsedResponse = storedResponse ? JSON.parse(storedResponse) : null;
-
+  console.log(parsedResponse);
   const receivedData: IMsg[] | undefined = data?.filter(item => {
     return item.toUser === parsedResponse.user.email;
   });
