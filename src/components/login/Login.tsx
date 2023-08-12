@@ -34,14 +34,13 @@ const Login = () => {
       email: formData.email,
       password: formData.password,
     });
-    console.log('response', response);
+    localStorage.setItem('response', JSON.stringify(response.data));
     return response.data.accessToken;
   });
 
   const onClickLoginHandler = async (formData: FieldType) => {
     try {
       const accessToken = await loginMutation.mutateAsync(formData);
-      console.log(accessToken);
 
       setCookie('accessToken', accessToken, { path: '/' });
       navigate('/');

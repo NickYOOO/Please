@@ -3,12 +3,12 @@ import * as Styled from './SendText.styles';
 import { Input } from 'antd';
 import Button from '../common/button/Button';
 
-interface SendTextProps {}
+interface SendTextProps { }
 
 const { TextArea } = Input;
 
 const SendText: React.FC<SendTextProps> = () => {
-  const HandleToSend = () => {};
+  const HandleToSend = () => { };
 
   return (
     <div>

@@ -23,6 +23,12 @@
       "password": "$2a$10$uI8L1CTgElRHF578EjX9p.laW4ajGKcc.cE14JRh8KTqhzi4K14Wi",
       "username": "aa",
       "id": 4
+    },
+    {
+      "email": "test8@test.com",
+      "password": "$2a$10$V7p1ibIOKh6R/BZ2AWTFB.lZMPPWFYHJgC2iwgRR9QcmJ9R2r5eD2",
+      "username": "test8",
+      "id": 5
     }
   ],
   "login": [],
@@ -141,6 +147,25 @@
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Ff7473231-7837-b4f0-4a99-a95559bbc405?alt=media&token=37b89409-1e4b-49ad-a4cf-92d8be377e80",
       "id": 5
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "help",
+      "timeStamp": 1691806528381,
+      "title": "안녕",
+      "content": "안녕",
+      "category": "역할 대행",
+      "date": "2023년 8월 13일",
+      "time": "",
+      "price": "₩21,123,312",
+      "position": {
+        "lat": 0,
+        "lng": 0,
+        "address": ""
+      },
+      "img": "",
+      "id": 6
     }
   ]
 }
