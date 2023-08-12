@@ -21,7 +21,7 @@
     {
       "email": "choiys1103@naver.com",
       "password": "$2a$10$uI8L1CTgElRHF578EjX9p.laW4ajGKcc.cE14JRh8KTqhzi4K14Wi",
-      "username": "aa",
+      "username": "ys",
       "id": 4
     },
     {
@@ -344,6 +344,29 @@
       },
       "img": "",
       "id": 15
+    }
+  ],
+  "msg": [
+    {
+      "id": 1,
+      "toUser": "test2@test.com",
+      "fromUser": "test@test.com",
+      "content": "쪽지 봐주세여",
+      "timeStamp": 1691817347384
+    },
+    {
+      "id": 2,
+      "toUser": "test@test.com",
+      "fromUser": "choiys1103@naver.com",
+      "content": "ㅎㅇ!!!",
+      "timeStamp": 1691817347386
+    },
+    {
+      "id": 3,
+      "toUser": "test2@test.com",
+      "fromUser": "choiys1103@naver.com",
+      "content": "제가 도와드릴게여ㅑ",
+      "timeStamp": 1691817347386
     }
   ]
 }

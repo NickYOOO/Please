@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import mainImage from '../assets/img/main.gif';
 import Modal from '../components/common/modal/Modal';
-import ReceiveText from '../components/receiveText/ReceiveText';
+import ReceiveText from '../components/receiveText/ReceiveMsg';
 
 const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
