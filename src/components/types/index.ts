@@ -6,3 +6,11 @@ export interface Like {
 export interface GetLikesResponse {
   likes: Like[];
 }
+
+
+export interface IMsg{
+  toUser: string,
+  fromUser: string,
+  timeStamp: number,
+  content: string
+}

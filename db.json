@@ -26,12 +26,13 @@
   }
   ],
   "login": [],
-  "messages": [
+  "msg": [
   {
   "id": 1,
   "toUser": "kitae@kitae.kitae",
   "fromUser": "test@test.com",
-  "content": "ㅎㅇ"
+  "content": "ㅎㅇ",
+  "timeStamp": 1691744242379
   }
   ],
   "likes": [

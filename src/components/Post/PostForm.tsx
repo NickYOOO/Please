@@ -40,7 +40,6 @@ const PostForm: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [errMsg, setErrMsg] = useState("")
-  const [price, setPrice] = useState("￦0")
   const postsMutation = useMutation(addPost, {
     onSuccess: () => {
       queryClient.invalidateQueries('postsData');
@@ -58,7 +57,7 @@ const PostForm: React.FC = () => {
     category: '',
     date: null,
     time: "",
-    price,
+    price: "￦0",
     position: {
       lat: 0,
       lng: 0,

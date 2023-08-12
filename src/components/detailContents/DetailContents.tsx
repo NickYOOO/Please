@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { deletePost } from '../../api/post';
 import { IFormData } from '../Post/PostForm';
 import Modal from '../common/modal/Modal';
-import SendText from '../sendText/SendText';
+import SendText from '../sendMsg/SendMsg';
 import * as Styled from './DetailContents.style';
 
 interface DetailContentsProps {
