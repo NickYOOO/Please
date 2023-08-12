@@ -97,6 +97,7 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
   };
 
   const handleSearch = () => {
+    console.log('map');
     if (!map || !searchKeyword) return;
 
     const ps = new kakao.maps.services.Places();
