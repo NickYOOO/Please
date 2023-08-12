@@ -50,7 +50,7 @@ const PostForm: React.FC = () => {
     },
   });
 
-  const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '반려동물', '벌레 퇴치', '기타'];
+  const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '벌레 퇴치', '기타'];
   const [formData, setFormData] = useState<IFormData>({
     email: '',
     nickName: '',
@@ -61,7 +61,7 @@ const PostForm: React.FC = () => {
     category: '',
     date: null,
     time: '',
-    price: "0",
+    price: '0',
     position: {
       lat: 0,
       lng: 0,
@@ -137,7 +137,7 @@ const PostForm: React.FC = () => {
   const onChangePrice = (value: number | null) => {
     if (value == null) value = 0;
 
-    const price = value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }).replace(/₩/g, "")
+    const price = value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }).replace(/₩/g, '');
     onChangeFormHandler('price', price);
   };
 
@@ -147,7 +147,6 @@ const PostForm: React.FC = () => {
     window.location.href = '/board';
   };
   return (
-
     <StyledBox>
       <StyledContentsBox>
         <form onSubmit={onSubmit}>
@@ -173,7 +172,7 @@ const PostForm: React.FC = () => {
                 &nbsp;<label>부탁내용</label>
               </div>
 
-              <Input value={formData.title} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
+              <Input value={formData.title} maxLength={13} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
               <TextArea value={formData.content} showCount maxLength={100} style={{ height: 150, resize: 'none' }} onChange={e => onChangeFormHandler('content', e.target.value)} placeholder="자세하게 설명해주세요!" />
             </StyledRequestBox>
             <div>
@@ -207,13 +206,15 @@ const StyledBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  padding-top: 60px;
+  /* padding-top: 60px; */
 
   min-height: calc(100vh - 186px);
 `;
 const StyledContentsBox = styled.div`
   width: 50%;
   min-width: 600px;
+
+  margin-top: 20px;
 `;
 
 const StyledChooseBox = styled.div`
