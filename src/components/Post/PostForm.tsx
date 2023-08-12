@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import uuid from 'react-uuid';
 import { addPost } from '../../api/post';
 import { storage } from '../../firebase';
@@ -39,8 +39,8 @@ export interface IFormData {
 const PostForm: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [errMsg, setErrMsg] = useState("")
-  const [price, setPrice] = useState("￦0")
+  const [errMsg, setErrMsg] = useState('');
+  const [price, setPrice] = useState('￦0');
   const postsMutation = useMutation(addPost, {
     onSuccess: () => {
       queryClient.invalidateQueries('postsData');
@@ -57,7 +57,7 @@ const PostForm: React.FC = () => {
     content: '',
     category: '',
     date: null,
-    time: "",
+    time: '',
     price,
     position: {
       lat: 0,
@@ -117,9 +117,9 @@ const PostForm: React.FC = () => {
     onChangeFormHandler('time', timeString);
   };
   const onChangePrice = (value: number | null) => {
-    if (value == null) value = 0
-    onChangeFormHandler("price", value.toLocaleString("ko", { style: "currency", currency: "KRW" }))
-  }
+    if (value == null) value = 0;
+    onChangeFormHandler('price', value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }));
+  };
 
   const format = 'HH:mm';
   return (
@@ -128,27 +128,15 @@ const PostForm: React.FC = () => {
         <DropBox itemList={categories} selectedState={formData.category} onChangeFormHandler={onChangeFormHandler} />
         <PostDatePicker onChangeFormHandler={onChangeFormHandler} />
         <TimePicker defaultValue={dayjs('00:00', format)} onChange={onChange} format={format} />
-        <InputNumber controls={false} maxLength={10} style={{ width: 200 }} min={0} defaultValue={0} onChange={(value) => onChangePrice(value)} />
+        <InputNumber controls={false} maxLength={10} style={{ width: 200 }} min={0} defaultValue={0} onChange={value => onChangePrice(value)} />
         <span>{formData.price}</span>
-        <Input value={formData.title} placeholder="어떤 부탁인가요?" allowClear onChange={(e) => onChangeFormHandler("title", e.target.value)} />
-        <TextArea
-          value={formData.content}
-          showCount
-          maxLength={100}
-          style={{ height: 120, resize: 'none' }}
-          onChange={(e) => onChangeFormHandler("content", e.target.value)}
-          placeholder="자세하게 설명해주세요!"
-        />
-        <input
-          type="file"
-          accept="image/jpg, image/jpeg, image/png"
-          name="img"
-          onChange={onChangeAddFile}
-        />
+        <Input value={formData.title} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
+        <TextArea value={formData.content} showCount maxLength={100} style={{ height: 120, resize: 'none' }} onChange={e => onChangeFormHandler('content', e.target.value)} placeholder="자세하게 설명해주세요!" />
+        <input type="file" accept="image/jpg, image/jpeg, image/png" name="img" onChange={onChangeAddFile} />
         <PostMap onChangeFormHandler={onChangeFormHandler} />
         <button type="submit">작성</button>
         <h1 style={{ color: 'red' }}>{errMsg}</h1>
-      </form >
+      </form>
     </>
   );
 };

@@ -14,6 +14,7 @@ import { FaBookmark } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
 import { IFormData } from '../Post/PostForm';
 import * as Styled from './DetailContents.style';
+import { useParams } from 'react-router-dom';
 
 interface DetailContentsProps {
   data: IFormData | undefined;
@@ -56,11 +57,14 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
     },
   ];
 
+  const params = useParams();
+  const { id } = params;
+
   const onClick: MenuProps['onClick'] = ({ key }) => {
     switch (key) {
       case 'update':
         updatePost(data!);
-        window.location.href = '/update';
+        window.location.href = `/update/${id}`;
         break;
 
       case 'delete':

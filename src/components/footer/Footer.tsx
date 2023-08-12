@@ -3,7 +3,7 @@ import { SiNotion } from 'react-icons/si';
 import * as Styled from './Footer.styles';
 
 const Footer = () => {
-  const paths = ['/signup', '/login', '/', '/post', '/board', '/report'];
+  const paths = ['/signup', '/login', '/', '/post', '/board', '/report', '/update'];
   const dynamicPaths = /^\/detail|user\/[\w\d]+$/;
 
   if (!paths.includes(window.location.pathname) && !dynamicPaths.test(window.location.pathname)) {

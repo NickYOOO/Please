@@ -6,11 +6,12 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import uuid from 'react-uuid';
-import { addPost } from '../../api/post';
+import { addPost, updatePost } from '../../api/post';
 import { storage } from '../../firebase';
 import DropBox from '../DropBox/DropBox';
 import PostMap from '../Map/PostMap';
 import PostDatePicker from '../Post/PostDatePicker';
+import axios from 'axios';
 
 export interface onChangeFormfuncType {
   (type: string, data: string | number | null | { lat: number; lng: number; addr: string }): void;
@@ -37,6 +38,7 @@ export interface IFormData {
 }
 
 const Update: React.FC = () => {
+  const params = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [errMsg, setErrMsg] = useState('');
@@ -88,6 +90,8 @@ const Update: React.FC = () => {
     }
   };
 
+  const { id } = params;
+
   useEffect(() => {
     if (imgFile) updateImg(imgFile);
   }, [imgFile]);
@@ -101,32 +105,16 @@ const Update: React.FC = () => {
       setErrMsg('제목과 내용을 모두 입력해주세요');
       return;
     }
-    postsMutation.mutate(formData);
-    navigate('/board');
+
+    try {
+      const updatedData = { ...formData, id: id }; // 수정할 게시글 데이터에 postId 추가
+      await updatePost(updatedData); // updatePost 함수를 사용하여 수정된 데이터를 서버에 전달합니다.
+      queryClient.invalidateQueries('postsData');
+      navigate(`/detail/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // 포스트 ID를 useParams로 받아옴
-        const { id } = useParams();
-
-        // 기존 포스트 데이터를 서버로부터 불러옴
-        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`);
-        const existingPost = response.data; // 불러온 데이터
-
-        // 업데이트 폼의 formData 상태를 업데이트
-        setFormData(prevFormData => ({
-          ...prevFormData,
-          ...existingPost, // 기존 포스트 데이터로 폼 필드 업데이트
-        }));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   // const handleImgUpload = (event: ChangeEventHandler) => {
   //   updateImg(event.target.files[0]);
@@ -157,7 +145,7 @@ const Update: React.FC = () => {
         <TextArea value={formData.content} showCount maxLength={100} style={{ height: 120, resize: 'none' }} onChange={e => onChangeFormHandler('content', e.target.value)} placeholder="자세하게 설명해주세요!" />
         <input type="file" accept="image/jpg, image/jpeg, image/png" name="img" onChange={onChangeAddFile} />
         <PostMap onChangeFormHandler={onChangeFormHandler} />
-        <button type="submit">작성</button>
+        <button type="submit">수정</button>
         <h1 style={{ color: 'red' }}>{errMsg}</h1>
       </form>
     </>
