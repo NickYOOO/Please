@@ -164,8 +164,27 @@
         "lng": 126.98145970410191,
         "addr": "서울 중구 을지로가 "
       },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Ff5c857e8-ff4f-2f42-e6ae-ed9f628b3375?alt=media&token=abf19305-9144-4cd3-b1d1-cda4f9d007c0",
-      "id": 2
+      "img": "",
+      "id": 15
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "help",
+      "timeStamp": 1691855237437,
+      "title": "ㅁㅁ",
+      "content": "ㅁㅁ",
+      "category": "배달",
+      "date": "2023년 8월 14일",
+      "time": "00:53",
+      "price": "11",
+      "position": {
+        "lat": 37.2755790587423,
+        "lng": 127.13240586152656,
+        "addr": "경기 용인시 기흥구 구갈동 "
+      },
+      "img": "",
+      "id": 16
     }
   ],
   "msg": [
