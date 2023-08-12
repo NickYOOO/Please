@@ -39,12 +39,14 @@ const Login = () => {
       password: formData.password,
     });
     localStorage.setItem('response', JSON.stringify(response.data));
+
     return response.data.accessToken;
   });
 
   const checkUserRegisted = async (formData: FieldType) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users?email=${formData.email}&password=${formData.password}`);
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users?email=${formData.email}`);
+      console.log(response);
       return response.data.length > 0;
     } catch (error) {
       console.error('사용자 조회 오류:', error);
@@ -59,7 +61,9 @@ const Login = () => {
   const onClickLoginHandler = async (formData: FieldType) => {
     try {
       const checkUser = await checkUserRegisted(formData);
-      // console.log(checkUser);
+      setCheckUser(checkUser);
+      console.log(checkUser);
+
       if (!checkUser) {
         openClearModal();
 
