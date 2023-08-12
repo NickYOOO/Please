@@ -43,7 +43,6 @@ const PostForm: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [errMsg, setErrMsg] = useState('');
-  const [price, setPrice] = useState('￦0');
   const postsMutation = useMutation(addPost, {
     onSuccess: () => {
       queryClient.invalidateQueries('postsData');
@@ -61,7 +60,7 @@ const PostForm: React.FC = () => {
     category: '',
     date: null,
     time: '',
-    price,
+    price: "0",
     position: {
       lat: 0,
       lng: 0,
@@ -128,7 +127,8 @@ const PostForm: React.FC = () => {
   };
   const onChangePrice = (value: number | null) => {
     if (value == null) value = 0;
-    onChangeFormHandler('price', value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }));
+    const price = value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }).replace(/₩/g, "")
+    onChangeFormHandler('price', price);
   };
 
   const format = 'HH:mm';
@@ -152,7 +152,7 @@ const PostForm: React.FC = () => {
             <label>시간 </label>
             <TimePicker defaultValue={dayjs('00:00', format)} onChange={onChange} format={format} style={{ lineHeight: 'none' }} />
             <label>금액 </label>
-            <InputNumber controls={false} maxLength={10} style={{ width: 135 }} min={1} defaultValue={0} onChange={value => onChangeFormHandler('price', value)} />
+            <InputNumber controls={false} maxLength={10} style={{ width: 135 }} min={1} defaultValue={0} onChange={value => onChangePrice(value)} />
             {/* <span>{formData.price?.toLocaleString('ko', { style: 'currency', currency: 'KRW' })}원</span> */}
           </StyledChooseBox>
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '30px' }}>
