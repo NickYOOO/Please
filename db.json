@@ -21,7 +21,7 @@
     {
       "email": "choiys1103@naver.com",
       "password": "$2a$10$uI8L1CTgElRHF578EjX9p.laW4ajGKcc.cE14JRh8KTqhzi4K14Wi",
-      "username": "aa",
+      "username": "ys",
       "id": 4
     },
     {
@@ -261,6 +261,29 @@
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F79022c36-7ed3-59fa-74b2-3703c76a1abb?alt=media&token=d68712be-d4f2-4910-a783-34fc8a1631f5",
       "id": 11
+    }
+  ],
+  "msg": [
+    {
+      "id": 1,
+      "toUser": "test2@test.com",
+      "fromUser": "test@test.com",
+      "content": "쪽지 봐주세여",
+      "timeStamp": 1691817347384
+    },
+    {
+      "id": 2,
+      "toUser": "test@test.com",
+      "fromUser": "choiys1103@naver.com",
+      "content": "ㅎㅇ!!!",
+      "timeStamp": 1691817347386
+    },
+    {
+      "id": 3,
+      "toUser": "test2@test.com",
+      "fromUser": "choiys1103@naver.com",
+      "content": "제가 도와드릴게여ㅑ",
+      "timeStamp": 1691817347386
     }
   ]
 }
