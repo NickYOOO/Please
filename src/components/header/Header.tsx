@@ -27,7 +27,6 @@ const Header = () => {
       setUser({ userName: username });
       setIsLoggedIn(true);
     }
-    console.log(storedResponse);
   }, [pathname]);
 
   if (!paths.includes(window.location.pathname) && !dynamicPaths.test(window.location.pathname)) {
@@ -56,7 +55,6 @@ const Header = () => {
       console.error('로그아웃 오류:', error);
     }
   };
-
   return (
     <Styled.Header>
       <Styled.TitleBox onClick={moveToMain}>
