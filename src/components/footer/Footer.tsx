@@ -4,7 +4,7 @@ import * as Styled from './Footer.styles';
 
 const Footer = () => {
   const paths = ['/signup', '/login', '/', '/post', '/board', '/report', '/update'];
-  const dynamicPaths = /^\/detail|user\/[\w\d]+$/;
+  const dynamicPaths = /^\/detail|user|update\/[\w\d]+$/;
 
   if (!paths.includes(window.location.pathname) && !dynamicPaths.test(window.location.pathname)) {
     return null;

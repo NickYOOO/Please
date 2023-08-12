@@ -172,16 +172,16 @@
       "nickName": "",
       "status": "help",
       "timeStamp": 1691855237437,
-      "title": "ㅁㅁ",
-      "content": "ㅁㅁ",
+      "title": "안녕!",
+      "content": "ㅎㅎㅎㅋㅎㅇ",
       "category": "배달",
-      "date": "2023년 8월 14일",
-      "time": "00:53",
-      "price": "11",
+      "date": "2023년 8월 24일",
+      "time": "04:05",
+      "price": "₩2,323",
       "position": {
-        "lat": 37.56606734559856,
-        "lng": 126.97853928538898,
-        "address": "서울 중구 을지로가 "
+        "lat": 37.54504247800529,
+        "lng": 126.9606890409133,
+        "addr": "서울 용구 효창동 "
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F8fd2c662-40dc-05b5-44dc-f19fa18df512?alt=media&token=b2a99832-c662-4e20-a7da-07d04bdd13ba",
       "id": 4

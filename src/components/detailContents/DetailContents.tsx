@@ -7,7 +7,7 @@ import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query'
 import { deletePost, updatePost } from '../../api/post';
 import { getLikes, patchLikes } from '../../api/likes';
 import Modal from '../common/modal/Modal';
-import SendText from '../sendText/SendText';
+import SendText from '../sendMsg/SendMsg';
 
 import type { Like } from '../types';
 import { FaBookmark } from 'react-icons/fa';
@@ -96,7 +96,6 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const openModal = () => {
     setIsModalOpen(true);
   };

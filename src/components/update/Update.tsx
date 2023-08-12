@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import uuid from 'react-uuid';
-import { addPost, updatePost } from '../../api/post';
+import { getPostId, addPost, updatePost } from '../../api/post';
 import { storage } from '../../firebase';
 import DropBox from '../DropBox/DropBox';
 import PostMap from '../Map/PostMap';
@@ -35,12 +35,14 @@ export interface IFormData {
   };
   img: string | undefined;
   id: string | undefined;
+  username: string;
 }
 
 const Update: React.FC = () => {
   const params = useParams();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
   const [errMsg, setErrMsg] = useState('');
   const [price, setPrice] = useState('￦0');
   const postsMutation = useMutation(addPost, {
@@ -68,6 +70,7 @@ const Update: React.FC = () => {
     },
     img: '',
     id: '',
+    username: '',
   });
 
   const onChangeFormHandler: onChangeFormfuncType = (type, data): void => {
@@ -90,11 +93,34 @@ const Update: React.FC = () => {
     }
   };
 
-  const { id } = params;
+  const onChange = (time: dayjs.Dayjs | null, timeString: string) => {
+    onChangeFormHandler('time', timeString);
+  };
+  const onChangePrice = (value: number | null) => {
+    if (value == null) value = 0;
+    onChangeFormHandler('price', value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }));
+  };
 
   useEffect(() => {
     if (imgFile) updateImg(imgFile);
   }, [imgFile]);
+
+  const { id } = params;
+  const [dataFetched, setDataFetched] = useState(false);
+
+  useEffect(() => {
+    const fetchPostData = async () => {
+      try {
+        const postData = await getPostId(params.id); // getPost 함수로 포스트 데이터 가져오기
+        setFormData(postData); // 가져온 데이터로 formData 설정
+        setDataFetched(true); // 데이터를 가져왔음을 표시
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchPostData();
+  }, [params.id]);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -107,8 +133,8 @@ const Update: React.FC = () => {
     }
 
     try {
-      const updatedData = { ...formData, id: id }; // 수정할 게시글 데이터에 postId 추가
-      await updatePost(updatedData); // updatePost 함수를 사용하여 수정된 데이터를 서버에 전달합니다.
+      const updatedData = { ...formData, id: id };
+      await updatePost(updatedData);
       queryClient.invalidateQueries('postsData');
       navigate(`/detail/${id}`);
     } catch (error) {
@@ -124,13 +150,6 @@ const Update: React.FC = () => {
   //   const { name, value } = e.target
   //   setFormData({ ...formData, [name]: value })
   // }
-  const onChange = (time: dayjs.Dayjs | null, timeString: string) => {
-    onChangeFormHandler('time', timeString);
-  };
-  const onChangePrice = (value: number | null) => {
-    if (value == null) value = 0;
-    onChangeFormHandler('price', value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }));
-  };
 
   const format = 'HH:mm';
   return (
