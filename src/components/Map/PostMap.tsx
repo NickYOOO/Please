@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { BiSearchAlt } from 'react-icons/bi';
 import { Map } from 'react-kakao-maps-sdk';
+import { styled } from 'styled-components';
 import { onChangeFormfuncType } from '../Post/PostForm';
 
 interface PostDatePickerProps {
-  onChangeFormHandler: onChangeFormfuncType
+  onChangeFormHandler: onChangeFormfuncType;
 }
 
 const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
@@ -30,10 +32,10 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
         });
         setMarker(newMarker);
       }
-      let lat: number = clickedPosition.getLat()
-      let lng: number = clickedPosition.getLng()
+      let lat: number = clickedPosition.getLat();
+      let lng: number = clickedPosition.getLng();
 
-      setClickInfo(`${lat},${lng} `)
+      setClickInfo(`${lat},${lng} `);
 
       if (previousOverlay) {
         previousOverlay.setMap(null);
@@ -54,10 +56,9 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
         </div>
           `;
 
+          const addr = addrFunc(fullAddress);
 
-          const addr = addrFunc(fullAddress)
-
-          onChangeFormHandler("position", { lat, lng, addr })
+          onChangeFormHandler('position', { lat, lng, addr });
           const overlayPosition = new kakao.maps.LatLng(clickedPosition.getLat() + 0.0001, clickedPosition.getLng()); // 마커 위로 조금 올린 위치
 
           const newOverlay = new kakao.maps.CustomOverlay({
@@ -67,7 +68,7 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
           });
 
           setAddressOverlay(newOverlay);
-          setAddressOverlay(null)
+          setAddressOverlay(null);
           previousOverlay = newOverlay;
         }
       });
@@ -117,28 +118,68 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={searchKeyword}
-        onChange={handleSearchInputChange}
-      />
-      <button onClick={handleSearch}>검색</button>
-      <Map
-        center={{
-          lat: 37.18610826882379,
-          lng: 128.45149303027506,
-        }}
-        style={{
-          width: '100%',
-          height: '350px',
-        }}
-        level={3}
-        onCreate={setMap}
-      />
+    <MapSearchBox>
+      <MapContainer>
+        <SearchBox>
+          <input type="text" value={searchKeyword} onChange={handleSearchInputChange} />
+          <button onClick={handleSearch}>
+            <BiSearchAlt size={20} />
+          </button>
+        </SearchBox>
 
-    </div>
+        <Map
+          center={{
+            lat: 37.56679717075284,
+            lng: 126.97864094748478,
+          }}
+          style={{
+            width: '100%',
+            height: '220px',
+          }}
+          level={3}
+          onCreate={setMap}
+        />
+      </MapContainer>
+    </MapSearchBox>
   );
 };
 
 export default PostMap;
+
+const MapSearchBox = styled.div`
+  width: 100%;
+  position: relative;
+`;
+const MapContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+const SearchBox = styled.div`
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 2;
+
+  & > button {
+    background-color: transparent;
+    border: none;
+
+    color: #494949;
+
+    cursor: pointer;
+  }
+
+  & > input {
+    line-height: 23px;
+
+    padding-left: 10px;
+
+    border: 1px solid #494949;
+    border-radius: 20px;
+
+    &:hover {
+      border-color: #0074dd !important;
+    }
+  }
+`;
