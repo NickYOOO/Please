@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import mainImage from '../assets/img/main.gif';
 import Modal from '../components/common/modal/Modal';
-import ReceiveText from '../components/receiveText/ReceiveText';
+import Msg from '../components/Msg/Msg';
 
 const HomePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // 쪽지함 모달
@@ -27,9 +27,9 @@ const HomePage = () => {
         <StyledLink to="/board">
           <StyledButton>부탁하러 가기</StyledButton>
         </StyledLink>
-        <button onClick={openModal}>받은 쪽지함</button>
+        <button onClick={openModal}>쪽지함</button>
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
-          <ReceiveText />
+          <Msg />
         </Modal>
         <button onClick={openClearModal}>빈 모달</button>
         <Modal isModalOpen={isClearModalOpen} setIsModalOpen={setIsClearModalOpen} closeButton={false} size="small">
