@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import { styled } from 'styled-components';
 
 export const MsgParagraph = styled.p`
@@ -18,7 +19,7 @@ export const StyledBox = styled.div`
   width: 100%;
   min-height: 0;
   position: absolute;
-  top: 100px;
+  top: 70px;
   left: 0;
   right: 0;
   bottom: 25px;
@@ -30,13 +31,46 @@ export const StyledBox = styled.div`
   }
 `;
 
+export const MsgButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+`;
+
+export const MsgButton = styled(Button)`
+  margin: 0 auto;
+  background-color: #f9f7f1;
+  color: #000000;
+
+  &.active {
+    color: #ffffff !important;
+    background-color: #0074dd;
+    border-color: #0074dd;
+
+    &:hover {
+      color: #ffffff !important;
+      border-color: #f9f7f1 !important;
+    }
+  }
+
+  &:hover {
+    color: #000000 !important;
+    border-color: #0074dd !important;
+  }
+`;
+
 export const MsgBox = styled.div`
   width: 100%;
-  height: 200px;
   padding: 20px;
   margin-bottom: 15px;
   border-radius: 20px;
   background-color: #f9f7f1;
+
+  & > div > h1 {
+    font-size: 15px;
+  }
 
   & > div {
     display: flex;
@@ -44,13 +78,18 @@ export const MsgBox = styled.div`
   }
 `;
 
-export const ReplyBox = styled.div`
-  margin-bottom: 30px;
+export const MsgOption = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 15px;
   cursor: pointer;
   transition: 0.4s;
 
-  &:hover {
-    color: #3382d9 !important;
+  & > svg {
+    &:hover {
+      color: #3382d9 !important;
+    }
   }
 `;
 
@@ -59,20 +98,11 @@ export const MsgContent = styled.p`
   line-height: 1.5;
   margin-bottom: 15px;
   font-family: 'HakgyoansimWoojuR';
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 900;
 `;
 
-export const MsgTimeBox = styled.div`
+export const MsgTimeBox = styled.p`
   float: right;
   font-size: 12px;
-`;
-
-export const LoaderWrap = styled.div`
-  width: 100%;
-  height: 80%;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
 `;

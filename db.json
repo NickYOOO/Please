@@ -38,15 +38,6 @@
     }
   ],
   "login": [],
-  "msg": [
-    {
-      "id": 1,
-      "toUser": "kitae@kitae.kitae",
-      "fromUser": "test@test.com",
-      "content": "ㅎㅇ",
-      "timeStamp": 1691744242379
-    }
-  ],
   "likes": [
     {
       "id": 1,
@@ -357,7 +348,7 @@
     {
       "id": 2,
       "toUser": "test@test.com",
-      "fromUser": "choiys1103@naver.com",
+      "fromUser": "test2@test.com",
       "content": "ㅎㅇ!!!",
       "timeStamp": 1691817347386
     },
@@ -366,6 +357,13 @@
       "toUser": "test2@test.com",
       "fromUser": "choiys1103@naver.com",
       "content": "제가 도와드릴게여ㅑ",
+      "timeStamp": 1691823691676
+    },
+    {
+      "id": 4,
+      "toUser": "test2@test.com",
+      "fromUser": "choiys1103@naver.com",
+      "content": "제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ",
       "timeStamp": 1691823691676
     }
   ]
