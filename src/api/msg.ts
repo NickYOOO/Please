@@ -11,3 +11,7 @@ export const getMsg = async () => {
 export const sendMsg = async (msg: IMsg) => {
   await axios.post(`${URL}/msg`, msg);
 };
+
+export const deleteMsg = async (id: string) => {
+  await axios.delete(`${URL}/msg/${id}`);
+};
