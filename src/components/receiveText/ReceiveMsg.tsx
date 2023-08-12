@@ -14,12 +14,18 @@ const ReceiveMsg: React.FC = () => {
     return item.toUser === parsedResponse.user.email;
   });
 
+  const sortedDetailData = detailData?.sort((a, b) => {
+    const msgEarly = new Date(a.timeStamp).getTime();
+    const msgLate = new Date(b.timeStamp).getTime();
+    return msgLate - msgEarly;
+  });
+
   return (
     <div>
       <Styled.MsgParagraph>받은 쪽지함</Styled.MsgParagraph>
       <Styled.StyledBox>
-        {detailData &&
-          detailData.map(item => {
+        {sortedDetailData &&
+          sortedDetailData.map(item => {
             const timeStampDate = new Date(item.timeStamp);
 
             const year = timeStampDate.getFullYear();
