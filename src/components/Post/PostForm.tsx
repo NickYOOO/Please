@@ -61,7 +61,7 @@ const PostForm: React.FC = () => {
     category: '',
     date: null,
     time: '',
-    price: "0",
+    price: '0',
     position: {
       lat: 0,
       lng: 0,
@@ -137,7 +137,7 @@ const PostForm: React.FC = () => {
   const onChangePrice = (value: number | null) => {
     if (value == null) value = 0;
 
-    const price = value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }).replace(/₩/g, "")
+    const price = value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }).replace(/₩/g, '');
     onChangeFormHandler('price', price);
   };
 
@@ -147,7 +147,6 @@ const PostForm: React.FC = () => {
     window.location.href = '/board';
   };
   return (
-
     <StyledBox>
       <StyledContentsBox>
         <form onSubmit={onSubmit}>
