@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import { styled } from 'styled-components';
 
 export const TextParagraph = styled.p`
@@ -41,4 +42,15 @@ export const SendBox = styled.div`
   display: flex;
   align-items: center;
   margin-top: 50px;
+`;
+
+export const SendButton = styled(Button)`
+  margin: 0 auto;
+  background-color: #0074dd;
+  color: #ffffff;
+
+  &:hover {
+    color: #ffffff !important;
+    border-color: #0074dd !important;
+  }
 `;

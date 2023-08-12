@@ -130,338 +130,53 @@
   ],
   "posts": [
     {
-      "email": "",
-      "nickName": "",
+      "email": "test2@test.com",
+      "username": "test2",
       "status": "help",
-      "timeStamp": 1691744242379,
-      "title": "ㅎㅇ",
-      "content": "ㅎㅇ",
-      "category": "반려동물",
-      "date": "2023년 8월 17일",
-      "time": "10:30",
-      "price": 123214214,
+      "timeStamp": 1691842762952,
+      "title": "집 지어주세요",
+      "content": "집이 무너졌어요",
+      "category": "조립",
+      "date": "2023년 8월 27일",
+      "time": "21:19",
+      "price": "134,254,364",
       "position": {
-        "lat": 37.511103551052734,
-        "lng": 127.0981423862268,
-        "address": "서울 송파구 잠실동 "
+        "lat": 37.5655362526725,
+        "lng": 126.98145970410191,
+        "addr": "서울 중구 을지로가 "
       },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F3efbfe94-12aa-0bfb-235e-e76d0e101baa?alt=media&token=50924607-9887-49d4-a5dc-ea25b39cdd9e",
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Fabc66ba8-9c80-fbf9-d6b3-0d7dc7a30eca?alt=media&token=a297b5ac-6cff-41bd-8930-0de368ac1f1e",
       "id": 1
     },
     {
-      "email": "",
-      "nickName": "",
-      "status": "done",
-      "timeStamp": 1691744800086,
-      "title": "강아지 돌봐주세요",
-      "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너",
-      "category": "동행·돌봄",
-      "date": "2023년 8월 17일",
-      "time": "10:30",
-      "price": 15000,
-      "position": {
-        "lat": 37.56642787343069,
-        "lng": 126.97926359774955,
-        "address": "서울 중구 을지로가 "
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F68f76863-1d4e-2b8f-049d-2a85f4731ac6?alt=media&token=3c39b174-0acf-49a0-afe2-41722ac63627",
-      "id": 2
-    },
-    {
-      "email": "",
-      "nickName": "",
+      "email": "test@test.com",
+      "username": "test",
       "status": "help",
-      "timeStamp": 1691744962935,
-      "title": "강아지",
-      "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해",
-      "category": "동행·돌봄",
-      "date": "2023년 8월 15일",
-      "time": "05:05",
-      "price": 8000,
-      "position": {
-        "lat": 37.448135818459036,
-        "lng": 126.93307459173312,
-        "address": "서울 관악구 신림동 "
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F7e6e6d66-9c8f-e1d2-417f-0309d95ec7cd?alt=media&token=4d373018-2020-4562-a790-040998d05eb7",
-      "id": 3
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "help",
-      "timeStamp": 1691745087513,
-      "title": "강아지2",
-      "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지",
-      "category": "동행·돌봄",
-      "date": "2023년 8월 21일",
-      "time": "05:05",
-      "price": 8000,
-      "position": {
-        "lat": 37.56606734559856,
-        "lng": 126.97853928538898,
-        "address": "서울 중구 을지로가 "
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F8fd2c662-40dc-05b5-44dc-f19fa18df512?alt=media&token=b2a99832-c662-4e20-a7da-07d04bdd13ba",
-      "id": 4
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "help",
-      "timeStamp": 1691745293347,
-      "title": "강아지3",
-      "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지",
-      "category": "동행·돌봄",
-      "date": "2023년 8월 29일",
-      "time": "04:03",
-      "price": 10000,
-      "position": {
-        "lat": 37.56642787343069,
-        "lng": 126.97926359774955,
-        "address": "서울 중구 을지로가 "
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Ff7473231-7837-b4f0-4a99-a95559bbc405?alt=media&token=37b89409-1e4b-49ad-a4cf-92d8be377e80",
-      "id": 5
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "진행중",
-      "timeStamp": 1691751647044,
-      "title": "유효성",
-      "content": "유효성 검사",
-      "category": "청소",
-      "date": "2023년 8월 15일",
-      "time": "",
-      "price": null,
-      "position": {
-        "lat": 0,
-        "lng": 0,
-        "address": ""
-      },
-      "img": "",
-      "id": 6
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "진행중",
-      "timeStamp": 1691751791031,
-      "title": "ㅇㅇㅇ",
-      "content": "ㅇㅇㅇ",
+      "timeStamp": 1691850271726,
+      "title": "1234",
+      "content": "13412",
       "category": "역할 대행",
-      "date": "2023년 8월 23일",
-      "time": "03:03",
-      "price": 9000,
-      "position": {
-        "lat": 0,
-        "lng": 0,
-        "address": ""
-      },
-      "img": "",
-      "id": 7
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "진행중",
-      "timeStamp": 1691753177211,
-      "title": "부탁",
-      "content": "설명",
-      "category": "기타",
-      "date": "2023년 8월 24일",
-      "time": "",
-      "price": 15000,
-      "position": {
-        "lat": 37.18634433500887,
-        "lng": 128.4528150907374,
-        "addr": "강원특별자치도 영월군 영월읍 방절리 "
-      },
-      "img": "",
-      "id": 8
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "진행중",
-      "timeStamp": 1691760754373,
-      "title": "fg",
-      "content": "f",
-      "category": "역할 대행",
-      "date": "2023년 8월 14일",
-      "time": "05:04",
-      "price": 1,
-      "position": {
-        "lat": 37.1857794408003,
-        "lng": 128.45185834761003,
-        "addr": "강원특별자치도 영월군 영월읍 방절리 "
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Ff21bdcc3-27ae-f5fb-816e-16d7c7922399?alt=media&token=3436a1e7-b9e6-4860-a122-d41001d844d1",
-      "id": 9
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "진행중",
-      "timeStamp": 1691763084440,
-      "title": "ㅇ",
-      "content": "ㅇ",
-      "category": "조립",
-      "date": "2023년 8월 21일",
-      "time": "04:02",
-      "price": 0,
-      "position": {
-        "lat": 0,
-        "lng": 0,
-        "address": ""
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F8ce97137-2366-3790-7c3d-988e44cd6729?alt=media&token=0757cbbb-180b-49d4-8465-fb33ea18a0ed",
-      "id": 10
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "진행중",
-      "timeStamp": 1691817347384,
-      "title": "가구조립가구조립가구조립가구조립가구조립가구조립",
-      "content": "가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립가구조립",
-      "category": "조립",
       "date": "2023년 8월 22일",
-      "time": "14:16",
-      "price": 5000,
+      "time": "23:24",
+      "price": "123,412",
       "position": {
-        "lat": 37.5669775924683,
-        "lng": 126.97990863291894,
-        "addr": "서울 중구 다동 "
+        "lat": 37.5655362526725,
+        "lng": 126.98145970410191,
+        "addr": "서울 중구 을지로가 "
       },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F79022c36-7ed3-59fa-74b2-3703c76a1abb?alt=media&token=d68712be-d4f2-4910-a783-34fc8a1631f5",
-      "id": 11
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "help",
-      "timeStamp": 1691821587951,
-      "title": "11",
-      "content": "11",
-      "category": "청소",
-      "date": "2023년 8월 17일",
-      "time": "03:04",
-      "price": 111111,
-      "position": {
-        "lat": 0,
-        "lng": 0,
-        "address": ""
-      },
-      "img": "",
-      "id": 12
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "help",
-      "timeStamp": 1691823408314,
-      "title": "11",
-      "content": "11",
-      "category": "청소",
-      "date": "2023년 8월 14일",
-      "time": "15:56",
-      "price": "₩111,111",
-      "position": {
-        "lat": 0,
-        "lng": 0,
-        "address": ""
-      },
-      "img": "",
-      "id": 13
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "help",
-      "timeStamp": 1691823637017,
-      "title": "11",
-      "content": "11",
-      "category": "청소",
-      "date": "2023년 8월 16일",
-      "time": "16:00",
-      "price": "₩11,111",
-      "position": {
-        "lat": 0,
-        "lng": 0,
-        "address": ""
-      },
-      "img": "",
-      "id": 14
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "help",
-      "timeStamp": 1691823691676,
-      "title": "1",
-      "content": "1",
-      "category": "청소",
-      "date": "2023년 8월 14일",
-      "time": "",
-      "price": "1,122,311",
-      "position": {
-        "lat": 0,
-        "lng": 0,
-        "address": ""
-      },
-      "img": "",
-      "id": 15
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Ff5c857e8-ff4f-2f42-e6ae-ed9f628b3375?alt=media&token=abf19305-9144-4cd3-b1d1-cda4f9d007c0",
+      "id": 2
     }
   ],
   "msg": [
     {
-      "id": 1,
-      "toUser": "test2@test.com",
-      "fromUser": "test@test.com",
-      "content": "쪽지 봐주세여",
-      "timeStamp": 1691817347384
-    },
-    {
-      "id": 2,
+      "postId": 2,
       "toUser": "test@test.com",
       "fromUser": "test2@test.com",
-      "content": "ㅎㅇ!!!",
-      "timeStamp": 1691817347386
-    },
-    {
-      "id": 3,
-      "toUser": "test2@test.com",
-      "fromUser": "choiys1103@naver.com",
-      "content": "제가 도와드릴게여ㅑ",
-      "timeStamp": 1691823691676
-    },
-    {
-      "id": 4,
-      "toUser": "test2@test.com",
-      "fromUser": "choiys1103@naver.com",
-      "content": "제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ제가 도와드릴게여ㅑ",
-      "timeStamp": 1691823691676
-    },
-    {
-      "email": "",
-      "nickName": "",
-      "status": "help",
-      "timeStamp": 1691842903249,
-      "title": "ㅅㅅ",
-      "content": "ㅅㅅ",
-      "category": "청소",
-      "date": "2023년 8월 22일",
-      "time": "21:21",
-      "price": "￦0",
-      "position": {
-        "lat": 0,
-        "lng": 0,
-        "address": ""
-      },
-      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F26cc008a-e6f7-18d0-a5cd-d51e8047755d?alt=media&token=5a239518-3fef-40be-80dd-15af799bd0eb",
-      "id": 12
+      "fromUsername": "test2",
+      "timeStamp": 1691852167268,
+      "content": "ㅋㅋㅋㅋ",
+      "id": 1
     }
   ]
 }

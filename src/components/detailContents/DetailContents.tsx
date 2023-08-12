@@ -84,12 +84,18 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
     setIsModalOpen(true);
   };
 
+  const MsgProps = {
+    postId: data?.id,
+    postUserName: data?.username,
+    postUserEmail: data?.email,
+  };
+
   return (
     <Styled.ContentsBox>
       <Styled.DetailContentsTopBox>
         <Styled.UserBox>
           <img src="https://cdn-icons-png.flaticon.com/512/95/95641.png" alt="" />
-          닉네임
+          {data?.username}
         </Styled.UserBox>
         <Select
           defaultValue={postStatus}
@@ -149,7 +155,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
           <FaPaperPlane />
         </Styled.DetailButton>
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
-          <SendText />
+          <SendText postInfo={MsgProps} setIsModalOpen={setIsModalOpen} />
         </Modal>
         <Styled.DetailButton>
           찜하기 &nbsp;0&nbsp;
