@@ -29,7 +29,7 @@ export interface IFormData {
   category: string;
   date: null | string;
   time: string;
-  price: number;
+  price: string;
   position: {
     lat: number;
     lng: number;
@@ -43,6 +43,7 @@ const PostForm: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [errMsg, setErrMsg] = useState('');
+  const [price, setPrice] = useState('￦0');
   const postsMutation = useMutation(addPost, {
     onSuccess: () => {
       queryClient.invalidateQueries('postsData');
@@ -53,14 +54,14 @@ const PostForm: React.FC = () => {
   const [formData, setFormData] = useState<IFormData>({
     email: '',
     nickName: '',
-    status: '진행중',
+    status: 'help',
     timeStamp: new Date().getTime(),
     title: '',
     content: '',
     category: '',
     date: null,
     time: '',
-    price: 0,
+    price,
     position: {
       lat: 0,
       lng: 0,
@@ -72,9 +73,6 @@ const PostForm: React.FC = () => {
 
   const onChangeFormHandler: onChangeFormfuncType = (type, data): void => {
     setFormData(prev => ({ ...prev, [type]: data }));
-    console.log(type, data);
-    console.log({ ...formData, [type]: data });
-    console.log(formData);
   };
 
   const [imgFile, setImgFile] = useState<File | null>(null);
@@ -128,6 +126,11 @@ const PostForm: React.FC = () => {
   const onChange = (time: dayjs.Dayjs | null, timeString: string) => {
     onChangeFormHandler('time', timeString);
   };
+  const onChangePrice = (value: number | null) => {
+    if (value == null) value = 0;
+    onChangeFormHandler('price', value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }));
+  };
+
   const format = 'HH:mm';
 
   const moveToBoard = () => {

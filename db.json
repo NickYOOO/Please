@@ -23,11 +23,22 @@
       "password": "$2a$10$uI8L1CTgElRHF578EjX9p.laW4ajGKcc.cE14JRh8KTqhzi4K14Wi",
       "username": "aa",
       "id": 4
+    },
+    {
+      "email": "test8@test.com",
+      "password": "$2a$10$V7p1ibIOKh6R/BZ2AWTFB.lZMPPWFYHJgC2iwgRR9QcmJ9R2r5eD2",
+      "username": "test8",
+      "id": 5
     }
   ],
   "login": [],
   "messages": [
-    {}
+    {
+      "id": 1,
+      "toUser": "kitae@kitae.kitae",
+      "fromUser": "test@test.com",
+      "content": "ㅎㅇ"
+    }
   ],
   "likes": [
     {
@@ -45,18 +56,18 @@
     {
       "email": "",
       "nickName": "",
-      "status": "진행중",
+      "status": "help",
       "timeStamp": 1691744242379,
       "title": "ㅎㅇ",
       "content": "ㅎㅇ",
       "category": "반려동물",
-      "date": null,
-      "time": "",
+      "date": "2023년 8월 17일",
+      "time": "10:30",
       "price": 123214214,
       "position": {
         "lat": 37.511103551052734,
         "lng": 127.0981423862268,
-        "addr": "서울 송파구 잠실동 "
+        "address": "서울 송파구 잠실동 "
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F3efbfe94-12aa-0bfb-235e-e76d0e101baa?alt=media&token=50924607-9887-49d4-a5dc-ea25b39cdd9e",
       "id": 1
@@ -64,7 +75,7 @@
     {
       "email": "",
       "nickName": "",
-      "status": "진행중",
+      "status": "done",
       "timeStamp": 1691744800086,
       "title": "강아지 돌봐주세요",
       "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너",
@@ -73,9 +84,9 @@
       "time": "10:30",
       "price": 15000,
       "position": {
-        "lat": 0,
-        "lng": 0,
-        "address": ""
+        "lat": 37.56642787343069,
+        "lng": 126.97926359774955,
+        "address": "서울 중구 을지로가 "
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F68f76863-1d4e-2b8f-049d-2a85f4731ac6?alt=media&token=3c39b174-0acf-49a0-afe2-41722ac63627",
       "id": 2
@@ -83,7 +94,7 @@
     {
       "email": "",
       "nickName": "",
-      "status": "진행중",
+      "status": "help",
       "timeStamp": 1691744962935,
       "title": "강아지",
       "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해",
@@ -94,7 +105,7 @@
       "position": {
         "lat": 37.448135818459036,
         "lng": 126.93307459173312,
-        "addr": "서울 관악구 신림동  "
+        "address": "서울 관악구 신림동 "
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F7e6e6d66-9c8f-e1d2-417f-0309d95ec7cd?alt=media&token=4d373018-2020-4562-a790-040998d05eb7",
       "id": 3
@@ -102,7 +113,7 @@
     {
       "email": "",
       "nickName": "",
-      "status": "진행중",
+      "status": "help",
       "timeStamp": 1691745087513,
       "title": "강아지2",
       "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지",
@@ -113,7 +124,7 @@
       "position": {
         "lat": 37.56606734559856,
         "lng": 126.97853928538898,
-        "addr": "서울 중구 을지로가 "
+        "address": "서울 중구 을지로가 "
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F8fd2c662-40dc-05b5-44dc-f19fa18df512?alt=media&token=b2a99832-c662-4e20-a7da-07d04bdd13ba",
       "id": 4
@@ -121,7 +132,7 @@
     {
       "email": "",
       "nickName": "",
-      "status": "진행중",
+      "status": "help",
       "timeStamp": 1691745293347,
       "title": "강아지3",
       "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지",
@@ -132,7 +143,7 @@
       "position": {
         "lat": 37.56642787343069,
         "lng": 126.97926359774955,
-        "addr": "서울 중구 을지로가 "
+        "address": "서울 중구 을지로가 "
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Ff7473231-7837-b4f0-4a99-a95559bbc405?alt=media&token=37b89409-1e4b-49ad-a4cf-92d8be377e80",
       "id": 5

@@ -11,55 +11,53 @@ interface PostDatePickerProps {
 const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
   const [map, setMap] = useState<kakao.maps.Map | null>(null);
   const [marker, setMarker] = useState<kakao.maps.Marker | null>(null);
-  const [clickInfo, setClickInfo] = useState<string>('');
-  const [searchKeyword, setSearchKeyword] = useState<string>('');
   const [addressOverlay, setAddressOverlay] = useState<kakao.maps.CustomOverlay | null>(null);
 
   useEffect(() => {
     if (!map) return;
 
+    let previousMarker: kakao.maps.Marker | null = null;
     let previousOverlay: kakao.maps.CustomOverlay | null = null;
 
     const clickListener = (mouseEvent: any) => {
       const clickedPosition = mouseEvent.latLng;
 
-      if (marker) {
-        marker.setPosition(clickedPosition);
-      } else {
-        const newMarker = new kakao.maps.Marker({
-          position: clickedPosition,
-          map,
-        });
-        setMarker(newMarker);
+      if (previousMarker) {
+        previousMarker.setMap(null);
       }
-      let lat: number = clickedPosition.getLat();
-      let lng: number = clickedPosition.getLng();
-
-      setClickInfo(`${lat},${lng} `);
-
       if (previousOverlay) {
         previousOverlay.setMap(null);
-        setAddressOverlay(null);
       }
+
+      const newMarker = new kakao.maps.Marker({
+        position: clickedPosition,
+        map,
+      });
+      setMarker(newMarker);
+
       function addrFunc(input: string): string {
         const addr = input.replace(/[^\s가-힣]|산/g, '');
-
         return addr;
       }
+
       const ps = new kakao.maps.services.Geocoder();
       ps.coord2Address(clickedPosition.getLng(), clickedPosition.getLat(), (result: any, status: any) => {
         if (status === kakao.maps.services.Status.OK) {
           const fullAddress = result[0].address.address_name;
           const overlayContent = `
-          <div style="position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); background-color: #fff; padding: 5px; font-size: 14px; font-weight:800; border:2px solid">
-          주소: ${fullAddress}
-        </div>
+            <div style="position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); background-color: #fff; padding: 5px; font-size: 14px; font-weight:800; border:2px solid">
+              주소: ${fullAddress}
+            </div>
           `;
+
+          let lat: number = clickedPosition.getLat();
+          let lng: number = clickedPosition.getLng();
 
           const addr = addrFunc(fullAddress);
 
           onChangeFormHandler('position', { lat, lng, addr });
-          const overlayPosition = new kakao.maps.LatLng(clickedPosition.getLat() + 0.0001, clickedPosition.getLng()); // 마커 위로 조금 올린 위치
+
+          const overlayPosition = new kakao.maps.LatLng(clickedPosition.getLat() + 0.0001, clickedPosition.getLng());
 
           const newOverlay = new kakao.maps.CustomOverlay({
             content: overlayContent,
@@ -67,8 +65,12 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
             map,
           });
 
+          if (addressOverlay) {
+            addressOverlay.setMap(null);
+          }
+
           setAddressOverlay(newOverlay);
-          setAddressOverlay(null);
+          previousMarker = newMarker;
           previousOverlay = newOverlay;
         }
       });
@@ -80,9 +82,15 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
       if (marker) {
         marker.setMap(null);
       }
+      if (previousMarker) {
+        previousMarker.setMap(null);
+      }
+      if (previousOverlay) {
+        previousOverlay.setMap(null);
+      }
       kakao.maps.event.removeListener(map, 'click', clickListener);
     };
-  }, [map]);
+  }, [map, marker, addressOverlay, onChangeFormHandler]);
 
   const handleSearchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(event.target.value);
@@ -112,10 +120,22 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
           addressOverlay.setMap(null);
         }
 
-        map.panTo(position);
+        const overlayPosition = new kakao.maps.LatLng(position.getLat() + 0.0001, position.getLng());
+
+        const newOverlay = new kakao.maps.CustomOverlay({
+          content: `<div style="position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%); background-color: #fff; padding: 5px; font-size: 14px; font-weight:800; border:2px solid">
+            주소: ${firstResult.address_name}
+          </div>`,
+          position: overlayPosition,
+          map,
+        });
+
+        setAddressOverlay(newOverlay);
       }
     });
   };
+
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
 
   return (
     <MapSearchBox>
