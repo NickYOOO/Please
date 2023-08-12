@@ -174,17 +174,15 @@ const PostForm: React.FC = () => {
               <ImageInput id="file" type="file" accept="image/jpg, image/jpeg, image/png" name="img" onChange={onChangeAddFile} />
             </div>
           </div>
-
-          <PostMap onChangeFormHandler={onChangeFormHandler} />
-          <h1 style={{ color: 'red', marginTop: '15px' }}>{errMsg}</h1>
-          <StyledButtonBox>
-            <button type="submit" style={{ backgroundColor: '#3382D9', color: 'white' }}>
-              작성
-            </button>
-
-            <button onClick={moveToBoard}>취소</button>
-          </StyledButtonBox>
         </form>
+        <PostMap onChangeFormHandler={onChangeFormHandler} /> <h1 style={{ color: 'red', marginTop: '15px' }}>{errMsg}</h1>
+        <StyledButtonBox>
+          <button type="submit" style={{ backgroundColor: '#3382D9', color: 'white' }}>
+            작성
+          </button>
+
+          <button onClick={moveToBoard}>취소</button>
+        </StyledButtonBox>
       </StyledContentsBox>
     </StyledBox>
   );

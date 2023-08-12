@@ -29,6 +29,60 @@
       "password": "$2a$10$V7p1ibIOKh6R/BZ2AWTFB.lZMPPWFYHJgC2iwgRR9QcmJ9R2r5eD2",
       "username": "test8",
       "id": 5
+    },
+    {
+      "email": "fnqhdtm@naver.com",
+      "password": "$2a$10$YID8jWu57BLfVJzrgefmrepLxDYVwLR9WFv./LhihEQji56nqA59G",
+      "username": "행인",
+      "id": 6
+    },
+    {
+      "email": "fnqhdtm1@naver.com",
+      "password": "$2a$10$VKp8Sf0bOxaFW8e/FLBe6usLnI28PnBqQAqjwzTq0Hn.AAVYzRoKe",
+      "username": "행인",
+      "id": 7
+    },
+    {
+      "email": "fnqhdtm2@naver.com",
+      "password": "$2a$10$bmG/0vFQe7LF4Pi5XgWghOG.UjQhUMKNu8ss0NdBnKqpSSyYT0Jia",
+      "username": "행인",
+      "id": 8
+    },
+    {
+      "email": "fnqhd@naver.com",
+      "password": "$2a$10$k.ZuRD41GyStGwMKUTt1VeM2lH7oSsefUINWXpud15f/pqNIn4iNy",
+      "username": "fnqhdtm",
+      "id": 9
+    },
+    {
+      "email": "gg@naver.com",
+      "password": "$2a$10$7LDMY4gjpbckFt8Df1c7n.7eRBKmDTkOQjJHpPu0QI81UMQHpis5.",
+      "username": "행인",
+      "id": 10
+    },
+    {
+      "email": "pp@naver.com",
+      "password": "$2a$10$qfWleK9dgEJCfDtHN6LrNu/8AI4pE4jgetJLL2JWOH5jDhj.ChTEW",
+      "username": "dd",
+      "id": 11
+    },
+    {
+      "email": "qq@naver.com",
+      "password": "$2a$10$UGtAaA/ZDSbezDwngtVZw.ASJItAK50tcUWFXW4LB2LsnvBBy3Kpq",
+      "username": "수빈",
+      "id": 12
+    },
+    {
+      "email": "gg1@naver.com",
+      "password": "$2a$10$JnQSPiYgxABoyDA1R/OKkulp3yeF3vowr4Ro9O9Gsk8AlXVJFTLB2",
+      "username": "행인",
+      "id": 13
+    },
+    {
+      "email": "fnqhdtm5@naver.com",
+      "password": "$2a$10$UXcPWsfW9Gore9k9pAc9.Ot.j1Z5ltUSozaow0gbt0XlPs5po3FrS",
+      "username": "행인",
+      "id": 14
     }
   ],
   "login": [],
@@ -261,6 +315,25 @@
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F79022c36-7ed3-59fa-74b2-3703c76a1abb?alt=media&token=d68712be-d4f2-4910-a783-34fc8a1631f5",
       "id": 11
+    },
+    {
+      "email": "",
+      "nickName": "",
+      "status": "help",
+      "timeStamp": 1691842903249,
+      "title": "ㅅㅅ",
+      "content": "ㅅㅅ",
+      "category": "청소",
+      "date": "2023년 8월 22일",
+      "time": "21:21",
+      "price": "￦0",
+      "position": {
+        "lat": 0,
+        "lng": 0,
+        "address": ""
+      },
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F26cc008a-e6f7-18d0-a5cd-d51e8047755d?alt=media&token=5a239518-3fef-40be-80dd-15af799bd0eb",
+      "id": 12
     }
   ]
 }

@@ -6,8 +6,8 @@ import Modal from '../components/common/modal/Modal';
 import ReceiveText from '../components/receiveText/ReceiveText';
 
 const HomePage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isClearModalOpen, setIsClearModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 쪽지함 모달
+  const [isClearModalOpen, setIsClearModalOpen] = useState(false); // 알림 모달
 
   const openModal = () => {
     setIsModalOpen(true);
