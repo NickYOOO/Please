@@ -3,6 +3,12 @@ import { useState } from 'react';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
+import Paging from '../components/pagination/Pagination';
+import Modal from '../components/common/modal/Modal';
+import UserInfoUpdate from '../components/userPage/UserInfoUpdate';
+import { useParams } from 'react-router-dom';
+import { getUserId } from '../api/users';
+import { Button, Space } from 'antd';
 import assemble from '../assets/categoryImg/assemble.avif';
 import bug from '../assets/categoryImg/bug.png';
 import caring from '../assets/categoryImg/caring.jpeg';
@@ -11,18 +17,21 @@ import delivery from '../assets/categoryImg/delivery.jpeg';
 import logo from '../assets/categoryImg/else.png';
 import role from '../assets/categoryImg/role.jpeg';
 import Logo from '../assets/img/logo.svg';
-import Paging from '../components/pagination/Pagination';
 import useLogInUser from '../hooks/useLoginUser';
 
 const ITEMS_PER_PAGE = 3;
-
 const UserPage = () => {
   const logInUser = useLogInUser();
   const navigation = useNavigate();
   const [page, setPage] = useState(1);
-
-  console.log(page);
-
+  const params = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const getMyPosts = async (email: string) => {
     try {
       const response = await axios.get(`http://localhost:3001/posts?email=${email}`);
@@ -33,7 +42,6 @@ const UserPage = () => {
       return [];
     }
   };
-
   const fetchPostsByPage = async (email: string, page: number) => {
     const startIndex = (page - 1) * ITEMS_PER_PAGE;
     // console.log(startIndex);
@@ -53,9 +61,8 @@ const UserPage = () => {
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber); // 페이지 상태 업데이트
   };
-
-  const { isLoading, isError, data } = useQuery(['posts', logInUser.email, page], () => fetchPostsByPage(logInUser.email, page), { enabled: !!logInUser.email });
-
+  const { isLoading: UsersIsLoading, isError: UsersIsError, data: UsersData } = useQuery("users", () => getUserId(params.id));
+  const { isLoading: PostsIstLoading, isError: PostsIsError, data: PostsData } = useQuery(['posts', logInUser.email, page], () => fetchPostsByPage(logInUser.email, page), { enabled: !!logInUser.email });
   const itemClickHandler = (id: string | undefined) => {
     navigation(`/detail/${id}`);
   };
@@ -63,6 +70,13 @@ const UserPage = () => {
   type ImageComponentProps = {
     category: string; // 카테고리의 타입을 여기에 지정
   };
+  if (UsersIsLoading) {
+    return <p>로딩중입니다....!</p>;
+  }
+
+  if (UsersIsError) {
+    return <p>오류가 발생하였습니다...!</p>;
+  }
   const ImageComponent: React.FC<ImageComponentProps> = ({ category }) => {
     let imageSrc: string;
 
@@ -94,11 +108,10 @@ const UserPage = () => {
 
     return <StyledImg src={imageSrc} alt="이미지" />;
   };
-
-  if (isLoading) {
+  if (PostsIstLoading) {
     return <h1>로딩 중입니다..</h1>;
   }
-  if (isError) {
+  if (PostsIsError) {
     return <h1>오류가 발생했습니다..</h1>;
   }
 
@@ -106,12 +119,13 @@ const UserPage = () => {
     <StyledBox>
       <StyledUpperBox>
         <StyledPhotoBox>
-          <img src={Logo} alt="logo" />
+          <img src={UsersData.imgUrl} alt="preview" />
         </StyledPhotoBox>
         <StyledUserInfoBox>
-          <h2>유저님</h2>
-          <p>fnqhdtm@gamil.com</p>
+          <h2>{UsersData.username}</h2>
+          <p>{UsersData.email}</p>
         </StyledUserInfoBox>
+        <Button onClick={openModal}>수정하기</Button>
       </StyledUpperBox>
       <StyledBottomBox>
         <StyledCategoryBox>
@@ -119,9 +133,13 @@ const UserPage = () => {
           <p>|</p>
           <p>찜 보기</p>
         </StyledCategoryBox>
-
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
+          <UserInfoUpdate userInfo={UsersData} closeModal={closeModal} />
+        </Modal>
+        <StyledListBox>리스트</StyledListBox>
+        <Paging page={page} setPage={setPage} />
         <StyledListBox>
-          {data?.map(function (post: any, postIndex: number) {
+          {PostsData?.map(function (post: any, postIndex: number) {
             return (
               <StyledListItemBox
                 key={postIndex}
@@ -163,12 +181,12 @@ const StyledBox = styled.div`
 const StyledUpperBox = styled.div`
   display: flex;
   justify-content: space-around;
-
+  align-items: center;
   width: 450px;
 
   margin: 60px 0 50px;
 `;
-const StyledPhotoBox = styled.div`
+export const StyledPhotoBox = styled.div`
   width: 120px;
   height: 120px;
 
@@ -177,6 +195,7 @@ const StyledPhotoBox = styled.div`
     height: 120px;
     margin: 0 auto;
     border-radius: 50%;
+    object-fit: cover;
     cursor: pointer;
   }
 `;

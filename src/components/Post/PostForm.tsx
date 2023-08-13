@@ -84,6 +84,7 @@ const PostForm: React.FC = () => {
 
   const [imgFile, setImgFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
+
   const onChangeAddFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const theFile = event.target.files[0];
@@ -188,7 +189,6 @@ const PostForm: React.FC = () => {
             <button type="submit" style={{ backgroundColor: '#3382D9', color: 'white' }}>
               작성
             </button>
-
             <button onClick={moveToBoard}>취소</button>
           </Styled.StyledButtonBox>
         </form>
