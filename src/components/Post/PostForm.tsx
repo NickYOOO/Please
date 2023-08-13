@@ -1,4 +1,3 @@
-import * as Styled from './PostForm.styles';
 import { Input, InputNumber, TimePicker } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
@@ -11,10 +10,11 @@ import uuid from 'react-uuid';
 import { addPost } from '../../api/post';
 import defaultImg from '../../assets/img/defaultImg.png';
 import { storage } from '../../firebase';
+import useLogInUser from '../../hooks/useLoginUser';
 import DropBox from '../DropBox/DropBox';
 import PostMap from '../Map/PostMap';
 import PostDatePicker from './PostDatePicker';
-import useLogInUser from '../../hooks/useLoginUser';
+import * as Styled from './PostForm.styles';
 
 export interface onChangeFormfuncType {
   (type: string, data: string | number | null | { lat: number; lng: number; addr: string }): void;
@@ -41,7 +41,6 @@ export interface IFormData {
 }
 
 const PostForm: React.FC = () => {
-  const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '반려동물', '벌레 퇴치', '기타'];
   const navigate = useNavigate();
   const logInUserData = useLogInUser();
   const queryClient = useQueryClient();
@@ -53,6 +52,7 @@ const PostForm: React.FC = () => {
     },
   });
 
+  const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '벌레 퇴치', '기타'];
   const [formData, setFormData] = useState<IFormData>({
     email: '',
     username: '',
@@ -64,6 +64,7 @@ const PostForm: React.FC = () => {
     date: null,
     time: '',
     price: '0',
+
     position: {
       lat: 0,
       lng: 0,
@@ -170,7 +171,7 @@ const PostForm: React.FC = () => {
                 &nbsp;<label>부탁내용</label>
               </div>
 
-              <Input value={formData.title} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
+              <Input value={formData.title} maxLength={13} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
               <TextArea value={formData.content} showCount maxLength={100} style={{ height: 150, resize: 'none' }} onChange={e => onChangeFormHandler('content', e.target.value)} placeholder="자세하게 설명해주세요!" />
             </Styled.StyledRequestBox>
             <div>

@@ -4,7 +4,14 @@ import ReactLoading from 'react-loading';
 import { useInfiniteQuery } from 'react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-import caring from '../assets/img/caring.jpeg';
+import assemble from '../assets/categoryImg/assemble.avif';
+import bug from '../assets/categoryImg/bug.png';
+import caring from '../assets/categoryImg/caring.jpeg';
+import cleaning from '../assets/categoryImg/cleaning.jpeg';
+import delivery from '../assets/categoryImg/delivery.jpeg';
+import logo from '../assets/categoryImg/else.png';
+import role from '../assets/categoryImg/role.jpeg';
+
 import { IFormData } from '../components/Post/PostForm';
 
 const LIMIT = 30; //페이지 스크롤
@@ -79,6 +86,41 @@ const BoardPage = () => {
     navigation(`/detail/${id}`);
   };
 
+  type ImageComponentProps = {
+    category: string; // 카테고리의 타입을 여기에 지정
+  };
+  const ImageComponent: React.FC<ImageComponentProps> = ({ category }) => {
+    let imageSrc: string;
+
+    switch (category) {
+      case '배달':
+        imageSrc = delivery;
+        break;
+      case '청소':
+        imageSrc = cleaning;
+        break;
+      case '조립':
+        imageSrc = assemble;
+        break;
+      case '동행·돌봄':
+        imageSrc = caring;
+        break;
+      case '역할 대행':
+        imageSrc = role;
+        break;
+      case '벌레 퇴치':
+        imageSrc = bug;
+        break;
+      case '기타':
+        imageSrc = logo;
+        break;
+      default:
+        imageSrc = logo;
+    }
+
+    return <StyledImg src={imageSrc} alt="이미지" />;
+  };
+
   return (
     <StyledBox>
       <div style={{ display: 'flex', width: '750px' }}>
@@ -117,7 +159,7 @@ const BoardPage = () => {
             >
               {post && (
                 <div>
-                  <StyledImg src={caring} alt="이미지" />
+                  <ImageComponent category={post.category} />
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
                     <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
