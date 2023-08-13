@@ -20,11 +20,12 @@ export const TitleBox = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
   & > h1 {
     font-size: 25px;
     color: #3382d9;
-
     padding-top: 5px;
+
     @media screen and (max-width: 576px) {
       display: none;
     }
@@ -41,9 +42,7 @@ export const LogoutUserBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: #3382d9;
-
   border-radius: 15px;
   width: 200px;
   height: 25px;
@@ -51,13 +50,11 @@ export const LogoutUserBox = styled.div`
   & > a {
     line-height: 25px;
     color: #fff;
-
     outline: inherit;
     text-decoration: none;
     padding: 0 20px;
     background: none;
     border: none;
-
     font-size: 14px;
 
     cursor: pointer;
@@ -80,8 +77,8 @@ export const LoginUserBox = styled.div`
   cursor: pointer;
 
   & > img {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     margin-right: 7px;
   }
 `;
@@ -94,27 +91,24 @@ export const DropdownMenu = styled.ul`
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 15px;
-  padding: 8px 0;
-  min-width: 100px;
+  padding: 4px 0;
+  min-width: 90px;
   list-style: none;
+  box-shadow: 5px 5px 12px rgba(23, 23, 23, 0.3);
 
   & > li {
     line-height: 25px;
-    color: #0074dd;
+    color: #555555;
     outline: inherit;
     text-decoration: none;
-    padding: 8px;
+    padding: 2px;
     background: none;
     border: none;
-
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
+
     &:hover {
-      background-color: #f0f0f0;
-    }
-    & > a {
       color: #0074dd;
-      text-decoration: none;
     }
   }
 `;
