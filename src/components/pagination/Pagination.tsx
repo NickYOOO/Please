@@ -1,26 +1,19 @@
-import React, { useState } from 'react';
 import Pagination from 'react-js-pagination';
 import { styled } from 'styled-components';
 
-const Paging: React.FC = () => {
-  const [page, setPage] = useState<number>(1);
-
+interface PagingProps {
+  page: number;
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+}
+const Paging = ({ page, setPage }: PagingProps) => {
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
-    console.log(page);
+    // console.log(pageNumber);
   };
 
   return (
     <StyledPagination>
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={10}
-        totalItemsCount={450}
-        pageRangeDisplayed={5}
-        prevPageText={'‹'}
-        nextPageText={'›'}
-        onChange={pageNumber => handlePageChange(pageNumber)} // 이 부분 수정
-      />
+      <Pagination activePage={page} itemsCountPerPage={3} totalItemsCount={100} pageRangeDisplayed={5} prevPageText={'‹'} nextPageText={'›'} onChange={handlePageChange} />
     </StyledPagination>
   );
 };
@@ -30,7 +23,7 @@ export default Paging;
 const StyledPagination = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 5px;
+  margin-top: 50px;
 
   ul {
     display: flex;

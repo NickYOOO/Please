@@ -6,7 +6,7 @@ export const StyledBox = styled.div`
   justify-content: center;
   align-items: center;
 
-  padding-top: 60px;
+  /* padding-top: 60px; */
 
   min-height: calc(100vh - 186px);
 `;
@@ -32,7 +32,7 @@ export const StyledRequestBox = styled.div`
   flex-direction: column;
 
   width: 49%;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
 
   & > .ant-input-affix-wrapper {
     margin-bottom: 25px;
