@@ -37,7 +37,7 @@ export const TitleBox = styled.div`
   }
 `;
 
-export const UserBox = styled.div`
+export const LogoutUserBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,5 +68,53 @@ export const UserBox = styled.div`
 
   & > a:first-child {
     border-right: 1px solid #eee;
+  }
+`;
+
+export const LoginUserBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0 14px;
+  cursor: pointer;
+
+  & > img {
+    width: 40px;
+    height: 40px;
+    margin-right: 7px;
+  }
+`;
+
+export const DropdownMenu = styled.ul`
+  text-align: center;
+  position: absolute;
+  top: 100%;
+  left: 15%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 8px 0;
+  min-width: 100px;
+  list-style: none;
+
+  & > li {
+    line-height: 25px;
+    color: #0074dd;
+    outline: inherit;
+    text-decoration: none;
+    padding: 8px;
+    background: none;
+    border: none;
+
+    font-size: 16px;
+    cursor: pointer;
+    &:hover {
+      background-color: #f0f0f0;
+    }
+    & > a {
+      color: #0074dd;
+      text-decoration: none;
+    }
   }
 `;
