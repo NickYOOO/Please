@@ -2,16 +2,17 @@ import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query';
-
 import { deletePost, updatePost } from '../../api/post';
 import { getLikes, patchLikes } from '../../api/likes';
-
 import { IFormData } from '../Post/PostForm';
 import type { Like } from '../types';
-
 import Modal from '../common/modal/Modal';
 import SendText from '../sendMsg/SendMsg';
 import * as Styled from './DetailContents.style';
+import useLogInUser from '../../hooks/useLoginUser';
+import { sendMsg } from '../../api/msg';
+import { IMsg } from '../types';
+import ConfirmModal from '../common/confirmModal/ConfirmModal';
 import { FaBookmark, FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
@@ -21,6 +22,7 @@ interface DetailContentsProps {
 }
 
 const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
+  const logInUser = useLogInUser();
   const params = useParams();
   let postStatus = '';
 
@@ -96,6 +98,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -126,6 +129,28 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
     postUserEmail: data?.email,
   };
 
+  const HandleToHelp = () => {
+    setIsConfirmModalOpen(true);
+  };
+
+  const HandleToSend = async (id: string | undefined) => {
+    const msgData: IMsg = {
+      postId: id,
+      toUser: data?.email,
+      fromUser: logInUser.email,
+      fromUsername: logInUser.username,
+      timeStamp: new Date().getTime(),
+      content: '도움 요청하신 글 제가 해줄게요!✋',
+      id: '',
+    };
+
+    try {
+      await sendMsg(msgData);
+    } catch (error) {
+      console.error('Error sending message:', error);
+    }
+  };
+
   return (
     <Styled.ContentsBox>
       <Styled.DetailContentsTopBox>
@@ -145,7 +170,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
       </Styled.DetailContentsTopBox>
       <Styled.DetailContentsLayout>
         <Styled.DetailBox>
-          <p>{data?.position.address}</p>
+          <p>{data?.position.addr}</p>
           <div>
             <p>{nowDate}</p>
 
@@ -182,10 +207,19 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
       </Styled.DetailContentsLayout>
 
       <Styled.DetailButtons>
-        <Styled.DetailButton>
+        <Styled.DetailButton onClick={HandleToHelp}>
           해줄게요&nbsp;
           <FaHandRock />
         </Styled.DetailButton>
+        <ConfirmModal
+          isModalOpen={isConfirmModalOpen}
+          setIsModalOpen={setIsConfirmModalOpen}
+          confirmToSend={() => {
+            HandleToSend(data?.id); // Execute the action
+          }}
+        >
+          {data?.username}님을 도와주시겠습니까?
+        </ConfirmModal>
         <Styled.DetailButton onClick={openModal}>
           쪽지 보내기&nbsp;
           <FaPaperPlane />

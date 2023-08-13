@@ -5,7 +5,7 @@ import * as Styled from './Modal.style';
 
 export const PORTAL_MODAL = 'portal-root';
 
-interface ModalProps {
+export interface ModalProps {
   children: React.ReactNode;
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

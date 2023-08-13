@@ -168,7 +168,7 @@ const BoardPage = () => {
                     <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
                   </div>
                   <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
-                  <StyledParagraph>{post.position.address || 'No data'}</StyledParagraph>
+                  <StyledParagraph>{post.position.addr || 'No data'}</StyledParagraph>
                 </div>
               )}
             </StyledListItemBox>

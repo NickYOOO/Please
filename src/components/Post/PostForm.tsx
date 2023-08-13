@@ -34,7 +34,7 @@ export interface IFormData {
   position: {
     lat: number;
     lng: number;
-    address: string;
+    addr: string;
   };
   img: string | undefined;
   id: string | undefined;
@@ -68,7 +68,7 @@ const PostForm: React.FC = () => {
     position: {
       lat: 0,
       lng: 0,
-      address: '',
+      addr: '',
     },
     img: '',
     id: '',
