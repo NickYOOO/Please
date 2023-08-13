@@ -12,7 +12,7 @@ interface User {
 
 const Header = () => {
   const paths = ['/signup', '/login', '/', '/post', '/board', '/report'];
-  const dynamicPaths = /^\/detail|user|update\/[\w\d]+$/;
+  const dynamicPaths = /^\/detail|user\/[\w\d]+$/;
   const [cookies, setCookie, removeCookie] = useCookies();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<User | null>(null);
