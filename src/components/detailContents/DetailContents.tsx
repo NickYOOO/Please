@@ -65,19 +65,25 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
     }
   };
 
+  const isAuthor = logInUser.email === data?.email;
   const items: MenuProps['items'] = [
-    {
-      key: 'update',
-      label: '수정하기',
-    },
-    {
-      key: 'delete',
-      label: '삭제하기',
-    },
-    {
-      key: 'remote',
-      label: '신고하기',
-    },
+    ...(isAuthor
+      ? [
+          {
+            key: 'update',
+            label: '수정하기',
+          },
+          {
+            key: 'delete',
+            label: '삭제하기',
+          },
+        ]
+      : [
+          {
+            key: 'report',
+            label: '신고하기',
+          },
+        ]),
   ];
 
   const { id } = params;
