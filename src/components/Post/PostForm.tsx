@@ -109,6 +109,10 @@ const PostForm: React.FC = () => {
     if (imgFile) updateImg(imgFile);
   }, [imgFile]);
 
+  const moveToBoard = () => {
+    window.location.href = '/board';
+  };
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -119,8 +123,13 @@ const PostForm: React.FC = () => {
       setErrMsg('제목과 내용을 모두 입력해주세요');
       return;
     }
-    postsMutation.mutate(formData);
-    navigate('/board');
+
+    try {
+      await postsMutation.mutateAsync(formData);
+      window.location.href = '/board';
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onChange = (time: dayjs.Dayjs | null, timeString: string) => {
@@ -135,9 +144,6 @@ const PostForm: React.FC = () => {
 
   const format = 'HH:mm';
 
-  const moveToBoard = () => {
-    window.location.href = '/board';
-  };
   return (
     <Styled.StyledBox>
       <Styled.StyledContentsBox>
