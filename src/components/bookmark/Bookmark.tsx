@@ -1,39 +1,53 @@
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { getLikes, patchLikes } from '../../api/likes';
-
-import type { Like } from '../types';
-import { FaRegBookmark } from 'react-icons/fa';
-import { FaBookmark } from 'react-icons/fa';
+import { addBookmark, getBookmark, delBookmark } from '../../api/bookmark';
 
 const Bookmark: React.FC = () => {
   const queryClient = useQueryClient();
+  const email = 'kitae@kitae.kitae';
+  // json 서버 어스의 현재 로그인한 사람의 email
 
-  const { data: likes = [] } = useQuery<Like[], Error>('likes', getLikes);
+  const { data, isLoading, isError } = useQuery(['bookmark', email], getBookmark);
 
-  const likeMutation = useMutation(patchLikes, {
-    onMutate: (like: Like) => {
-      // Optimistic Update
-      queryClient.setQueryData<Like[]>('likes', prevData => {
-        if (!prevData) return [];
-        return prevData.map(currentLike => (currentLike.id === like.id ? { ...currentLike, likes: like.likes + 1 } : currentLike));
-      });
+  // 추가할 때 사용하는 뮤테이션
+  // const addBookmarkMutation = useMutation(addBookmark, {
+  //   onSuccess: () => {
+  //     queryClient.invalidateQueries('bookmark');
+  //   },
+  // });
+
+  // const BookmarkRemoveHandler = (id: string) => {
+  //   addBookmarkMutation.mutate({ email, postid });
+  // };
+
+  const delBookmarkMutation = useMutation(delBookmark, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('bookmark');
     },
   });
 
-  const handleLike = (like: Like) => {
-    likeMutation.mutate(like);
+  const BookmarkRemoveHandler = (id: string) => {
+    delBookmarkMutation.mutate(id);
   };
+
+  if (isLoading || !data) {
+    return <div>로딩중</div>;
+  }
+
   return (
     <div>
       <ul>
-        {likes?.map(like => (
-          <li key={like.id}>
-            Like: {like.likes} <button onClick={() => handleLike(like)}>{like.likes % 2 !== 0 ? <FaRegBookmark size="20" color="#0074DD" /> : <FaBookmark size="20" color="#0074DD" />}</button>
-          </li>
-        ))}
+        {data.map(bookmark => {
+          return (
+            <li key={bookmark.id}>
+              <span>{bookmark.postTitle}</span>
+              <button onClick={() => BookmarkRemoveHandler(bookmark.id)}>북마크 제거</button>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
 };
+
 export default Bookmark;

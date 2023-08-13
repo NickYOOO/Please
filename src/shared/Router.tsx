@@ -11,6 +11,7 @@ import PostPage from '../pages/PostPage';
 import ReportPage from '../pages/ReportPage';
 import SignUpPage from '../pages/SignUpPage';
 import UserPage from '../pages/UserPage';
+import Update from '../components/update/Update';
 
 const Router: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const Router: React.FC = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/post" element={<PostPage />} />
+            <Route path="/update/:id" element={<Update />} />
             <Route path="/board" element={<BoardPage />} />
             <Route path="/detail/:id" element={<DetailPage />} />
             <Route path="/user/:id" element={<UserPage />} />

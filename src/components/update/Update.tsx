@@ -1,20 +1,17 @@
-import * as Styled from './PostForm.styles';
 import { Input, InputNumber, TimePicker } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
-import { FaStarOfLife } from 'react-icons/fa';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import uuid from 'react-uuid';
-import { addPost } from '../../api/post';
-import defaultImg from '../../assets/img/defaultImg.png';
+import { getPostId, addPost, updatePost } from '../../api/post';
 import { storage } from '../../firebase';
 import DropBox from '../DropBox/DropBox';
 import PostMap from '../Map/PostMap';
-import PostDatePicker from './PostDatePicker';
-import useLogInUser from '../../hooks/useLoginUser';
+import PostDatePicker from '../Post/PostDatePicker';
+import axios from 'axios';
 
 export interface onChangeFormfuncType {
   (type: string, data: string | number | null | { lat: number; lng: number; addr: string }): void;
@@ -22,7 +19,7 @@ export interface onChangeFormfuncType {
 
 export interface IFormData {
   email: string;
-  username: string;
+  nickName: string;
   status: string;
   timeStamp: number;
   title: string;
@@ -38,13 +35,14 @@ export interface IFormData {
   };
   img: string | undefined;
   id: string | undefined;
+  username: string;
 }
 
-const PostForm: React.FC = () => {
-  const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '반려동물', '벌레 퇴치', '기타'];
+const Update: React.FC = () => {
+  const params = useParams();
   const navigate = useNavigate();
-  const logInUserData = useLogInUser();
   const queryClient = useQueryClient();
+
   const [errMsg, setErrMsg] = useState('');
   const [price, setPrice] = useState('￦0');
   const postsMutation = useMutation(addPost, {
@@ -53,9 +51,10 @@ const PostForm: React.FC = () => {
     },
   });
 
+  const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '반려동물', '벌레 퇴치', '기타'];
   const [formData, setFormData] = useState<IFormData>({
     email: '',
-    username: '',
+    nickName: '',
     status: 'help',
     timeStamp: new Date().getTime(),
     title: '',
@@ -63,7 +62,7 @@ const PostForm: React.FC = () => {
     category: '',
     date: null,
     time: '',
-    price: '0',
+    price,
     position: {
       lat: 0,
       lng: 0,
@@ -71,26 +70,16 @@ const PostForm: React.FC = () => {
     },
     img: '',
     id: '',
+    username: '',
   });
-
-  useEffect(() => {
-    setFormData(prev => ({ ...prev, email: logInUserData.email, username: logInUserData.username }));
-  }, [logInUserData]);
 
   const onChangeFormHandler: onChangeFormfuncType = (type, data): void => {
     setFormData(prev => ({ ...prev, [type]: data }));
   };
 
-  const [imgFile, setImgFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [imgFile, setImgFile] = useState<File>();
   const onChangeAddFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      const theFile = event.target.files[0];
-      const _preview = URL.createObjectURL(theFile);
-
-      setPreview(_preview);
-      setImgFile(event.target.files[0]);
-    }
+    if (event.target.files) setImgFile(event.target.files[0]);
   };
 
   const updateImg = async (file: File) => {
@@ -104,21 +93,37 @@ const PostForm: React.FC = () => {
     }
   };
 
+  const onChange = (time: dayjs.Dayjs | null, timeString: string) => {
+    onChangeFormHandler('time', timeString);
+  };
+  const onChangePrice = (value: number | null) => {
+    if (value == null) value = 0;
+    onChangeFormHandler('price', value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }));
+  };
+
   useEffect(() => {
     if (imgFile) updateImg(imgFile);
+  }, [imgFile]);
 
-    const storedData = localStorage.getItem('response');
+  const { id } = params;
+  const [dataFetched, setDataFetched] = useState(false);
 
-    if (!storedData) {
-      navigate('/login');
-    } else {
-      console.log('게시글작성하기');
-    }
-  }, [imgFile, navigate]);
+  useEffect(() => {
+    const fetchPostData = async () => {
+      try {
+        const postData = await getPostId(params.id); // getPost 함수로 포스트 데이터 가져오기
+        setFormData(postData); // 가져온 데이터로 formData 설정
+        setDataFetched(true); // 데이터를 가져왔음을 표시
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchPostData();
+  }, [params.id]);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     if (!formData.category) {
       setErrMsg('카테고리를 선택해주세요');
       return;
@@ -126,25 +131,27 @@ const PostForm: React.FC = () => {
       setErrMsg('제목과 내용을 모두 입력해주세요');
       return;
     }
-    postsMutation.mutate(formData);
-    navigate('/board');
+
+    try {
+      const updatedData = { ...formData, id: id };
+      await updatePost(updatedData);
+      queryClient.invalidateQueries('postsData');
+      navigate(`/detail/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const onChange = (time: dayjs.Dayjs | null, timeString: string) => {
-    onChangeFormHandler('time', timeString);
-  };
-  const onChangePrice = (value: number | null) => {
-    if (value == null) value = 0;
+  // const handleImgUpload = (event: ChangeEventHandler) => {
+  //   updateImg(event.target.files[0]);
+  // };
 
-    const price = value.toLocaleString('ko', { style: 'currency', currency: 'KRW' }).replace(/₩/g, '');
-    onChangeFormHandler('price', price);
-  };
+  // const onChangeFormHandler: onChangeFormfuncType = (e): void => {
+  //   const { name, value } = e.target
+  //   setFormData({ ...formData, [name]: value })
+  // }
 
   const format = 'HH:mm';
-
-  const moveToBoard = () => {
-    window.location.href = '/board';
-  };
   return (
     <>
       <form onSubmit={onSubmit}>
@@ -157,11 +164,11 @@ const PostForm: React.FC = () => {
         <TextArea value={formData.content} showCount maxLength={100} style={{ height: 120, resize: 'none' }} onChange={e => onChangeFormHandler('content', e.target.value)} placeholder="자세하게 설명해주세요!" />
         <input type="file" accept="image/jpg, image/jpeg, image/png" name="img" onChange={onChangeAddFile} />
         <PostMap onChangeFormHandler={onChangeFormHandler} />
-        <button type="submit">작성</button>
+        <button type="submit">수정</button>
         <h1 style={{ color: 'red' }}>{errMsg}</h1>
       </form>
     </>
   );
 };
 
-export default PostForm;
+export default Update;

@@ -119,7 +119,7 @@
   "likes": [
     {
       "id": 1,
-      "likes": 77
+      "likes": 86
     }
   ],
   "bookmark": [
@@ -172,30 +172,38 @@
       "nickName": "",
       "status": "help",
       "timeStamp": 1691855237437,
-      "title": "ㅁㅁ",
-      "content": "ㅁㅁ",
+      "title": "안녕!",
+      "content": "ㅎㅎㅎㅋㅎㅇ",
       "category": "배달",
-      "date": "2023년 8월 14일",
-      "time": "00:53",
-      "price": "11",
+      "date": "2023년 8월 24일",
+      "time": "04:05",
+      "price": "₩2,323",
       "position": {
-        "lat": 37.2755790587423,
-        "lng": 127.13240586152656,
-        "addr": "경기 용인시 기흥구 구갈동 "
+        "lat": 37.54504247800529,
+        "lng": 126.9606890409133,
+        "addr": "서울 용구 효창동 "
       },
-      "img": "",
-      "id": 16
-    }
-  ],
-  "msg": [
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F8fd2c662-40dc-05b5-44dc-f19fa18df512?alt=media&token=b2a99832-c662-4e20-a7da-07d04bdd13ba",
+      "id": 4
+    },
     {
-      "postId": 2,
-      "toUser": "test@test.com",
-      "fromUser": "test2@test.com",
-      "fromUsername": "test2",
-      "timeStamp": 1691852167268,
-      "content": "ㅋㅋㅋㅋ",
-      "id": 1
+      "email": "",
+      "nickName": "",
+      "status": "help",
+      "timeStamp": 1691745293347,
+      "title": "강아지3",
+      "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지",
+      "category": "동행·돌봄",
+      "date": "2023년 8월 29일",
+      "time": "04:03",
+      "price": 10000,
+      "position": {
+        "lat": 37.56642787343069,
+        "lng": 126.97926359774955,
+        "address": "서울 중구 을지로가 "
+      },
+      "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2Ff7473231-7837-b4f0-4a99-a95559bbc405?alt=media&token=37b89409-1e4b-49ad-a4cf-92d8be377e80",
+      "id": 5
     }
   ]
 }
