@@ -32,8 +32,7 @@ const useFormValidation = () => {
       const { email } = values;
 
       try {
-        const response = await axios.get(`http://localhost:3001/users?email=${email}`);
-        console.log(response.data);
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users?email=${email}`);
         return response.data.length > 0;
       } catch (error) {
         console.error('이메일 중복 확인 오류:', error);

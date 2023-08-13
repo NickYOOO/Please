@@ -20,11 +20,12 @@ export const TitleBox = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
   & > h1 {
     font-size: 25px;
     color: #3382d9;
-
     padding-top: 5px;
+
     @media screen and (max-width: 576px) {
       display: none;
     }
@@ -37,13 +38,11 @@ export const TitleBox = styled.div`
   }
 `;
 
-export const UserBox = styled.div`
+export const LogoutUserBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: #3382d9;
-
   border-radius: 15px;
   width: 200px;
   height: 25px;
@@ -51,13 +50,11 @@ export const UserBox = styled.div`
   & > a {
     line-height: 25px;
     color: #fff;
-
     outline: inherit;
     text-decoration: none;
     padding: 0 20px;
     background: none;
     border: none;
-
     font-size: 14px;
 
     cursor: pointer;
@@ -68,5 +65,50 @@ export const UserBox = styled.div`
 
   & > a:first-child {
     border-right: 1px solid #eee;
+  }
+`;
+
+export const LoginUserBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 0 14px;
+  cursor: pointer;
+
+  & > img {
+    width: 30px;
+    height: 30px;
+    margin-right: 7px;
+  }
+`;
+
+export const DropdownMenu = styled.ul`
+  text-align: center;
+  position: absolute;
+  top: 100%;
+  left: 15%;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 4px 0;
+  min-width: 90px;
+  list-style: none;
+  box-shadow: 5px 5px 12px rgba(23, 23, 23, 0.3);
+
+  & > li {
+    line-height: 25px;
+    color: #555555;
+    outline: inherit;
+    text-decoration: none;
+    padding: 2px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+      color: #0074dd;
+    }
   }
 `;

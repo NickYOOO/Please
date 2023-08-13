@@ -3,31 +3,50 @@ import { useCookies } from 'react-cookie';
 import { Link, useLocation } from 'react-router-dom';
 import check from '../../assets/img/check.svg';
 import Logo from '../../assets/img/logo.svg';
+import ProfileImg from '../../assets/img/profile.png';
 import Modal from '../common/modal/Modal';
+import Msg from '../Msg/Msg';
 import * as Styled from './Header.styles';
 
 interface User {
+  id: string;
   userName: string;
 }
 
-const Header = () => {
+const Header: React.FC = () => {
   const paths = ['/signup', '/login', '/', '/post', '/board', '/report', '/update'];
   const dynamicPaths = /^\/detail|user|update\/[\w\d]+$/;
   const [cookies, setCookie, removeCookie] = useCookies();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<User | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // 쪽지함 모달
   const { pathname } = useLocation();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMessageModalOpen, setIsMessageModalOpen] = useState(false); // 쪽지함 모달
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
 
   useEffect(() => {
     const storedResponse = localStorage.getItem('response');
     if (storedResponse) {
       const parsedResponse = JSON.parse(storedResponse);
       const username = parsedResponse.user.username;
-      setUser({ userName: username });
+      setUser({ userName: username, id: parsedResponse.user.id });
       setIsLoggedIn(true);
+    } else {
+      checkAndRedirectToLogin();
     }
   }, [pathname]);
+
+  const checkAndRedirectToLogin = () => {
+    const storedResponse = localStorage.getItem('response');
+    if (!storedResponse) {
+      const protectedPaths = ['/post', '/detail/', '/user/', '/report'];
+      const currentPath = window.location.pathname;
+
+      if (protectedPaths.some(path => currentPath.startsWith(path))) {
+        window.location.href = '/login';
+      }
+    }
+  };
 
   if (!paths.includes(window.location.pathname) && !dynamicPaths.test(window.location.pathname)) {
     return null;
@@ -37,52 +56,79 @@ const Header = () => {
     window.location.href = '/';
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const moveToUser = () => {
+    window.location.href = `/user/${user?.id}`;
+  };
+
+  const openMessageModal = () => {
+    setIsMessageModalOpen(true);
+    setIsDropdownOpen(false);
+  };
+
+  const openLogoutModal = () => {
+    setIsLogoutModalOpen(true);
     setTimeout(() => {
-      setIsModalOpen(false);
+      setIsLogoutModalOpen(false);
       window.location.reload();
     }, 1500);
   };
 
-  const handleLogout = () => {
+  const LogoutHandler = () => {
     try {
-      setIsModalOpen(true);
       localStorage.removeItem('response');
       removeCookie('accessToken');
-      openModal();
+      openLogoutModal();
     } catch (error) {
       console.error('로그아웃 오류:', error);
     }
   };
+
   return (
     <Styled.Header>
       <Styled.TitleBox onClick={moveToMain}>
         <img src={Logo} alt="logo" />
         <h1>부탁해</h1>
       </Styled.TitleBox>
-      <Styled.UserBox>
-        {isLoggedIn ? (
-          <>
-            <Link to={`/mypage`}>{user?.userName}님</Link>
-            <Link to={`#`} onClick={handleLogout}>
-              로그아웃
-            </Link>
-          </>
-        ) : (
-          <>
-            <Link to={`/login`}>로그인</Link>
-            <Link to={`/signup`}>회원가입</Link>
-          </>
-        )}
-        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={false} size="small">
-          <img src={check} alt="알림창" style={{ width: '40px' }} />
-          <div>
-            <p>로그아웃 되었습니다.</p>
-            <p>메시지창은 자동으로 사라집니다.</p>
-          </div>
-        </Modal>
-      </Styled.UserBox>
+      {isLoggedIn ? (
+        <>
+          <Styled.LoginUserBox onClick={toggleDropdown}>
+            <img src={ProfileImg} alt="Profile" />
+            <div>
+              {user?.userName}님
+              <Styled.DropdownMenu style={{ display: isDropdownOpen ? 'block' : 'none' }}>
+                <li onClick={moveToUser}>
+                  <span>마이페이지</span>
+                </li>
+                <li onClick={openMessageModal}>
+                  <span>쪽지함</span>
+                </li>
+                <li onClick={LogoutHandler}>
+                  <span>로그아웃</span>
+                </li>
+              </Styled.DropdownMenu>
+            </div>
+          </Styled.LoginUserBox>
+          <Modal isModalOpen={isMessageModalOpen} setIsModalOpen={setIsMessageModalOpen} closeButton={true} size="medium">
+            <Msg />
+          </Modal>
+          <Modal isModalOpen={isLogoutModalOpen} setIsModalOpen={setIsLogoutModalOpen} closeButton={false} size="small">
+            <img src={check} alt="알림창" style={{ width: '40px' }} />
+            <div>
+              <p>로그아웃 되었습니다.</p>
+              <p>메시지창은 자동으로 사라집니다.</p>
+            </div>
+          </Modal>
+        </>
+      ) : (
+        <Styled.LogoutUserBox>
+          <Link to={`/login`}>로그인</Link>
+          <Link to={`/signup`}>회원가입</Link>
+        </Styled.LogoutUserBox>
+      )}
     </Styled.Header>
   );
 };
