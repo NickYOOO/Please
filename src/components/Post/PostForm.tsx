@@ -75,7 +75,9 @@ const PostForm: React.FC = () => {
   });
 
   useEffect(() => {
-    setFormData(prev => ({ ...prev, email: logInUserData.email, username: logInUserData.username }));
+    if (logInUserData !== null) {
+      setFormData(prev => ({ ...prev, email: logInUserData.email, username: logInUserData.username }));
+    }
   }, [logInUserData]);
 
   const onChangeFormHandler: onChangeFormfuncType = (type, data): void => {

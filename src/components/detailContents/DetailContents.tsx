@@ -16,6 +16,7 @@ import ConfirmModal from '../common/confirmModal/ConfirmModal';
 import { FaBookmark, FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
+import { ItemType, MenuItemType } from 'antd/es/menu/hooks/useItems';
 
 interface DetailContentsProps {
   data: IFormData | undefined;
@@ -24,6 +25,7 @@ interface DetailContentsProps {
 const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const logInUser = useLogInUser();
   const params = useParams();
+  const [itemList, setItemList] = useState<ItemType<MenuItemType>[] | undefined>();
   let postStatus = '';
 
   const time = data?.timeStamp || 0;
@@ -65,9 +67,9 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
     }
   };
 
-  const isAuthor = logInUser.email === data?.email;
-  const items: MenuProps['items'] = [
-    ...(isAuthor
+  if (logInUser !== null) {
+    const isAuthor = logInUser.email === data?.email;
+    const items: MenuProps['items'] = isAuthor
       ? [
           {
             key: 'update',
@@ -83,8 +85,9 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
             key: 'report',
             label: '신고하기',
           },
-        ]),
-  ];
+        ];
+    setItemList(items);
+  }
 
   const { id } = params;
 
@@ -140,22 +143,27 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   };
 
   const HandleToSend = async (id: string | undefined) => {
-    const msgData: IMsg = {
-      postId: id,
-      toUser: data?.email,
-      fromUser: logInUser.email,
-      fromUsername: logInUser.username,
-      timeStamp: new Date().getTime(),
-      content: '도움 요청하신 글 제가 해줄게요!✋',
-      id: '',
-    };
-
     try {
-      await sendMsg(msgData);
+      if (logInUser !== null) {
+        const msgData: IMsg = {
+          postId: id,
+          toUser: data?.email,
+          fromUser: logInUser.email,
+          fromUsername: logInUser.username,
+          timeStamp: new Date().getTime(),
+          content: '도움 요청하신 글 제가 해줄게요!✋',
+          id: '',
+        };
+        await sendMsg(msgData);
+      }
     } catch (error) {
       console.error('Error sending message:', error);
     }
   };
+
+  if (!itemList) {
+    return <div>아이템이 없습니다</div>;
+  }
 
   return (
     <Styled.ContentsBox>
@@ -183,7 +191,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
             <Dropdown
               placement="bottomLeft"
               menu={{
-                items,
+                items: itemList,
                 onClick,
                 selectable: true,
               }}
