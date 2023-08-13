@@ -25,7 +25,7 @@ const BoardPage = () => {
   const navigation = useNavigate();
 
   const fetchPosts = ({ pageParam = 1 }) =>
-    axios.get<AxiosResponse<{ posts: IFormData[] }>>(`http://localhost:3001/posts`, {
+    axios.get<AxiosResponse<{ posts: IFormData[] }>>(`${process.env.REACT_APP_SERVER_URL}/posts`, {
       params: {
         _page: pageParam,
         _limit: LIMIT,

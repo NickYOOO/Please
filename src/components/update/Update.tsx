@@ -3,18 +3,18 @@ import TextArea from 'antd/es/input/TextArea';
 import dayjs from 'dayjs';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
-import { FaStarOfLife } from 'react-icons/fa';
 import { useMutation, useQueryClient } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import uuid from 'react-uuid';
-import { addPost } from '../../api/post';
-import defaultImg from '../../assets/img/defaultImg.png';
+import { getPostId, addPost, updatePost } from '../../api/post';
 import { storage } from '../../firebase';
-import useLogInUser from '../../hooks/useLoginUser';
 import DropBox from '../DropBox/DropBox';
 import PostMap from '../Map/PostMap';
-import PostDatePicker from './PostDatePicker';
-import * as Styled from './PostForm.styles';
+import PostDatePicker from '../Post/PostDatePicker';
+import useLogInUser from '../../hooks/useLoginUser';
+import { FaStarOfLife } from 'react-icons/fa';
+import defaultImg from '../../assets/img/defaultImg.png';
+import * as Styled from './Update.style';
 
 export interface onChangeFormfuncType {
   (type: string, data: string | number | null | { lat: number; lng: number; addr: string }): void;
@@ -40,10 +40,12 @@ export interface IFormData {
   id: string | undefined;
 }
 
-const PostForm: React.FC = () => {
-  const navigate = useNavigate();
+const Update: React.FC = () => {
+  const params = useParams();
   const logInUserData = useLogInUser();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
+
   const [errMsg, setErrMsg] = useState('');
 
   const postsMutation = useMutation(addPost, {
@@ -52,7 +54,7 @@ const PostForm: React.FC = () => {
     },
   });
 
-  const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '벌레 퇴치', '기타'];
+  const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '반려동물', '벌레 퇴치', '기타'];
   const [formData, setFormData] = useState<IFormData>({
     email: '',
     username: '',
@@ -82,7 +84,7 @@ const PostForm: React.FC = () => {
     setFormData(prev => ({ ...prev, [type]: data }));
   };
 
-  const [imgFile, setImgFile] = useState<File | null>(null);
+  const [imgFile, setImgFile] = useState<File>();
   const [preview, setPreview] = useState<string | null>(null);
   const onChangeAddFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -107,11 +109,35 @@ const PostForm: React.FC = () => {
 
   useEffect(() => {
     if (imgFile) updateImg(imgFile);
-  }, [imgFile]);
+
+    const storedData = localStorage.getItem('response');
+
+    if (!storedData) {
+      navigate('/login');
+    } else {
+      console.log('게시글작성하기');
+    }
+  }, [imgFile, navigate]);
+
+  const { id } = params;
+  const [dataFetched, setDataFetched] = useState(false);
+
+  useEffect(() => {
+    const fetchPostData = async () => {
+      try {
+        const postData = await getPostId(params.id); // getPost 함수로 포스트 데이터 가져오기
+        setFormData(postData); // 가져온 데이터로 formData 설정
+        setDataFetched(true); // 데이터를 가져왔음을 표시
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchPostData();
+  }, [params.id]);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     if (!formData.category) {
       setErrMsg('카테고리를 선택해주세요');
       return;
@@ -119,8 +145,15 @@ const PostForm: React.FC = () => {
       setErrMsg('제목과 내용을 모두 입력해주세요');
       return;
     }
-    postsMutation.mutate(formData);
-    navigate('/board');
+
+    try {
+      const updatedData = { ...formData, id: id };
+      await updatePost(updatedData);
+      queryClient.invalidateQueries('postsData');
+      navigate(`/detail/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onChange = (time: dayjs.Dayjs | null, timeString: string) => {
@@ -177,10 +210,10 @@ const PostForm: React.FC = () => {
           </div>
 
           <PostMap onChangeFormHandler={onChangeFormHandler} />
-          <h1 style={{ color: 'red', marginTop: '15px', fontSize: '12px', display: 'flex', justifyContent: 'center' }}>{errMsg}</h1>
+          <h1 style={{ color: 'red', marginTop: '15px' }}>{errMsg}</h1>
           <Styled.StyledButtonBox>
             <button type="submit" style={{ backgroundColor: '#3382D9', color: 'white' }}>
-              작성
+              수정
             </button>
 
             <button onClick={moveToBoard}>취소</button>
@@ -191,4 +224,4 @@ const PostForm: React.FC = () => {
   );
 };
 
-export default PostForm;
+export default Update;
