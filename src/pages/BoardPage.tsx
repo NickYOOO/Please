@@ -293,7 +293,7 @@ const StyledParagraph = styled.p`
 
 const StyledH2tag = styled.h2`
   margin-bottom: 5px;
-  font-size: '13px';
+  /* font-size: '13px'; */
   font-family: 'Pretendard-Regular';
 `;
 

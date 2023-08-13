@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactLoading from 'react-loading';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -6,7 +7,6 @@ import { getPost } from '../api/post';
 import { IFormData } from '../components/Post/PostForm';
 import DetailContents from '../components/detailContents/DetailContents';
 import DetailMap from '../components/detailMap/DetailMap';
-import ReactLoading from 'react-loading';
 
 type DetailParams = {
   id: string;
@@ -44,7 +44,9 @@ export default DetailPage;
 const StyledBox = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+
   min-height: calc(100vh - 186px);
 
   @media (max-width: 1000px) {

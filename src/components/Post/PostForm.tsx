@@ -185,7 +185,7 @@ const PostForm: React.FC = () => {
           </div>
 
           <PostMap onChangeFormHandler={onChangeFormHandler} />
-          <h1 style={{ color: 'red', marginTop: '15px' }}>{errMsg}</h1>
+          <h1 style={{ color: 'red', marginTop: '15px', fontSize: '12px', display: 'flex', justifyContent: 'center' }}>{errMsg}</h1>
           <Styled.StyledButtonBox>
             <button type="submit" style={{ backgroundColor: '#3382D9', color: 'white' }}>
               작성
