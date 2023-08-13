@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { logInUserProps } from '../components/types';
 
 const useLogInUser = (): logInUserProps => {
-  const [userData, setUserData] = useState({ email: '', username: '', id: '' });
+  const [userData, setUserData] = useState({ email: '', username: '', imgUrl:'', id: '' });
 
   useEffect(() => {
     const storedResponse = localStorage.getItem('response');

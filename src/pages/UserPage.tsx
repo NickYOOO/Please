@@ -1,8 +1,11 @@
+import { Button } from 'antd';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { getPost } from '../api/post';
+import { getUserId } from '../api/users';
 import assemble from '../assets/categoryImg/assemble.avif';
 import bug from '../assets/categoryImg/bug.png';
 import caring from '../assets/categoryImg/caring.jpeg';
@@ -10,19 +13,25 @@ import cleaning from '../assets/categoryImg/cleaning.jpeg';
 import delivery from '../assets/categoryImg/delivery.jpeg';
 import logo from '../assets/categoryImg/else.png';
 import role from '../assets/categoryImg/role.jpeg';
-import Logo from '../assets/img/logo.svg';
+import { IFormData } from '../components/Post/PostForm';
+import Modal from '../components/common/modal/Modal';
 import Paging from '../components/pagination/Pagination';
+import UserInfoUpdate from '../components/userPage/UserInfoUpdate';
 import useLogInUser from '../hooks/useLoginUser';
 
 const ITEMS_PER_PAGE = 3;
-
 const UserPage = () => {
   const logInUser = useLogInUser();
   const navigation = useNavigate();
   const [page, setPage] = useState(1);
-
-  console.log(page);
-
+  const params = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
   const getMyPosts = async (email: string) => {
     try {
       const response = await axios.get(`http://localhost:3001/posts?email=${email}`);
@@ -33,7 +42,6 @@ const UserPage = () => {
       return [];
     }
   };
-
   const fetchPostsByPage = async (email: string, page: number) => {
     const startIndex = (page - 1) * ITEMS_PER_PAGE;
     // console.log(startIndex);
@@ -50,19 +58,69 @@ const UserPage = () => {
       return [];
     }
   };
-  const handlePageChange = (pageNumber: number) => {
-    setPage(pageNumber); // 페이지 상태 업데이트
+
+  const [showMyPosts, setShowMyPosts] = useState(true);
+  const [myPostsLength, setMyPostsLength] = useState(0);
+  const [myPostsData, setMyPostsData] = useState([]);
+  const [bookmarksArray, setBookmarksArray] = useState<string[]>([]);
+
+  const startIndex = (page - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const myPostsResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts?email=${logInUser.email}`);
+        const bookmarksResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bookmark?email=${logInUser.email}`);
+
+        setMyPostsLength(myPostsResponse.data.length);
+        setBookmarksArray(bookmarksResponse.data.map((item: any) => item.postId));
+        const slicedmyPosts = myPostsResponse.data.slice(startIndex, endIndex);
+        setMyPostsData(slicedmyPosts);
+
+        if (showMyPosts) {
+          return myPostsResponse.data;
+        } else {
+          return bookmarksResponse.data;
+        }
+      } catch (error) {
+        console.log('Fetch 데이터 오류', error);
+      }
+    };
+
+    if (logInUser.email) {
+      fetchUserData();
+    }
+  }, [logInUser, showMyPosts, page]);
+
+  const { isLoading, isError, data } = useQuery<boolean, boolean, IFormData[]>('post', getPost);
+  const bookMarkedData = data?.filter(post => post.id !== undefined && bookmarksArray.includes(post.id));
+  const myBookmarksLength = bookMarkedData ? bookMarkedData.length : 0;
+  const myBookmarksData = bookMarkedData?.slice(startIndex, endIndex);
+
+  const handleMyPostsClick = () => {
+    setShowMyPosts(true);
   };
 
-  const { isLoading, isError, data } = useQuery(['posts', logInUser.email, page], () => fetchPostsByPage(logInUser.email, page), { enabled: !!logInUser.email });
-
+  const handleBookmarksClick = () => {
+    setShowMyPosts(false);
+  };
+  const { isLoading: UsersIsLoading, isError: UsersIsError, data: UsersData } = useQuery('users', () => getUserId(params.id));
+  const { isLoading: PostsIstLoading, isError: PostsIsError, data: PostsData } = useQuery(['posts', logInUser.email, page], () => fetchPostsByPage(logInUser.email, page), { enabled: !!logInUser.email });
   const itemClickHandler = (id: string | undefined) => {
     navigation(`/detail/${id}`);
   };
 
   type ImageComponentProps = {
-    category: string; // 카테고리의 타입을 여기에 지정
+    category: string;
   };
+  if (UsersIsLoading) {
+    return <p>로딩중입니다....!</p>;
+  }
+
+  if (UsersIsError) {
+    return <p>오류가 발생하였습니다...!</p>;
+  }
   const ImageComponent: React.FC<ImageComponentProps> = ({ category }) => {
     let imageSrc: string;
 
@@ -94,11 +152,10 @@ const UserPage = () => {
 
     return <StyledImg src={imageSrc} alt="이미지" />;
   };
-
-  if (isLoading) {
+  if (PostsIstLoading) {
     return <h1>로딩 중입니다..</h1>;
   }
-  if (isError) {
+  if (PostsIsError) {
     return <h1>오류가 발생했습니다..</h1>;
   }
 
@@ -106,44 +163,73 @@ const UserPage = () => {
     <StyledBox>
       <StyledUpperBox>
         <StyledPhotoBox>
-          <img src={Logo} alt="logo" />
+          <img src={UsersData.imgUrl} alt="preview" />
         </StyledPhotoBox>
         <StyledUserInfoBox>
-          <h2>유저님</h2>
-          <p>fnqhdtm@gamil.com</p>
+          <h2>{UsersData.username}</h2>
+          <p>{UsersData.email}</p>
         </StyledUserInfoBox>
+        <Button onClick={openModal}>수정하기</Button>
       </StyledUpperBox>
       <StyledBottomBox>
         <StyledCategoryBox>
-          <p>내 부탁 보기</p>
+          <p onClick={handleMyPostsClick} style={{ cursor: 'pointer' }}>
+            내 부탁 보기
+          </p>
           <p>|</p>
-          <p>찜 보기</p>
+          <p onClick={handleBookmarksClick} style={{ cursor: 'pointer' }}>
+            찜 보기
+          </p>
         </StyledCategoryBox>
-
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
+          <UserInfoUpdate userInfo={UsersData} closeModal={closeModal} />
+        </Modal>
         <StyledListBox>
-          {data?.map(function (post: any, postIndex: number) {
-            return (
-              <StyledListItemBox
-                key={postIndex}
-                onClick={() => {
-                  itemClickHandler(post.id);
-                }}
-              >
-                <ImageComponent category={post.category} />
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
-                  <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
-                </div>
-                <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
-                  <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
-                </div>
-                <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
-                <StyledParagraph>{post.position.address || 'No data'}</StyledParagraph>
-              </StyledListItemBox>
-            );
-          })}
+          {showMyPosts
+            ? myPostsData?.map(function (post: any, postIndex: number) {
+              return (
+                <StyledListItemBox
+                  key={postIndex}
+                  onClick={() => {
+                    itemClickHandler(post.id);
+                  }}
+                >
+                  <ImageComponent category={post.category} />
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
+                    <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
+                  </div>
+                  <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
+                    <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
+                  </div>
+                  <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
+                  <StyledParagraph>{post.position?.addr || 'No data'}</StyledParagraph>
+                </StyledListItemBox>
+              );
+            })
+            : myBookmarksData?.map(function (post: any, postIndex: number) {
+              return (
+                <StyledListItemBox
+                  key={postIndex}
+                  onClick={() => {
+                    itemClickHandler(post.id);
+                  }}
+                >
+                  <ImageComponent category={post.category} />
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
+                    <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
+                  </div>
+                  <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
+                    <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
+                  </div>
+                  <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
+                  <StyledParagraph>{post.position?.addr || 'No data'}</StyledParagraph>
+                </StyledListItemBox>
+              );
+            })}
         </StyledListBox>
-        <Paging page={page} setPage={setPage} />
+        {showMyPosts ? <Paging page={page} setPage={setPage} totalItemsCount={myPostsLength} /> : <Paging page={page} setPage={setPage} totalItemsCount={myBookmarksLength} />}
       </StyledBottomBox>
     </StyledBox>
   );
@@ -156,80 +242,71 @@ const StyledBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  /* margin-top: 40px; */
   min-height: calc(100vh - 186px);
 `;
 const StyledUpperBox = styled.div`
   display: flex;
   justify-content: space-around;
-
+  align-items: center;
   width: 450px;
 
   margin: 60px 0 50px;
 `;
-const StyledPhotoBox = styled.div`
-  width: 120px;
-  height: 120px;
+export const StyledPhotoBox = styled.div`
+  width: 100px;
+  height: 100px;
 
   img {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     margin: 0 auto;
     border-radius: 50%;
-    cursor: pointer;
+    object-fit: cover;
   }
 `;
 const StyledUserInfoBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   width: 50%;
-
   padding: 20px;
-  /* background-color: #d5e6eb; */
 
   & > h2 {
     margin-bottom: 15px;
   }
   & > p {
     color: #444444;
-
     font-size: 13px;
   }
 `;
 const StyledBottomBox = styled.div`
   width: 700px;
   height: 420px;
-
   padding: 25px;
-
   border: 5px solid #f9f7f1;
   border-radius: 30px;
-  /* background-color: #d5e6eb; */
 `;
 const StyledCategoryBox = styled.div`
   display: flex;
-
   padding-bottom: 30px;
 
   & > p {
     color: #444444;
-
     margin-right: 20px;
     font-size: 13px;
   }
 `;
+
 const StyledListBox = styled.div`
   width: 100%;
   height: 250px;
-
-  display: flex;
-  justify-content: space-between;
-
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 25px;
   /* background-color: #d5e6eb; */
 `;
+
 const StyledListItemBox = styled.div`
   width: 180px;
   height: 300px;
@@ -247,9 +324,9 @@ const StyledImg = styled.img`
 
 const StyledH2tag = styled.h2`
   margin-bottom: 5px;
-  /* font-size: '13px'; */
   font-family: 'Pretendard-Regular';
 `;
+
 const StyledParagraph = styled.p`
   margin-bottom: 5px;
   font-size: 13px;

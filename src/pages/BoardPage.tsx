@@ -14,7 +14,7 @@ import role from '../assets/categoryImg/role.jpeg';
 
 import { IFormData } from '../components/Post/PostForm';
 
-const LIMIT = 30; //페이지 스크롤
+const LIMIT = 50; //페이지 스크롤
 
 // 1번 페이지는 0~19
 // 2번 페이지는 20~39
@@ -167,8 +167,8 @@ const BoardPage = () => {
                   <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
                     <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
                   </div>
-                  <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
-                  <StyledParagraph>{post.position.addr || 'No data'}</StyledParagraph>
+                  <StyledParagraph>{post.date || ''}</StyledParagraph>
+                  <StyledParagraph>{post.position.addr || ''}</StyledParagraph>
                 </div>
               )}
             </StyledListItemBox>
