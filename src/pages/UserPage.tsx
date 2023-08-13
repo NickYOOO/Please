@@ -1,8 +1,13 @@
 import { styled } from 'styled-components';
 import Logo from '../assets/img/logo.svg';
 import Paging from '../components/pagination/Pagination';
+import useLogInUser from '../hooks/useLoginUser';
+
+
+
 
 const UserPage = () => {
+  const loginUser = useLogInUser()
   return (
     <StyledBox>
       <StyledUpperBox>
@@ -10,8 +15,8 @@ const UserPage = () => {
           <img src={Logo} alt="logo" />
         </StyledPhotoBox>
         <StyledUserInfoBox>
-          <h2>유저님</h2>
-          <p>fnqhdtm@gamil.com</p>
+          <h2>{loginUser.username}</h2>
+          <p>{loginUser.email}</p>
         </StyledUserInfoBox>
       </StyledUpperBox>
       <StyledBottomBox>
