@@ -133,7 +133,7 @@ const BoardPage = () => {
             ))}
           </StyledListBox>
           <StyledListBox>
-            {['역할 대행', '동행 · 돌봄', '벌레 퇴치', '기타'].map(category => (
+            {['역할 대행', '동행·돌봄', '벌레 퇴치', '기타'].map(category => (
               <StyledOptionBox key={category} onClick={() => handleCategoryChange(category)}>
                 {category}
               </StyledOptionBox>
