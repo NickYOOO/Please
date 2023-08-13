@@ -100,6 +100,7 @@ const Msg: React.FC = () => {
               </Styled.MsgBox>
             );
           })}
+        {selectedTab === 'received' && sortedReceivedData?.length === 0 && <Styled.MsgBox>받은 쪽지가 없습니다</Styled.MsgBox>}
         {selectedTab === 'sent' &&
           sortedSentData &&
           sortedSentData.map(item => {
@@ -126,6 +127,7 @@ const Msg: React.FC = () => {
               </Styled.MsgBox>
             );
           })}
+        {selectedTab === 'sent' && sortedSentData?.length === 0 && <Styled.MsgBox>보낸 쪽지가 없습니다</Styled.MsgBox>}
       </Styled.StyledBox>
     </div>
   );

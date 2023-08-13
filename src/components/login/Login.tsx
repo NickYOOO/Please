@@ -77,7 +77,7 @@ const Login = () => {
       setTimeout(() => {
         setIsClearModalOpen(false);
         navigate('/');
-      }, 3000);
+      }, 1500);
     } catch (error) {
       console.log(error);
     }
