@@ -20,13 +20,25 @@ const UserPage = () => {
   const logInUser = useLogInUser();
   const navigation = useNavigate();
   const [page, setPage] = useState(1);
+  const [showMyPosts, setShowMyPosts] = useState(true);
 
-  console.log(page);
+  const { isLoading, isError, data } = useQuery(['posts', logInUser.email, page], () => fetchPostsByPage(logInUser.email, page), { enabled: !!logInUser.email });
 
   const getMyPosts = async (email: string) => {
     try {
-      const response = await axios.get(`http://localhost:3001/posts?email=${email}`);
-      // console.log(response.data);
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts?email=${email}`);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log('Fetch 데이터 오류', error);
+      return [];
+    }
+  };
+
+  const getBookmarkedPosts = async (email: string) => {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bookmark?email=${email}`);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log('Fetch 데이터 오류', error);
@@ -36,9 +48,10 @@ const UserPage = () => {
 
   const fetchPostsByPage = async (email: string, page: number) => {
     const startIndex = (page - 1) * ITEMS_PER_PAGE;
-    // console.log(startIndex);
+
     try {
-      const allPosts = await getMyPosts(email);
+      // 카테고리에 따라 데이터 불러오기
+      const allPosts = showMyPosts ? await getMyPosts(email) : await getBookmarkedPosts(email);
 
       console.log(allPosts);
       const endIndex = startIndex + ITEMS_PER_PAGE;
@@ -53,8 +66,16 @@ const UserPage = () => {
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber); // 페이지 상태 업데이트
   };
+  const handleMyPostsClick = () => {
+    console.log('내가 쓴 글 click');
+    setShowMyPosts(true);
+  };
 
-  const { isLoading, isError, data } = useQuery(['posts', logInUser.email, page], () => fetchPostsByPage(logInUser.email, page), { enabled: !!logInUser.email });
+  const handleBookmarksClick = () => {
+    console.log('찜 click');
+
+    setShowMyPosts(false);
+  };
 
   const itemClickHandler = (id: string | undefined) => {
     navigation(`/detail/${id}`);
@@ -115,9 +136,9 @@ const UserPage = () => {
       </StyledUpperBox>
       <StyledBottomBox>
         <StyledCategoryBox>
-          <p>내 부탁 보기</p>
+          <p onClick={handleMyPostsClick}>내 부탁 보기</p>
           <p>|</p>
-          <p>찜 보기</p>
+          <p onClick={handleBookmarksClick}>찜 보기</p>
         </StyledCategoryBox>
 
         <StyledListBox>
