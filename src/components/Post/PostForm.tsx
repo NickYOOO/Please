@@ -21,6 +21,7 @@ export interface onChangeFormfuncType {
 }
 
 export interface IFormData {
+  userProfileImg: string,
   email: string;
   username: string;
   status: string;
@@ -54,6 +55,7 @@ const PostForm: React.FC = () => {
 
   const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '벌레 퇴치', '기타'];
   const [formData, setFormData] = useState<IFormData>({
+    userProfileImg: '',
     email: '',
     username: '',
     status: 'help',
@@ -64,7 +66,6 @@ const PostForm: React.FC = () => {
     date: null,
     time: '',
     price: '0',
-
     position: {
       lat: 0,
       lng: 0,
@@ -75,15 +76,26 @@ const PostForm: React.FC = () => {
   });
 
   useEffect(() => {
-    setFormData(prev => ({ ...prev, email: logInUserData.email, username: logInUserData.username }));
+    setFormData(prev => ({ ...prev, email: logInUserData.email, username: logInUserData.username, userProfileImg: logInUserData.imgUrl }));
   }, [logInUserData]);
 
+  // const getUser = async (id: string | number) => {
+  //   try {
+
+  //     return response.data;
+  //   } catch (error) {
+  //     console.log('Fetch 데이터 오류', error);
+  //     return [];
+  //   }
+  // };
   const onChangeFormHandler: onChangeFormfuncType = (type, data): void => {
     setFormData(prev => ({ ...prev, [type]: data }));
+    console.log(formData)
   };
 
-  const [imgFile, setImgFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
+  const [imgFile, setImgFile] = useState<File | null>(null)
+
+  const [preview, setPreview] = useState<string | null>(null)
 
   const onChangeAddFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -169,7 +181,6 @@ const PostForm: React.FC = () => {
                 <FaStarOfLife size={6} color="#FF004C" />
                 &nbsp;<label>부탁내용</label>
               </div>
-
               <Input value={formData.title} maxLength={13} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
               <TextArea value={formData.content} showCount maxLength={100} style={{ height: 150, resize: 'none' }} onChange={e => onChangeFormHandler('content', e.target.value)} placeholder="자세하게 설명해주세요!" />
             </Styled.StyledRequestBox>

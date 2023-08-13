@@ -8,7 +8,7 @@ import Modal from '../components/common/modal/Modal';
 import UserInfoUpdate from '../components/userPage/UserInfoUpdate';
 import { useParams } from 'react-router-dom';
 import { getUserId } from '../api/users';
-import { Button, Space } from 'antd';
+import { Button } from 'antd';
 import assemble from '../assets/categoryImg/assemble.avif';
 import bug from '../assets/categoryImg/bug.png';
 import caring from '../assets/categoryImg/caring.jpeg';
@@ -16,7 +16,7 @@ import cleaning from '../assets/categoryImg/cleaning.jpeg';
 import delivery from '../assets/categoryImg/delivery.jpeg';
 import logo from '../assets/categoryImg/else.png';
 import role from '../assets/categoryImg/role.jpeg';
-import Logo from '../assets/img/logo.svg';
+
 import useLogInUser from '../hooks/useLoginUser';
 
 const ITEMS_PER_PAGE = 3;
