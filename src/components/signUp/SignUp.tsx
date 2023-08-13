@@ -49,7 +49,7 @@ const SignUp = () => {
       setTimeout(() => {
         setIsClearModalOpen(false);
         navigate('/login');
-      }, 3000);
+      }, 1500);
     } catch (error) {
       console.log(error);
     }
