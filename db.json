@@ -119,7 +119,7 @@
   "likes": [
     {
       "id": 1,
-      "likes": 77
+      "likes": 86
     }
   ],
   "bookmark": [
@@ -172,16 +172,16 @@
       "nickName": "",
       "status": "help",
       "timeStamp": 1691744962935,
-      "title": "강아지",
-      "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해",
-      "category": "벌레 퇴치",
+      "title": "강아지2222222",
+      "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해22222",
+      "category": "배달",
       "date": "2023년 8월 15일",
-      "time": "05:05",
+      "time": "16:18",
       "price": 8000,
       "position": {
-        "lat": 37.448135818459036,
-        "lng": 126.93307459173312,
-        "address": "서울 관악구 신림동 "
+        "lat": 37.545123680442295,
+        "lng": 126.96102847150475,
+        "addr": "서울 용구 효창동 "
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F7e6e6d66-9c8f-e1d2-417f-0309d95ec7cd?alt=media&token=4d373018-2020-4562-a790-040998d05eb7",
       "id": 3
@@ -191,16 +191,16 @@
       "nickName": "",
       "status": "help",
       "timeStamp": 1691745087513,
-      "title": "강아지2",
-      "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지",
-      "category": "동행·돌봄",
+      "title": "강아지333333333",
+      "content": "순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지너무예뻐요순해요우리강아지33",
+      "category": "역할 대행",
       "date": "2023년 8월 21일",
-      "time": "05:05",
-      "price": 8000,
+      "time": "16:09",
+      "price": "700",
       "position": {
-        "lat": 37.56606734559856,
-        "lng": 126.97853928538898,
-        "address": "서울 중구 을지로가 "
+        "lat": 37.54529481036035,
+        "lng": 126.9608473296159,
+        "addr": "서울 용구 효창동 "
       },
       "img": "https://firebasestorage.googleapis.com/v0/b/please-b08ba.appspot.com/o/Image%2F8fd2c662-40dc-05b5-44dc-f19fa18df512?alt=media&token=b2a99832-c662-4e20-a7da-07d04bdd13ba",
       "id": 4
