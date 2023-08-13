@@ -1,23 +1,43 @@
 import { styled } from 'styled-components';
-import Logo from '../assets/img/logo.svg';
 import Paging from '../components/pagination/Pagination';
-import useLogInUser from '../hooks/useLoginUser';
-
-
+import Modal from '../components/common/modal/Modal';
+import { useState } from 'react';
+import UserInfoUpdate from '../components/userPage/UserInfoUpdate';
+import { useParams } from 'react-router-dom';
+import { getUserId } from '../api/users';
+import { useQuery } from 'react-query';
+import { Button, Space } from 'antd';
 
 
 const UserPage = () => {
-  const loginUser = useLogInUser()
+  const params = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const { isLoading, isError, data } = useQuery("users", () => getUserId(params.id));
+  if (isLoading) {
+    return <p>로딩중입니다....!</p>;
+  }
+
+  if (isError) {
+    return <p>오류가 발생하였습니다...!</p>;
+  }
+
   return (
     <StyledBox>
       <StyledUpperBox>
         <StyledPhotoBox>
-          <img src={Logo} alt="logo" />
+          <img src={data.imgUrl} alt="preview" />
         </StyledPhotoBox>
         <StyledUserInfoBox>
-          <h2>{loginUser.username}</h2>
-          <p>{loginUser.email}</p>
+          <h2>{data.username}</h2>
+          <p>{data.email}</p>
         </StyledUserInfoBox>
+        <Button onClick={openModal}>수정하기</Button>
       </StyledUpperBox>
       <StyledBottomBox>
         <StyledCategoryBox>
@@ -25,7 +45,9 @@ const UserPage = () => {
           <p>|</p>
           <p>찜 보기</p>
         </StyledCategoryBox>
-
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
+          <UserInfoUpdate userInfo={data} closeModal={closeModal} />
+        </Modal>
         <StyledListBox>리스트</StyledListBox>
         <Paging />
       </StyledBottomBox>
@@ -47,12 +69,12 @@ const StyledBox = styled.div`
 const StyledUpperBox = styled.div`
   display: flex;
   justify-content: space-around;
-
+  align-items: center;
   width: 450px;
 
   margin: 100px 0 50px;
 `;
-const StyledPhotoBox = styled.div`
+export const StyledPhotoBox = styled.div`
   width: 120px;
   height: 120px;
 
@@ -61,6 +83,7 @@ const StyledPhotoBox = styled.div`
     height: 120px;
     margin: 0 auto;
     border-radius: 50%;
+    object-fit: cover;
     cursor: pointer;
   }
 `;

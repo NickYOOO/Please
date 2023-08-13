@@ -14,7 +14,7 @@ import role from '../assets/categoryImg/role.jpeg';
 
 import { IFormData } from '../components/Post/PostForm';
 
-const LIMIT = 30; //페이지 스크롤
+const LIMIT = 50; //페이지 스크롤
 
 // 1번 페이지는 0~19
 // 2번 페이지는 20~39
