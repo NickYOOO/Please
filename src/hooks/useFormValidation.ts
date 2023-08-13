@@ -32,7 +32,7 @@ const useFormValidation = () => {
       const { email } = values;
 
       try {
-        const response = await axios.get(`http://localhost:3001/users?email=${email}`);
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users?email=${email}`);
         console.log(response.data);
         return response.data.length > 0;
       } catch (error) {
