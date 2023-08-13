@@ -6,7 +6,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import React, { useEffect, useState } from 'react';
 import { FaStarOfLife } from 'react-icons/fa';
 import { useMutation, useQueryClient } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import uuid from 'react-uuid';
 import { addPost } from '../../api/post';
 import defaultImg from '../../assets/img/defaultImg.png';
@@ -46,7 +46,7 @@ const PostForm: React.FC = () => {
   const logInUserData = useLogInUser();
   const queryClient = useQueryClient();
   const [errMsg, setErrMsg] = useState('');
-  const [price, setPrice] = useState('￦0');
+
   const postsMutation = useMutation(addPost, {
     onSuccess: () => {
       queryClient.invalidateQueries('postsData');
@@ -146,21 +146,55 @@ const PostForm: React.FC = () => {
     window.location.href = '/board';
   };
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <DropBox itemList={categories} selectedState={formData.category} onChangeFormHandler={onChangeFormHandler} />
-        <PostDatePicker onChangeFormHandler={onChangeFormHandler} />
-        <TimePicker defaultValue={dayjs('00:00', format)} onChange={onChange} format={format} />
-        <InputNumber controls={false} maxLength={10} style={{ width: 200 }} min={0} defaultValue={0} onChange={value => onChangePrice(value)} />
-        <span>{formData.price}</span>
-        <Input value={formData.title} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
-        <TextArea value={formData.content} showCount maxLength={100} style={{ height: 120, resize: 'none' }} onChange={e => onChangeFormHandler('content', e.target.value)} placeholder="자세하게 설명해주세요!" />
-        <input type="file" accept="image/jpg, image/jpeg, image/png" name="img" onChange={onChangeAddFile} />
-        <PostMap onChangeFormHandler={onChangeFormHandler} />
-        <button type="submit">작성</button>
-        <h1 style={{ color: 'red' }}>{errMsg}</h1>
-      </form>
-    </>
+    <Styled.StyledBox>
+      <Styled.StyledContentsBox>
+        <form onSubmit={onSubmit}>
+          <div style={{ marginBottom: '15px' }}>
+            <DropBox itemList={categories} selectedState={formData.category} onChangeFormHandler={onChangeFormHandler} />
+          </div>
+          <Styled.StyledChooseBox>
+            <label>
+              <FaStarOfLife size={6} color="#FF004C" />
+              &nbsp;날짜{' '}
+            </label>
+            <PostDatePicker onChangeFormHandler={onChangeFormHandler} />
+            <label>시간 </label>
+            <TimePicker defaultValue={dayjs('00:00', format)} onChange={onChange} format={format} style={{ lineHeight: 'none' }} />
+            <label>금액 </label>
+            <InputNumber controls={false} maxLength={10} style={{ width: 135 }} min={1} defaultValue={0} onChange={value => onChangePrice(value)} />
+          </Styled.StyledChooseBox>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '30px' }}>
+            <Styled.StyledRequestBox>
+              <div style={{ marginBottom: '10px' }}>
+                <FaStarOfLife size={6} color="#FF004C" />
+                &nbsp;<label>부탁내용</label>
+              </div>
+
+              <Input value={formData.title} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
+              <TextArea value={formData.content} showCount maxLength={100} style={{ height: 150, resize: 'none' }} onChange={e => onChangeFormHandler('content', e.target.value)} placeholder="자세하게 설명해주세요!" />
+            </Styled.StyledRequestBox>
+            <div>
+              <Styled.Label htmlFor="file">
+                <Styled.StyledPhotoBox>
+                  <img src={preview ?? defaultImg} alt="사진 선택" />
+                </Styled.StyledPhotoBox>
+              </Styled.Label>
+              <Styled.ImageInput id="file" type="file" accept="image/jpg, image/jpeg, image/png" name="img" onChange={onChangeAddFile} />
+            </div>
+          </div>
+
+          <PostMap onChangeFormHandler={onChangeFormHandler} />
+          <h1 style={{ color: 'red', marginTop: '15px' }}>{errMsg}</h1>
+          <Styled.StyledButtonBox>
+            <button type="submit" style={{ backgroundColor: '#3382D9', color: 'white' }}>
+              작성
+            </button>
+
+            <button onClick={moveToBoard}>취소</button>
+          </Styled.StyledButtonBox>
+        </form>
+      </Styled.StyledContentsBox>
+    </Styled.StyledBox>
   );
 };
 
