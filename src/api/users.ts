@@ -8,7 +8,7 @@ export const getUsers = async () => {
   return response.data;
 };
 
-export const getUserId = async (id: string | undefined) => {
+export const getUserId = async (id: string | undefined | number) => {
   const response = await axios.get(`${URL}/users/${id}`);
   return response.data;
 };

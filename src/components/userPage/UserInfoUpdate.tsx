@@ -20,11 +20,25 @@ const UserInfoUpdate = ({ userInfo, closeModal }: UserInfoUpdateProps) => {
   const [newName, onChangeNewName] = useInput(userInfo.username);
   const queryClient = useQueryClient();
   const [errorMsg, setErrorMsg] = useState('');
+
+
   const usersMutation = useMutation(updateUser, {
     onSuccess: () => {
       queryClient.invalidateQueries('users');
+      setNewLocal()
+      // localStorage.setItem('response', { 'imgUrl': imgUrl });
     },
   });
+
+  const setNewLocal = () => {
+    const acc = localStorage.getItem("response")
+    if (acc) {
+      let parseRes = JSON.parse(acc);
+      parseRes = { ...parseRes, user: { id: parseRes.user.id, email: parseRes.user.email, username: newName, imgUrl: imgUrl } }
+      localStorage.setItem("response", JSON.stringify(parseRes))
+    }
+  }
+
   const onChangeImage = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const theFile = event.target.files[0];
@@ -54,6 +68,7 @@ const UserInfoUpdate = ({ userInfo, closeModal }: UserInfoUpdateProps) => {
       return;
     }
     usersMutation.mutate({ ...userInfo, username: newName, imgUrl });
+    setNewLocal()
     closeModal();
   };
 

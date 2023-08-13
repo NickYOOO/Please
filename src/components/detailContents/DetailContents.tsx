@@ -69,21 +69,21 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const items: MenuProps['items'] = [
     ...(isAuthor
       ? [
-          {
-            key: 'update',
-            label: '수정하기',
-          },
-          {
-            key: 'delete',
-            label: '삭제하기',
-          },
-        ]
+        {
+          key: 'update',
+          label: '수정하기',
+        },
+        {
+          key: 'delete',
+          label: '삭제하기',
+        },
+      ]
       : [
-          {
-            key: 'report',
-            label: '신고하기',
-          },
-        ]),
+        {
+          key: 'report',
+          label: '신고하기',
+        },
+      ]),
   ];
 
   const { id } = params;
@@ -161,7 +161,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
     <Styled.ContentsBox>
       <Styled.DetailContentsTopBox>
         <Styled.UserBox>
-          <img src="https://cdn-icons-png.flaticon.com/512/95/95641.png" alt="" />
+          <img src={data?.userProfileImg} alt="" />
           {data?.username}
         </Styled.UserBox>
         <Select

@@ -38,6 +38,8 @@ const Login = () => {
       email: formData.email,
       password: formData.password,
     });
+
+
     localStorage.setItem('response', JSON.stringify(response.data));
 
     return response.data.accessToken;
