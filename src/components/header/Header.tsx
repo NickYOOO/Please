@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { Link, Navigate, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import check from '../../assets/img/check.svg';
 import Logo from '../../assets/img/logo.svg';
 import ProfileImg from '../../assets/img/profile.png';
@@ -9,6 +9,7 @@ import Msg from '../Msg/Msg';
 import * as Styled from './Header.styles';
 
 interface User {
+  id: string;
   userName: string;
 }
 
@@ -28,7 +29,7 @@ const Header: React.FC = () => {
     if (storedResponse) {
       const parsedResponse = JSON.parse(storedResponse);
       const username = parsedResponse.user.username;
-      setUser({ userName: username });
+      setUser({ userName: username, id: parsedResponse.user.id });
       setIsLoggedIn(true);
     } else {
       checkAndRedirectToLogin();
@@ -59,20 +60,28 @@ const Header: React.FC = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const moveToUser = () => {
+    window.location.href = `/user/${user?.id}`;
+  };
+
   const openMessageModal = () => {
     setIsMessageModalOpen(true);
+    setIsDropdownOpen(false);
   };
 
   const openLogoutModal = () => {
     setIsLogoutModalOpen(true);
+    setTimeout(() => {
+      setIsLogoutModalOpen(false);
+      window.location.reload();
+    }, 1500);
   };
 
   const LogoutHandler = () => {
     try {
       localStorage.removeItem('response');
       removeCookie('accessToken');
-      setIsLogoutModalOpen(true);
-      openMessageModal();
+      openLogoutModal();
     } catch (error) {
       console.error('로그아웃 오류:', error);
     }
@@ -85,33 +94,35 @@ const Header: React.FC = () => {
         <h1>부탁해</h1>
       </Styled.TitleBox>
       {isLoggedIn ? (
-        <Styled.LoginUserBox onClick={toggleDropdown}>
-          <img src={ProfileImg} alt="Profile" />
-          <div>
-            {user?.userName}님
-            <Styled.DropdownMenu style={{ display: isDropdownOpen ? 'block' : 'none' }}>
-              <li>
-                <Link to={`/user/:id`}>마이페이지</Link>
-              </li>
-              <li>
-                <span onClick={openMessageModal}>쪽지함</span>
-                <Modal isModalOpen={isMessageModalOpen} setIsModalOpen={setIsMessageModalOpen} closeButton={true} size="medium">
-                  <Msg />
-                </Modal>
-              </li>
-              <li>
-                <span onClick={LogoutHandler}>로그아웃</span>
-              </li>
-              <Modal isModalOpen={isLogoutModalOpen} setIsModalOpen={setIsLogoutModalOpen} closeButton={false} size="small">
-                <img src={check} alt="알림창" style={{ width: '40px' }} />
-                <div>
-                  <p>로그아웃 되었습니다.</p>
-                  <p>메시지창은 자동으로 사라집니다.</p>
-                </div>
-              </Modal>
-            </Styled.DropdownMenu>
-          </div>
-        </Styled.LoginUserBox>
+        <>
+          <Styled.LoginUserBox onClick={toggleDropdown}>
+            <img src={ProfileImg} alt="Profile" />
+            <div>
+              {user?.userName}님
+              <Styled.DropdownMenu style={{ display: isDropdownOpen ? 'block' : 'none' }}>
+                <li onClick={moveToUser}>
+                  <span>마이페이지</span>
+                </li>
+                <li onClick={openMessageModal}>
+                  <span>쪽지함</span>
+                </li>
+                <li onClick={LogoutHandler}>
+                  <span>로그아웃</span>
+                </li>
+              </Styled.DropdownMenu>
+            </div>
+          </Styled.LoginUserBox>
+          <Modal isModalOpen={isMessageModalOpen} setIsModalOpen={setIsMessageModalOpen} closeButton={true} size="medium">
+            <Msg />
+          </Modal>
+          <Modal isModalOpen={isLogoutModalOpen} setIsModalOpen={setIsLogoutModalOpen} closeButton={false} size="small">
+            <img src={check} alt="알림창" style={{ width: '40px' }} />
+            <div>
+              <p>로그아웃 되었습니다.</p>
+              <p>메시지창은 자동으로 사라집니다.</p>
+            </div>
+          </Modal>
+        </>
       ) : (
         <Styled.LogoutUserBox>
           <Link to={`/login`}>로그인</Link>
