@@ -25,7 +25,7 @@ const BoardPage = () => {
   const navigation = useNavigate();
 
   const fetchPosts = ({ pageParam = 1 }) =>
-    axios.get<AxiosResponse<{ posts: IFormData[] }>>(`http://localhost:3001/posts`, {
+    axios.get<AxiosResponse<{ posts: IFormData[] }>>(`${process.env.REACT_APP_SERVER_URL}/posts`, {
       params: {
         _page: pageParam,
         _limit: LIMIT,
@@ -168,7 +168,7 @@ const BoardPage = () => {
                     <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
                   </div>
                   <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
-                  <StyledParagraph>{post.position.address || 'No data'}</StyledParagraph>
+                  <StyledParagraph>{post.position.addr || 'No data'}</StyledParagraph>
                 </div>
               )}
             </StyledListItemBox>
