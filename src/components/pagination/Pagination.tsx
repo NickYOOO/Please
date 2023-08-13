@@ -4,8 +4,9 @@ import { styled } from 'styled-components';
 interface PagingProps {
   page: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  totalItemsCount: number;
 }
-const Paging = ({ page, setPage }: PagingProps) => {
+const Paging = ({ page, setPage, totalItemsCount }: PagingProps) => {
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
     // console.log(pageNumber);
@@ -13,7 +14,7 @@ const Paging = ({ page, setPage }: PagingProps) => {
 
   return (
     <StyledPagination>
-      <Pagination activePage={page} itemsCountPerPage={3} totalItemsCount={100} pageRangeDisplayed={5} prevPageText={'‹'} nextPageText={'›'} onChange={handlePageChange} />
+      <Pagination activePage={page} itemsCountPerPage={3} totalItemsCount={totalItemsCount} pageRangeDisplayed={5} prevPageText={'‹'} nextPageText={'›'} onChange={handlePageChange} />
     </StyledPagination>
   );
 };

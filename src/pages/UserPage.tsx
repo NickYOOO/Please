@@ -1,14 +1,11 @@
+import { Button } from 'antd';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
-import Paging from '../components/pagination/Pagination';
-import Modal from '../components/common/modal/Modal';
-import UserInfoUpdate from '../components/userPage/UserInfoUpdate';
-import { useParams } from 'react-router-dom';
+import { getPost } from '../api/post';
 import { getUserId } from '../api/users';
-import { Button, Space } from 'antd';
 import assemble from '../assets/categoryImg/assemble.avif';
 import bug from '../assets/categoryImg/bug.png';
 import caring from '../assets/categoryImg/caring.jpeg';
@@ -16,7 +13,10 @@ import cleaning from '../assets/categoryImg/cleaning.jpeg';
 import delivery from '../assets/categoryImg/delivery.jpeg';
 import logo from '../assets/categoryImg/else.png';
 import role from '../assets/categoryImg/role.jpeg';
-import Logo from '../assets/img/logo.svg';
+import { IFormData } from '../components/Post/PostForm';
+import Modal from '../components/common/modal/Modal';
+import Paging from '../components/pagination/Pagination';
+import UserInfoUpdate from '../components/userPage/UserInfoUpdate';
 import useLogInUser from '../hooks/useLoginUser';
 
 const ITEMS_PER_PAGE = 3;
@@ -58,8 +58,52 @@ const UserPage = () => {
       return [];
     }
   };
-  const handlePageChange = (pageNumber: number) => {
-    setPage(pageNumber); // 페이지 상태 업데이트
+
+  const [showMyPosts, setShowMyPosts] = useState(true);
+  const [myPostsLength, setMyPostsLength] = useState(0);
+  const [myPostsData, setMyPostsData] = useState([]);
+  const [bookmarksArray, setBookmarksArray] = useState<string[]>([]);
+
+  const startIndex = (page - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const myPostsResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts?email=${logInUser.email}`);
+        const bookmarksResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bookmark?email=${logInUser.email}`);
+
+        setMyPostsLength(myPostsResponse.data.length);
+        setBookmarksArray(bookmarksResponse.data.map((item: any) => item.postId));
+        const slicedmyPosts = myPostsResponse.data.slice(startIndex, endIndex);
+        setMyPostsData(slicedmyPosts);
+
+        if (showMyPosts) {
+          return myPostsResponse.data;
+        } else {
+          return bookmarksResponse.data;
+        }
+      } catch (error) {
+        console.log('Fetch 데이터 오류', error);
+      }
+    };
+
+    if (logInUser.email) {
+      fetchUserData();
+    }
+  }, [logInUser, showMyPosts, page]);
+
+  const { isLoading, isError, data } = useQuery<boolean, boolean, IFormData[]>('post', getPost);
+  const bookMarkedData = data?.filter(post => post.id !== undefined && bookmarksArray.includes(post.id));
+  const myBookmarksLength = bookMarkedData ? bookMarkedData.length : 0;
+  const myBookmarksData = bookMarkedData?.slice(startIndex, endIndex);
+
+  const handleMyPostsClick = () => {
+    setShowMyPosts(true);
+  };
+
+  const handleBookmarksClick = () => {
+    setShowMyPosts(false);
   };
   const { isLoading: UsersIsLoading, isError: UsersIsError, data: UsersData } = useQuery('users', () => getUserId(params.id));
   const { isLoading: PostsIstLoading, isError: PostsIsError, data: PostsData } = useQuery(['posts', logInUser.email, page], () => fetchPostsByPage(logInUser.email, page), { enabled: !!logInUser.email });
@@ -68,7 +112,7 @@ const UserPage = () => {
   };
 
   type ImageComponentProps = {
-    category: string; // 카테고리의 타입을 여기에 지정
+    category: string;
   };
   if (UsersIsLoading) {
     return <p>로딩중입니다....!</p>;
@@ -129,39 +173,63 @@ const UserPage = () => {
       </StyledUpperBox>
       <StyledBottomBox>
         <StyledCategoryBox>
-          <p>내 부탁 보기</p>
+          <p onClick={handleMyPostsClick} style={{ cursor: 'pointer' }}>
+            내 부탁 보기
+          </p>
           <p>|</p>
-          <p>찜 보기</p>
+          <p onClick={handleBookmarksClick} style={{ cursor: 'pointer' }}>
+            찜 보기
+          </p>
         </StyledCategoryBox>
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
           <UserInfoUpdate userInfo={UsersData} closeModal={closeModal} />
         </Modal>
-        <StyledListBox>리스트</StyledListBox>
-        <Paging page={page} setPage={setPage} />
         <StyledListBox>
-          {PostsData?.map(function (post: any, postIndex: number) {
-            return (
-              <StyledListItemBox
-                key={postIndex}
-                onClick={() => {
-                  itemClickHandler(post.id);
-                }}
-              >
-                <ImageComponent category={post.category} />
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
-                  <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
-                </div>
-                <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
-                  <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
-                </div>
-                <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
-                <StyledParagraph>{post.position.address || 'No data'}</StyledParagraph>
-              </StyledListItemBox>
-            );
-          })}
+          {showMyPosts
+            ? myPostsData?.map(function (post: any, postIndex: number) {
+                return (
+                  <StyledListItemBox
+                    key={postIndex}
+                    onClick={() => {
+                      itemClickHandler(post.id);
+                    }}
+                  >
+                    <ImageComponent category={post.category} />
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
+                      <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
+                    </div>
+                    <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
+                      <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
+                    </div>
+                    <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
+                    <StyledParagraph>{post.position?.addr || 'No data'}</StyledParagraph>
+                  </StyledListItemBox>
+                );
+              })
+            : myBookmarksData?.map(function (post: any, postIndex: number) {
+                return (
+                  <StyledListItemBox
+                    key={postIndex}
+                    onClick={() => {
+                      itemClickHandler(post.id);
+                    }}
+                  >
+                    <ImageComponent category={post.category} />
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
+                      <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
+                    </div>
+                    <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
+                      <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
+                    </div>
+                    <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
+                    <StyledParagraph>{post.position?.addr || 'No data'}</StyledParagraph>
+                  </StyledListItemBox>
+                );
+              })}
         </StyledListBox>
-        {/* <Paging page={page} setPage={setPage} /> */}
+        {showMyPosts ? <Paging page={page} setPage={setPage} totalItemsCount={myPostsLength} /> : <Paging page={page} setPage={setPage} totalItemsCount={myBookmarksLength} />}
       </StyledBottomBox>
     </StyledBox>
   );
@@ -230,9 +298,13 @@ const StyledCategoryBox = styled.div`
 `;
 
 const StyledListBox = styled.div`
-  display: flex;
   width: 100%;
-  justify-content: space-between;
+  height: 250px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  gap: 25px;
+  /* background-color: #d5e6eb; */
 `;
 
 const StyledListItemBox = styled.div`
