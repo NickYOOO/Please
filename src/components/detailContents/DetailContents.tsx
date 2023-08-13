@@ -1,18 +1,27 @@
 import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
 import { useState } from 'react';
-import { BsThreeDots } from 'react-icons/bs';
-import { FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
-import { deletePost } from '../../api/post';
+import { useParams } from 'react-router-dom';
+import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query';
+
+import { deletePost, updatePost } from '../../api/post';
+import { getLikes, patchLikes } from '../../api/likes';
+
 import { IFormData } from '../Post/PostForm';
+import type { Like } from '../types';
+
 import Modal from '../common/modal/Modal';
 import SendText from '../sendMsg/SendMsg';
 import * as Styled from './DetailContents.style';
+import { FaBookmark, FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
+import { FiBookmark } from 'react-icons/fi';
+import { BsThreeDots } from 'react-icons/bs';
 
 interface DetailContentsProps {
   data: IFormData | undefined;
 }
 
 const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
+  const params = useParams();
   let postStatus = '';
 
   const time = data?.timeStamp || 0;
@@ -69,12 +78,20 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
     },
   ];
 
+  const { id } = params;
+
   const onClick: MenuProps['onClick'] = ({ key }) => {
     switch (key) {
+      case 'update':
+        updatePost(data!);
+        window.location.href = `/update/${id}`;
+        break;
+
       case 'delete':
         deletePost(data?.id);
         window.location.href = '/board';
-      // 컨펌 모달
+        // 컨펌 모달
+        break;
     }
   };
 
@@ -82,6 +99,25 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
 
   const openModal = () => {
     setIsModalOpen(true);
+  };
+
+  // 찜하기 기능
+  const queryClient = useQueryClient();
+
+  const { data: likes = [] } = useQuery<Like[], Error>('likes', getLikes);
+
+  const likeMutation = useMutation(patchLikes, {
+    onMutate: (like: Like) => {
+      // Optimistic Update
+      queryClient.setQueryData<Like[]>('likes', prevData => {
+        if (!prevData) return [];
+        return prevData.map(currentLike => (currentLike.id === like.id ? { ...currentLike, likes: like.likes + 1 } : currentLike));
+      });
+    },
+  });
+
+  const handleLike = (like: Like) => {
+    likeMutation.mutate(like);
   };
 
   const MsgProps = {
@@ -157,10 +193,14 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
           <SendText postInfo={MsgProps} setIsModalOpen={setIsModalOpen} />
         </Modal>
-        <Styled.DetailButton>
-          찜하기 &nbsp;0&nbsp;
-          <FaRegBookmark />
-        </Styled.DetailButton>
+        {likes?.map(like => (
+          <div key={like.id}>
+            <Styled.DetailButton onClick={() => handleLike(like)}>
+              찜하기&nbsp;{like.likes}&nbsp;
+              {like.likes % 2 !== 0 ? <FiBookmark size="20" color="white" /> : <FaBookmark size="20" color="#black" />}
+            </Styled.DetailButton>
+          </div>
+        ))}
       </Styled.DetailButtons>
     </Styled.ContentsBox>
   );
