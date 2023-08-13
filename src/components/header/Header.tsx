@@ -13,8 +13,8 @@ interface User {
 }
 
 const Header: React.FC = () => {
-  const paths = ['/signup', '/login', '/', '/post', '/board', '/report'];
-  const dynamicPaths = /^\/detail|user\/[\w\d]+$/;
+  const paths = ['/signup', '/login', '/', '/post', '/board', '/report', '/update'];
+  const dynamicPaths = /^\/detail|user|update\/[\w\d]+$/;
   const [cookies, setCookie, removeCookie] = useCookies();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState<User | null>(null);
