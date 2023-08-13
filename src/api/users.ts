@@ -1,0 +1,19 @@
+import axios from 'axios'; 
+import { UserData } from '../components/types';
+
+const URL = process.env.REACT_APP_SERVER_URL;
+
+export const getUsers = async () => {
+  const response = await axios.get(`${URL}/users`);
+  return response.data;
+};
+
+export const getUserId = async (id: string | undefined) => {
+  const response = await axios.get(`${URL}/users/${id}`);
+  return response.data;
+};
+
+export const updateUser = async (newUser: UserData) => {
+  console.log(newUser)
+  await axios.patch(`${process.env.REACT_APP_SERVER_URL}/users/${newUser.id}`, newUser)
+}

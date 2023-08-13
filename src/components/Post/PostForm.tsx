@@ -84,6 +84,7 @@ const PostForm: React.FC = () => {
 
   const [imgFile, setImgFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
+
   const onChangeAddFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const theFile = event.target.files[0];
@@ -109,6 +110,10 @@ const PostForm: React.FC = () => {
     if (imgFile) updateImg(imgFile);
   }, [imgFile]);
 
+  const moveToBoard = () => {
+    window.location.href = '/board';
+  };
+
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -119,8 +124,13 @@ const PostForm: React.FC = () => {
       setErrMsg('제목과 내용을 모두 입력해주세요');
       return;
     }
-    postsMutation.mutate(formData);
-    navigate('/board');
+
+    try {
+      await postsMutation.mutateAsync(formData);
+      window.location.href = '/board';
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onChange = (time: dayjs.Dayjs | null, timeString: string) => {
@@ -135,9 +145,6 @@ const PostForm: React.FC = () => {
 
   const format = 'HH:mm';
 
-  const moveToBoard = () => {
-    window.location.href = '/board';
-  };
   return (
     <Styled.StyledBox>
       <Styled.StyledContentsBox>
@@ -182,7 +189,6 @@ const PostForm: React.FC = () => {
             <button type="submit" style={{ backgroundColor: '#3382D9', color: 'white' }}>
               작성
             </button>
-
             <button onClick={moveToBoard}>취소</button>
           </Styled.StyledButtonBox>
         </form>

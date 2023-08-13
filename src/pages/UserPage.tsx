@@ -1,9 +1,11 @@
+import { Button } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getPost } from '../api/post';
+import { getUserId } from '../api/users';
 import assemble from '../assets/categoryImg/assemble.avif';
 import bug from '../assets/categoryImg/bug.png';
 import caring from '../assets/categoryImg/caring.jpeg';
@@ -11,17 +13,52 @@ import cleaning from '../assets/categoryImg/cleaning.jpeg';
 import delivery from '../assets/categoryImg/delivery.jpeg';
 import logo from '../assets/categoryImg/else.png';
 import role from '../assets/categoryImg/role.jpeg';
-import Logo from '../assets/img/logo.svg';
 import { IFormData } from '../components/Post/PostForm';
+import Modal from '../components/common/modal/Modal';
 import Paging from '../components/pagination/Pagination';
+import UserInfoUpdate from '../components/userPage/UserInfoUpdate';
 import useLogInUser from '../hooks/useLoginUser';
 
 const ITEMS_PER_PAGE = 3;
-
 const UserPage = () => {
   const logInUser = useLogInUser();
   const navigation = useNavigate();
   const [page, setPage] = useState(1);
+  const params = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const getMyPosts = async (email: string) => {
+    try {
+      const response = await axios.get(`http://localhost:3001/posts?email=${email}`);
+      // console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log('Fetch 데이터 오류', error);
+      return [];
+    }
+  };
+  const fetchPostsByPage = async (email: string, page: number) => {
+    const startIndex = (page - 1) * ITEMS_PER_PAGE;
+    // console.log(startIndex);
+    try {
+      const allPosts = await getMyPosts(email);
+
+      console.log(allPosts);
+      const endIndex = startIndex + ITEMS_PER_PAGE;
+      const slicedData = allPosts.slice(startIndex, endIndex);
+      console.log(slicedData);
+      return slicedData;
+    } catch (error) {
+      console.log('Fetch 데이터 오류', error);
+      return [];
+    }
+  };
+
   const [showMyPosts, setShowMyPosts] = useState(true);
   const [myPostsLength, setMyPostsLength] = useState(0);
   const [myPostsData, setMyPostsData] = useState([]);
@@ -68,7 +105,8 @@ const UserPage = () => {
   const handleBookmarksClick = () => {
     setShowMyPosts(false);
   };
-
+  const { isLoading: UsersIsLoading, isError: UsersIsError, data: UsersData } = useQuery('users', () => getUserId(params.id));
+  const { isLoading: PostsIstLoading, isError: PostsIsError, data: PostsData } = useQuery(['posts', logInUser.email, page], () => fetchPostsByPage(logInUser.email, page), { enabled: !!logInUser.email });
   const itemClickHandler = (id: string | undefined) => {
     navigation(`/detail/${id}`);
   };
@@ -76,7 +114,13 @@ const UserPage = () => {
   type ImageComponentProps = {
     category: string;
   };
+  if (UsersIsLoading) {
+    return <p>로딩중입니다....!</p>;
+  }
 
+  if (UsersIsError) {
+    return <p>오류가 발생하였습니다...!</p>;
+  }
   const ImageComponent: React.FC<ImageComponentProps> = ({ category }) => {
     let imageSrc: string;
 
@@ -108,17 +152,24 @@ const UserPage = () => {
 
     return <StyledImg src={imageSrc} alt="이미지" />;
   };
+  if (PostsIstLoading) {
+    return <h1>로딩 중입니다..</h1>;
+  }
+  if (PostsIsError) {
+    return <h1>오류가 발생했습니다..</h1>;
+  }
 
   return (
     <StyledBox>
       <StyledUpperBox>
         <StyledPhotoBox>
-          <img src={Logo} alt="logo" />
+          <img src={UsersData.imgUrl} alt="preview" />
         </StyledPhotoBox>
         <StyledUserInfoBox>
-          <h2>유저님</h2>
-          <p>fnqhdtm@gamil.com</p>
+          <h2>{UsersData.username}</h2>
+          <p>{UsersData.email}</p>
         </StyledUserInfoBox>
+        <Button onClick={openModal}>수정하기</Button>
       </StyledUpperBox>
       <StyledBottomBox>
         <StyledCategoryBox>
@@ -130,7 +181,9 @@ const UserPage = () => {
             찜 보기
           </p>
         </StyledCategoryBox>
-
+        <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
+          <UserInfoUpdate userInfo={UsersData} closeModal={closeModal} />
+        </Modal>
         <StyledListBox>
           {showMyPosts
             ? myPostsData?.map(function (post: any, postIndex: number) {
@@ -196,12 +249,12 @@ const StyledBox = styled.div`
 const StyledUpperBox = styled.div`
   display: flex;
   justify-content: space-around;
-
+  align-items: center;
   width: 450px;
 
   margin: 60px 0 50px;
 `;
-const StyledPhotoBox = styled.div`
+export const StyledPhotoBox = styled.div`
   width: 120px;
   height: 120px;
 
@@ -210,6 +263,7 @@ const StyledPhotoBox = styled.div`
     height: 120px;
     margin: 0 auto;
     border-radius: 50%;
+    object-fit: cover;
     cursor: pointer;
   }
 `;
