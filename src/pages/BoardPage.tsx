@@ -14,8 +14,9 @@ import role from '../assets/categoryImg/role.jpeg';
 
 import { IFormData } from '../components/Post/PostForm';
 
-const LIMIT = 50; //페이지 스크롤
+const LIMIT = 12; //페이지 스크롤
 
+// 예시
 // 1번 페이지는 0~19
 // 2번 페이지는 20~39
 // 3번 페이지는 40~59
@@ -74,7 +75,11 @@ const BoardPage = () => {
   };
 
   if (data === undefined) {
-    return <h1>Loading...</h1>;
+    return (
+      <CustomLoaderWrap>
+        <ReactLoading type="spin" color="#3382d9" />
+      </CustomLoaderWrap>
+    );
   }
   // console.log(data);
   // console.log(data.pages[0].data);
@@ -176,7 +181,7 @@ const BoardPage = () => {
       </StyledList>
       {isFetchingNextPage ? (
         <LoaderWrap>
-          <ReactLoading type="spin" color="#A593E0" />
+          <ReactLoading type="spin" color="#3382d9" />
         </LoaderWrap>
       ) : null}
     </StyledBox>
@@ -188,6 +193,13 @@ export default BoardPage;
 const StyledBox = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+  min-height: calc(100vh - 186px);
+`;
+const CustomLoaderWrap = styled.div`
+  display: flex;
+  justify-content: center;
   align-items: center;
   padding-top: 100px;
   min-height: calc(100vh - 186px);
@@ -304,4 +316,6 @@ const LoaderWrap = styled.div`
   justify-content: center;
   text-align: center;
   align-items: center;
+
+  margin: 20px auto;
 `;
