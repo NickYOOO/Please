@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import check from '../../assets/img/check.svg';
 import useFormValidation from '../../hooks/useFormValidation';
 import Modal from '../common/modal/Modal';
-import '../../assets/img/defaultProfile.png'
+import '../../assets/img/defaultProfile.png';
 import * as Styled from './SignUp.styles';
 
 type FieldType = {
@@ -37,7 +37,7 @@ const SignUp = () => {
         username: formState.username,
         email: formState.email,
         password: formState.password,
-        imgUrl: 'https://w7.pngwing.com/pngs/919/467/png-transparent-avatar-male-man-people-person-profile-user-mobile-basic-icon.png'
+        imgUrl: 'https://cdn-icons-png.flaticon.com/512/95/95641.png',
       });
 
       // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, {

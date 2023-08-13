@@ -1,7 +1,7 @@
 import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { deletePost, updatePost } from '../../api/post';
 import { getLikes, patchLikes } from '../../api/likes';
 import { IFormData } from '../Post/PostForm';
@@ -13,7 +13,7 @@ import useLogInUser from '../../hooks/useLoginUser';
 import { sendMsg } from '../../api/msg';
 import { IMsg } from '../types';
 import ConfirmModal from '../common/confirmModal/ConfirmModal';
-import { FaBookmark, FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
+import { FaBookmark, FaHandRock, FaPaperPlane } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
 
@@ -69,21 +69,21 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const items: MenuProps['items'] = [
     ...(isAuthor
       ? [
-          {
-            key: 'update',
-            label: '수정하기',
-          },
-          {
-            key: 'delete',
-            label: '삭제하기',
-          },
-        ]
+        {
+          key: 'update',
+          label: '수정하기',
+        },
+        {
+          key: 'delete',
+          label: '삭제하기',
+        },
+      ]
       : [
-          {
-            key: 'report',
-            label: '신고하기',
-          },
-        ]),
+        {
+          key: 'report',
+          label: '신고하기',
+        },
+      ]),
   ];
 
   const { id } = params;
@@ -161,7 +161,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
     <Styled.ContentsBox>
       <Styled.DetailContentsTopBox>
         <Styled.UserBox>
-          <img src="https://cdn-icons-png.flaticon.com/512/95/95641.png" alt="" />
+          <img src={data?.userProfileImg} alt="" />
           {data?.username}
         </Styled.UserBox>
         <Select
