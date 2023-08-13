@@ -1,7 +1,7 @@
 import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { deletePost, updatePost } from '../../api/post';
 import { getLikes, patchLikes } from '../../api/likes';
 import { IFormData } from '../Post/PostForm';
@@ -13,7 +13,7 @@ import useLogInUser from '../../hooks/useLoginUser';
 import { sendMsg } from '../../api/msg';
 import { IMsg } from '../types';
 import ConfirmModal from '../common/confirmModal/ConfirmModal';
-import { FaBookmark, FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
+import { FaBookmark, FaHandRock, FaPaperPlane } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
 

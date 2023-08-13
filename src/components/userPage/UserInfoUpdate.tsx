@@ -1,30 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import * as Styled from './UserInfoUpdate.syles';
 import { UserData } from '../types/index';
-import { StyledPhotoBox } from '../../pages/UserPage';
 import useInput from '../../hooks/useInput';
-import { Button, Input, Select, Space } from 'antd';
+import { Button, Input } from 'antd';
 import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useMutation, useQueryClient } from 'react-query';
 import { updateUser } from '../../api/users';
-import { UploadOutlined } from '@ant-design/icons';
-import type { UploadProps } from 'antd';
-import { Upload } from 'antd';
-import type { UploadFile } from 'antd/es/upload/interface';
 
 interface UserInfoUpdateProps {
   userInfo: UserData;
-  closeModal: () => void
+  closeModal: () => void;
 }
-
 
 const UserInfoUpdate = ({ userInfo, closeModal }: UserInfoUpdateProps) => {
   const [imgFile, setImgFile] = useState<File | null>(null);
-  const [imgUrl, setImgUrl] = useState(userInfo.imgUrl)
-  const [preview, setPreview] = useState<string | undefined>("");
+  const [imgUrl, setImgUrl] = useState(userInfo.imgUrl);
+  const [preview, setPreview] = useState<string | undefined>('');
   const [newName, onChangeNewName] = useInput(userInfo.username);
   const queryClient = useQueryClient();
-  const [errorMsg, setErrorMsg] = useState("")
+  const [errorMsg, setErrorMsg] = useState('');
   const usersMutation = useMutation(updateUser, {
     onSuccess: () => {
       queryClient.invalidateQueries('users');
@@ -43,7 +38,7 @@ const UserInfoUpdate = ({ userInfo, closeModal }: UserInfoUpdateProps) => {
       const imageRef = ref(storage, `Image/userProfile/${userInfo.email}`);
       await uploadBytes(imageRef, file);
       const url = await getDownloadURL(imageRef);
-      setImgUrl(url)
+      setImgUrl(url);
     } catch (error) {
       console.log(error);
     }
@@ -55,28 +50,28 @@ const UserInfoUpdate = ({ userInfo, closeModal }: UserInfoUpdateProps) => {
 
   const onSubmitProfileUpdate = () => {
     if (newName.length < 2) {
-      setErrorMsg("닉네임을 2글자 이상으로 정해주세요")
-      return
+      setErrorMsg('닉네임을 2글자 이상으로 정해주세요');
+      return;
     }
-    usersMutation.mutate({ ...userInfo, username: newName, imgUrl })
-    closeModal()
-  }
+    usersMutation.mutate({ ...userInfo, username: newName, imgUrl });
+    closeModal();
+  };
 
   return (
-    <div>
-      <StyledPhotoBox>
-        <img src={preview ? preview : userInfo.imgUrl} alt="logo" />
-      </StyledPhotoBox>
-
-      <Input accept="image/jpg, image/jpeg, image/png" type="file" onChange={onChangeImage} />
-      <div style={{ display: "flex", alignItems: "center" }}>
-        <label htmlFor="name" >닉네임 : </label>
-        <Input id="name" type="text" value={newName} onChange={onChangeNewName} defaultValue="26888888" style={{ width: '200px' }} />
-      </div>
+    <Styled.UpdateLayout>
+      <Styled.UpdateImgPreView src={preview ? preview : userInfo.imgUrl} alt="logo" />
+      <Styled.UpdateImg>
+        <label htmlFor="file">사진 변경</label>
+        <input accept="image/jpg, image/jpeg, image/png" id="file" type="file" onChange={onChangeImage} />
+      </Styled.UpdateImg>
+      <Styled.UpdateBox>
+        <label htmlFor="name">닉네임 :&nbsp;</label>
+        <Input id="name" type="text" value={newName} onChange={onChangeNewName} defaultValue="26888888" style={{ width: '150px' }} />
+      </Styled.UpdateBox>
       <h1>{errorMsg}</h1>
-      <Button onClick={onSubmitProfileUpdate} type="primary">변경하기</Button>
-    </div>
-  )
-}
+      <Styled.UpdateButton onClick={onSubmitProfileUpdate}>저장</Styled.UpdateButton>
+    </Styled.UpdateLayout>
+  );
+};
 
-export default UserInfoUpdate
+export default UserInfoUpdate;

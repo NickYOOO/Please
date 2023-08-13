@@ -242,8 +242,6 @@ const StyledBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  /* margin-top: 40px; */
   min-height: calc(100vh - 186px);
 `;
 const StyledUpperBox = styled.div`
@@ -255,59 +253,50 @@ const StyledUpperBox = styled.div`
   margin: 60px 0 50px;
 `;
 export const StyledPhotoBox = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
 
   img {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     margin: 0 auto;
     border-radius: 50%;
     object-fit: cover;
-    cursor: pointer;
   }
 `;
 const StyledUserInfoBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   width: 50%;
-
   padding: 20px;
-  /* background-color: #d5e6eb; */
 
   & > h2 {
     margin-bottom: 15px;
   }
   & > p {
     color: #444444;
-
     font-size: 13px;
   }
 `;
 const StyledBottomBox = styled.div`
   width: 700px;
   height: 420px;
-
   padding: 25px;
-
   border: 5px solid #f9f7f1;
   border-radius: 30px;
-  /* background-color: #d5e6eb; */
 `;
 const StyledCategoryBox = styled.div`
   display: flex;
-
   padding-bottom: 30px;
 
   & > p {
     color: #444444;
-
     margin-right: 20px;
     font-size: 13px;
   }
 `;
+
 const StyledListBox = styled.div`
   width: 100%;
   height: 250px;
@@ -317,6 +306,7 @@ const StyledListBox = styled.div`
   gap: 25px;
   /* background-color: #d5e6eb; */
 `;
+
 const StyledListItemBox = styled.div`
   width: 180px;
   height: 300px;
@@ -334,9 +324,9 @@ const StyledImg = styled.img`
 
 const StyledH2tag = styled.h2`
   margin-bottom: 5px;
-  /* font-size: '13px'; */
   font-family: 'Pretendard-Regular';
 `;
+
 const StyledParagraph = styled.p`
   margin-bottom: 5px;
   font-size: 13px;
