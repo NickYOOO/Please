@@ -1,5 +1,5 @@
 import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { deletePost, updatePost } from '../../api/post';
@@ -16,6 +16,7 @@ import ConfirmModal from '../common/confirmModal/ConfirmModal';
 import { FaBookmark, FaHandRock, FaPaperPlane } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
+import { addBookmark, getBookmark } from '../../api/bookmark';
 
 interface DetailContentsProps {
   data: IFormData | undefined;
@@ -24,6 +25,7 @@ interface DetailContentsProps {
 const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const logInUser = useLogInUser();
   const params = useParams();
+  const queryClient = useQueryClient();
   let postStatus = '';
 
   const time = data?.timeStamp || 0;
@@ -45,6 +47,24 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
     return `${Math.floor(years)}년 전`;
   };
   const nowDate = detailDate(time);
+
+  const { data: bookmarkData, error: bookmarkError } = useQuery('bookmarks', () => getBookmark(logInUser.email));
+
+  useEffect(() => {
+    const fetchBookmarkData = async () => {
+      try {
+        const bookmarks = await getBookmark(logInUser.email);
+        // 여기서 가져온 북마크 데이터를 원하는 방식으로 처리할 수 있습니다.
+        // 예를 들어, 컴포넌트의 상태나 상태 업데이트 함수로 설정할 수 있습니다.
+      } catch (error) {
+        console.error('Error fetching bookmark data:', error);
+      }
+    };
+
+    fetchBookmarkData();
+  }, []);
+
+  const isPostBookmarked = bookmarkData?.some((bookmark: any) => bookmark.postId === data?.id);
 
   if (data?.status === 'help') {
     postStatus = '부탁해요';
@@ -111,22 +131,69 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   };
 
   // 찜하기 기능
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
-  const { data: likes = [] } = useQuery<Like[], Error>('likes', getLikes);
+  // const { data: likes = [] } = useQuery<Like[], Error>('likes', getLikes);
 
-  const likeMutation = useMutation(patchLikes, {
-    onMutate: (like: Like) => {
-      // Optimistic Update
-      queryClient.setQueryData<Like[]>('likes', prevData => {
-        if (!prevData) return [];
-        return prevData.map(currentLike => (currentLike.id === like.id ? { ...currentLike, likes: like.likes + 1 } : currentLike));
-      });
+  // const likeMutation = useMutation(patchLikes, {
+  //   onMutate: (updatedLike: Like) => {
+  //     // Optimistic Update
+  //     const prevLikes = queryClient.getQueryData<Like[]>('likes');
+  //     const likeIndex = prevLikes?.findIndex(like => like.id === updatedLike.id);
+
+  //     if (likeIndex !== undefined && prevLikes) {
+  //       // 해당 like 객체에 대한 옵티미스틱 업데이트
+  //       const updatedLikes = [...prevLikes];
+  //       if (updatedLike.likes % 2 !== 0) {
+  //         // 찜하기가 되어있으면 -1
+  //         updatedLikes[likeIndex] = { ...updatedLikes[likeIndex], likes: updatedLike.likes - 1 };
+  //       } else {
+  //         // 찜하기가 안되어있으면 +1
+  //         updatedLikes[likeIndex] = { ...updatedLikes[likeIndex], likes: updatedLike.likes + 1 };
+  //       }
+
+  //       // 업데이트된 데이터로 쿼리 데이터 갱신
+  //       queryClient.setQueryData<Like[]>('likes', updatedLikes);
+  //     }
+
+  //     return prevLikes;
+  //   },
+  // });
+
+  // const handleLike = (like: Like) => {
+  //   // 업데이트된 좋아요 상태를 전달하여 뮤테이션 실행
+  //   if (like.likes % 2 !== 0) {
+  //     likeMutation.mutate({ ...like, likes: like.likes - 1 });
+  //   } else {
+  //     likeMutation.mutate({ ...like, likes: like.likes + 1 });
+  //   }
+  // };
+
+  const postsMutation = useMutation(addBookmark, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('postsData');
     },
   });
 
-  const handleLike = (like: Like) => {
-    likeMutation.mutate(like);
+  const bookmarkUser = useLogInUser();
+  const bookmarkEmail = bookmarkUser.email;
+  const bookmarkPostId = data?.id;
+
+  const handleBookmark = async (id: string | undefined) => {
+    try {
+      if (isPostBookmarked) {
+        // 북마크 해제 로직
+        // 예: await removeBookmark(id);
+      } else {
+        // 북마크 추가 로직
+        await postsMutation.mutateAsync({
+          email: bookmarkEmail,
+          postId: bookmarkPostId,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const MsgProps = {
@@ -233,14 +300,19 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
         <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} closeButton={true} size="medium">
           <SendText postInfo={MsgProps} setIsModalOpen={setIsModalOpen} />
         </Modal>
-        {likes?.map(like => (
+        <Styled.DetailButton onClick={() => handleBookmark(id)}>
+          {isPostBookmarked ? '찜하기 해제' : '찜하기'}&nbsp;&nbsp;
+          {isPostBookmarked ? <FaBookmark size="20" color="white" /> : <FiBookmark size="20" color="#black" />}
+          {/* {like.likes % 2 !== 0 ? <FiBookmark size="20" color="white" /> : <FaBookmark size="20" color="#black" />} */}
+        </Styled.DetailButton>
+        {/* {likes?.map(like => (
           <div key={like.id}>
             <Styled.DetailButton onClick={() => handleLike(like)}>
               찜하기&nbsp;{like.likes}&nbsp;
               {like.likes % 2 !== 0 ? <FiBookmark size="20" color="white" /> : <FaBookmark size="20" color="#black" />}
             </Styled.DetailButton>
           </div>
-        ))}
+        ))} */}
       </Styled.DetailButtons>
     </Styled.ContentsBox>
   );

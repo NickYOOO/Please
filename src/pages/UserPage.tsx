@@ -20,43 +20,19 @@ import UserInfoUpdate from '../components/userPage/UserInfoUpdate';
 import useLogInUser from '../hooks/useLoginUser';
 
 const ITEMS_PER_PAGE = 3;
+
 const UserPage = () => {
   const logInUser = useLogInUser();
   const navigation = useNavigate();
   const [page, setPage] = useState(1);
   const params = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const openModal = () => {
     setIsModalOpen(true);
   };
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-  const getMyPosts = async (email: string) => {
-    try {
-      const response = await axios.get(`http://localhost:3001/posts?email=${email}`);
-      // console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.log('Fetch 데이터 오류', error);
-      return [];
-    }
-  };
-  const fetchPostsByPage = async (email: string, page: number) => {
-    const startIndex = (page - 1) * ITEMS_PER_PAGE;
-    // console.log(startIndex);
-    try {
-      const allPosts = await getMyPosts(email);
-
-      console.log(allPosts);
-      const endIndex = startIndex + ITEMS_PER_PAGE;
-      const slicedData = allPosts.slice(startIndex, endIndex);
-      console.log(slicedData);
-      return slicedData;
-    } catch (error) {
-      console.log('Fetch 데이터 오류', error);
-      return [];
-    }
   };
 
   const [showMyPosts, setShowMyPosts] = useState(true);
@@ -106,7 +82,6 @@ const UserPage = () => {
     setShowMyPosts(false);
   };
   const { isLoading: UsersIsLoading, isError: UsersIsError, data: UsersData } = useQuery('users', () => getUserId(params.id));
-  const { isLoading: PostsIstLoading, isError: PostsIsError, data: PostsData } = useQuery(['posts', logInUser.email, page], () => fetchPostsByPage(logInUser.email, page), { enabled: !!logInUser.email });
   const itemClickHandler = (id: string | undefined) => {
     navigation(`/detail/${id}`);
   };
@@ -152,12 +127,6 @@ const UserPage = () => {
 
     return <StyledImg src={imageSrc} alt="이미지" />;
   };
-  if (PostsIstLoading) {
-    return <h1>로딩 중입니다..</h1>;
-  }
-  if (PostsIsError) {
-    return <h1>오류가 발생했습니다..</h1>;
-  }
 
   return (
     <StyledBox>
@@ -187,47 +156,47 @@ const UserPage = () => {
         <StyledListBox>
           {showMyPosts
             ? myPostsData?.map(function (post: any, postIndex: number) {
-              return (
-                <StyledListItemBox
-                  key={postIndex}
-                  onClick={() => {
-                    itemClickHandler(post.id);
-                  }}
-                >
-                  <ImageComponent category={post.category} />
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
-                    <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
-                  </div>
-                  <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
-                    <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
-                  </div>
-                  <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
-                  <StyledParagraph>{post.position?.addr || 'No data'}</StyledParagraph>
-                </StyledListItemBox>
-              );
-            })
+                return (
+                  <StyledListItemBox
+                    key={postIndex}
+                    onClick={() => {
+                      itemClickHandler(post.id);
+                    }}
+                  >
+                    <ImageComponent category={post.category} />
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
+                      <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
+                    </div>
+                    <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
+                      <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
+                    </div>
+                    <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
+                    <StyledParagraph>{post.position?.addr || 'No data'}</StyledParagraph>
+                  </StyledListItemBox>
+                );
+              })
             : myBookmarksData?.map(function (post: any, postIndex: number) {
-              return (
-                <StyledListItemBox
-                  key={postIndex}
-                  onClick={() => {
-                    itemClickHandler(post.id);
-                  }}
-                >
-                  <ImageComponent category={post.category} />
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
-                    <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
-                  </div>
-                  <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
-                    <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
-                  </div>
-                  <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
-                  <StyledParagraph>{post.position?.addr || 'No data'}</StyledParagraph>
-                </StyledListItemBox>
-              );
-            })}
+                return (
+                  <StyledListItemBox
+                    key={postIndex}
+                    onClick={() => {
+                      itemClickHandler(post.id);
+                    }}
+                  >
+                    <ImageComponent category={post.category} />
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <StyledH2tag>{post.category || 'No data'}</StyledH2tag>
+                      <StyledH2tag style={{ borderBottom: '1px solid black' }}>{post.price} 원</StyledH2tag>
+                    </div>
+                    <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
+                      <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
+                    </div>
+                    <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
+                    <StyledParagraph>{post.position?.addr || 'No data'}</StyledParagraph>
+                  </StyledListItemBox>
+                );
+              })}
         </StyledListBox>
         {showMyPosts ? <Paging page={page} setPage={setPage} totalItemsCount={myPostsLength} /> : <Paging page={page} setPage={setPage} totalItemsCount={myBookmarksLength} />}
       </StyledBottomBox>
