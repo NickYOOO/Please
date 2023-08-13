@@ -107,15 +107,7 @@ const PostForm: React.FC = () => {
 
   useEffect(() => {
     if (imgFile) updateImg(imgFile);
-
-    const storedData = localStorage.getItem('response');
-
-    if (!storedData) {
-      navigate('/login');
-    } else {
-      console.log('게시글작성하기');
-    }
-  }, [imgFile, navigate]);
+  }, [imgFile]);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
