@@ -2,37 +2,28 @@ import { Dropdown, MenuProps, Select, Space, Typography } from 'antd';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { QueryClient, useMutation, useQuery, useQueryClient } from 'react-query';
-
 import { deletePost, updatePost } from '../../api/post';
 import { getLikes, patchLikes } from '../../api/likes';
-
 import { IFormData } from '../Post/PostForm';
 import type { Like } from '../types';
-
 import Modal from '../common/modal/Modal';
 import SendText from '../sendMsg/SendMsg';
 import * as Styled from './DetailContents.style';
-<<<<<<< HEAD
 import useLogInUser from '../../hooks/useLoginUser';
 import { sendMsg } from '../../api/msg';
 import { IMsg } from '../types';
 import ConfirmModal from '../common/confirmModal/ConfirmModal';
-=======
 import { FaBookmark, FaHandRock, FaPaperPlane, FaRegBookmark } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
->>>>>>> ba7a054d406d1e36162c792d7f6c6b53600f98fc
 
 interface DetailContentsProps {
   data: IFormData | undefined;
 }
 
 const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
-<<<<<<< HEAD
   const logInUser = useLogInUser();
-=======
   const params = useParams();
->>>>>>> ba7a054d406d1e36162c792d7f6c6b53600f98fc
   let postStatus = '';
 
   const time = data?.timeStamp || 0;
