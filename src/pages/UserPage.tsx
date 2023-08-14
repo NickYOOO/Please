@@ -178,8 +178,8 @@ const UserPage = () => {
                     <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
                       <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
                     </div>
-                    <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
-                    <StyledParagraph>{post.position?.addr || 'No data'}</StyledParagraph>
+                    <StyledParagraph>{post.date || ''}</StyledParagraph>
+                    <StyledParagraph>{post.position?.addr || ''}</StyledParagraph>
                   </StyledListItemBox>
                 );
               })
@@ -199,8 +199,8 @@ const UserPage = () => {
                     <div style={{ width: '180px', height: '40px', margin: '15px 0 20px' }}>
                       <h1 style={{ fontFamily: 'Pretendard-Regular' }}>{post.title || 'No data'}</h1>
                     </div>
-                    <StyledParagraph>{post.date || 'No data'}</StyledParagraph>
-                    <StyledParagraph>{post.position?.addr || 'No data'}</StyledParagraph>
+                    <StyledParagraph>{post.date || ''}</StyledParagraph>
+                    <StyledParagraph>{post.position?.addr || ''}</StyledParagraph>
                   </StyledListItemBox>
                 );
               })}

@@ -183,7 +183,7 @@ const PostForm: React.FC = () => {
                 <FaStarOfLife size={6} color="#FF004C" />
                 &nbsp;<label>부탁내용</label>
               </div>
-              <Input value={formData.title} maxLength={13} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
+              <Input value={formData.title} maxLength={16} placeholder="어떤 부탁인가요?" allowClear onChange={e => onChangeFormHandler('title', e.target.value)} />
               <TextArea value={formData.content} showCount maxLength={100} style={{ height: 150, resize: 'none' }} onChange={e => onChangeFormHandler('content', e.target.value)} placeholder="자세하게 설명해주세요!" />
             </Styled.StyledRequestBox>
             <div>

@@ -27,6 +27,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const logInUser = useLogInUser();
   const params = useParams();
   const [itemList, setItemList] = useState<any[] | undefined>([]);
+  const [bookmark, setBookmark] = useState(false);
   const queryClient = useQueryClient();
   let postStatus = '';
   const time = data?.timeStamp || 0;
@@ -192,6 +193,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
         // 예: await removeBookmark(id);
       } else {
         // 북마크 추가 로직
+        setBookmark(true);
         await postsMutation.mutateAsync({
           email: bookmarkEmail,
           postId: bookmarkPostId,
@@ -312,8 +314,8 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
         </Modal>
         <Styled.DetailButton onClick={() => handleBookmark(id)}>
           {isPostBookmarked ? '찜하기 해제' : '찜하기'}&nbsp;&nbsp;
-          {isPostBookmarked ? <FaBookmark size="20" color="white" /> : <FiBookmark size="20" color="#black" />}
-          {/* {like.likes % 2 !== 0 ? <FiBookmark size="20" color="white" /> : <FaBookmark size="20" color="#black" />} */}
+          {/* {isPostBookmarked ? <FaBookmark size="20" color="white" /> : <FiBookmark size="20" color="#black" />} */}
+          {bookmark ? <FaBookmark size="20" color="#black" /> : <FiBookmark size="20" color="white" />}
         </Styled.DetailButton>
         {/* {likes?.map(like => (
           <div key={like.id}>
