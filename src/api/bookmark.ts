@@ -13,7 +13,7 @@ const delBookmark = async (id: string) => {
   await axios.delete(`${URL}/bookmark/${id}`);
 };
 
-const addBookmark = async ({ email, postId }: { email: string; postId: string | undefined }) => {
+const addBookmark = async ({ email, postId }: { email: any; postId: string | undefined }) => {
   const response = await axios.post(`${URL}/bookmark`, {
     email,
     postId,

@@ -1,11 +1,14 @@
-import { Button } from 'antd';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useNavigate, useParams } from 'react-router-dom';
 import { styled } from 'styled-components';
+import Paging from '../components/pagination/Pagination';
+import Modal from '../components/common/modal/Modal';
+import UserInfoUpdate from '../components/userPage/UserInfoUpdate';
 import { getPost } from '../api/post';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getUserId } from '../api/users';
+import { Button } from 'antd';
 import assemble from '../assets/categoryImg/assemble.avif';
 import bug from '../assets/categoryImg/bug.png';
 import caring from '../assets/categoryImg/caring.jpeg';
@@ -14,9 +17,6 @@ import delivery from '../assets/categoryImg/delivery.jpeg';
 import logo from '../assets/categoryImg/else.png';
 import role from '../assets/categoryImg/role.jpeg';
 import { IFormData } from '../components/Post/PostForm';
-import Modal from '../components/common/modal/Modal';
-import Paging from '../components/pagination/Pagination';
-import UserInfoUpdate from '../components/userPage/UserInfoUpdate';
 import useLogInUser from '../hooks/useLoginUser';
 
 const ITEMS_PER_PAGE = 3;
@@ -44,28 +44,30 @@ const UserPage = () => {
   const endIndex = startIndex + ITEMS_PER_PAGE;
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const myPostsResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts?email=${logInUser.email}`);
-        const bookmarksResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bookmark?email=${logInUser.email}`);
+    if (logInUser !== null) {
+      const fetchUserData = async () => {
+        try {
+          const myPostsResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts?email=${logInUser.email}`);
+          const bookmarksResponse = await axios.get(`${process.env.REACT_APP_SERVER_URL}/bookmark?email=${logInUser.email}`);
 
-        setMyPostsLength(myPostsResponse.data.length);
-        setBookmarksArray(bookmarksResponse.data.map((item: any) => item.postId));
-        const slicedmyPosts = myPostsResponse.data.slice(startIndex, endIndex);
-        setMyPostsData(slicedmyPosts);
+          setMyPostsLength(myPostsResponse.data.length);
+          setBookmarksArray(bookmarksResponse.data.map((item: any) => item.postId));
+          const slicedmyPosts = myPostsResponse.data.slice(startIndex, endIndex);
+          setMyPostsData(slicedmyPosts);
 
-        if (showMyPosts) {
-          return myPostsResponse.data;
-        } else {
-          return bookmarksResponse.data;
+          if (showMyPosts) {
+            return myPostsResponse.data;
+          } else {
+            return bookmarksResponse.data;
+          }
+        } catch (error) {
+          console.log('Fetch 데이터 오류', error);
         }
-      } catch (error) {
-        console.log('Fetch 데이터 오류', error);
-      }
-    };
+      };
 
-    if (logInUser.email) {
-      fetchUserData();
+      if (logInUser.email) {
+        fetchUserData();
+      }
     }
   }, [logInUser, showMyPosts, page]);
 

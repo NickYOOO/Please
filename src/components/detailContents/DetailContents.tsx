@@ -16,6 +16,7 @@ import ConfirmModal from '../common/confirmModal/ConfirmModal';
 import { FaBookmark, FaHandRock, FaPaperPlane } from 'react-icons/fa';
 import { FiBookmark } from 'react-icons/fi';
 import { BsThreeDots } from 'react-icons/bs';
+import { ItemType, MenuItemType } from 'antd/es/menu/hooks/useItems';
 import { addBookmark, getBookmark } from '../../api/bookmark';
 
 interface DetailContentsProps {
@@ -25,10 +26,11 @@ interface DetailContentsProps {
 const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const logInUser = useLogInUser();
   const params = useParams();
+  const [itemList, setItemList] = useState<any[] | undefined>([]);
   const queryClient = useQueryClient();
   let postStatus = '';
-
   const time = data?.timeStamp || 0;
+
   const detailDate = (timestamp: number) => {
     const milliSeconds = new Date().getTime() - timestamp;
     const seconds = milliSeconds / 1000;
@@ -48,23 +50,48 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   };
   const nowDate = detailDate(time);
 
-  const { data: bookmarkData, error: bookmarkError } = useQuery('bookmarks', () => getBookmark(logInUser.email));
+  const { data: bookmarkData, error: bookmarkError } = useQuery('bookmarks', () => {
+    if (logInUser !== null) {
+      return getBookmark(logInUser.email);
+    }
+  });
 
   useEffect(() => {
-    const fetchBookmarkData = async () => {
-      try {
-        const bookmarks = await getBookmark(logInUser.email);
-        // 여기서 가져온 북마크 데이터를 원하는 방식으로 처리할 수 있습니다.
-        // 예를 들어, 컴포넌트의 상태나 상태 업데이트 함수로 설정할 수 있습니다.
-      } catch (error) {
-        console.error('Error fetching bookmark data:', error);
-      }
-    };
+    if (logInUser !== null) {
+      const isAuthor = logInUser.email === data?.email;
+      const items: MenuProps['items'] = isAuthor
+        ? [
+            {
+              key: 'update',
+              label: '수정하기',
+            },
+            {
+              key: 'delete',
+              label: '삭제하기',
+            },
+          ]
+        : [
+            {
+              key: 'report',
+              label: '신고하기',
+            },
+          ];
+      setItemList(items);
 
-    fetchBookmarkData();
-  }, []);
+      const fetchBookmarkData = async () => {
+        try {
+          // const bookmarks = await getBookmark(logInUser.email);
+          // 여기서 가져온 북마크 데이터를 원하는 방식으로 처리할 수 있습니다.
+          // 예를 들어, 컴포넌트의 상태나 상태 업데이트 함수로 설정할 수 있습니다.
+        } catch (error) {
+          console.error('Error fetching bookmark data:', error);
+        }
+      };
+      fetchBookmarkData();
+    }
+  }, [logInUser]);
 
-  const isPostBookmarked = bookmarkData?.some((bookmark: any) => bookmark.postId === data?.id);
+  const isPostBookmarked = bookmarkData && bookmarkData?.some((bookmark: any) => bookmark.postId === data?.id);
 
   if (data?.status === 'help') {
     postStatus = '부탁해요';
@@ -84,27 +111,6 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
         break;
     }
   };
-
-  const isAuthor = logInUser.email === data?.email;
-  const items: MenuProps['items'] = [
-    ...(isAuthor
-      ? [
-        {
-          key: 'update',
-          label: '수정하기',
-        },
-        {
-          key: 'delete',
-          label: '삭제하기',
-        },
-      ]
-      : [
-        {
-          key: 'report',
-          label: '신고하기',
-        },
-      ]),
-  ];
 
   const { id } = params;
 
@@ -176,7 +182,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   });
 
   const bookmarkUser = useLogInUser();
-  const bookmarkEmail = bookmarkUser.email;
+  const bookmarkEmail = bookmarkUser?.email;
   const bookmarkPostId = data?.id;
 
   const handleBookmark = async (id: string | undefined) => {
@@ -207,22 +213,27 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   };
 
   const HandleToSend = async (id: string | undefined) => {
-    const msgData: IMsg = {
-      postId: id,
-      toUser: data?.email,
-      fromUser: logInUser.email,
-      fromUsername: logInUser.username,
-      timeStamp: new Date().getTime(),
-      content: '도움 요청하신 글 제가 해줄게요!✋',
-      id: '',
-    };
-
     try {
-      await sendMsg(msgData);
+      if (logInUser !== null) {
+        const msgData: IMsg = {
+          postId: id,
+          toUser: data?.email,
+          fromUser: logInUser.email,
+          fromUsername: logInUser.username,
+          timeStamp: new Date().getTime(),
+          content: '도움 요청하신 글 제가 해줄게요!✋',
+          id: '',
+        };
+        await sendMsg(msgData);
+      }
     } catch (error) {
       console.error('Error sending message:', error);
     }
   };
+
+  // if (!itemList) {
+  //   return <div>아이템이 없습니다</div>;
+  // }
 
   return (
     <Styled.ContentsBox>
@@ -246,11 +257,10 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
           <p>{data?.position.addr}</p>
           <div>
             <p>{nowDate}</p>
-
             <Dropdown
               placement="bottomLeft"
               menu={{
-                items,
+                items: itemList,
                 onClick,
                 selectable: true,
               }}
@@ -288,7 +298,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
           isModalOpen={isConfirmModalOpen}
           setIsModalOpen={setIsConfirmModalOpen}
           confirmToSend={() => {
-            HandleToSend(data?.id); // Execute the action
+            HandleToSend(data?.id);
           }}
         >
           {data?.username}님을 도와주시겠습니까?

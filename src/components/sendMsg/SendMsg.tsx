@@ -31,7 +31,9 @@ const SendText = ({ setIsModalOpen, postInfo }: ISendTextProps) => {
   });
 
   useEffect(() => {
-    setMsgData(prev => ({ ...prev, postId: postInfo.postId, toUser: postInfo.postUserEmail, fromUser: logInUser.email, fromUsername: logInUser.username, content: msgTextValue }));
+    if (logInUser !== null) {
+      setMsgData(prev => ({ ...prev, postId: postInfo.postId, toUser: postInfo.postUserEmail, fromUser: logInUser.email, fromUsername: logInUser.username, content: msgTextValue }));
+    }
   }, [postInfo, logInUser, msgTextValue]);
 
   const HandleToSend = async () => {
@@ -51,7 +53,7 @@ const SendText = ({ setIsModalOpen, postInfo }: ISendTextProps) => {
           <p>받는 사람:&nbsp;</p>
           <p>{postInfo.postUserName}</p>
         </Styled.ReceiveUser>
-        <TextArea value={msgTextValue} onChange={e => setMsgTextValue(e)} id="contentInput" placeholder="쪽지 내용을 입력해주세요" showCount maxLength={200} style={{ height: 200, resize: 'none' }} />
+        <TextArea value={msgTextValue} onChange={setMsgTextValue} id="contentInput" placeholder="쪽지 내용을 입력해주세요" showCount maxLength={200} style={{ height: 200, resize: 'none' }} />
         <Styled.SendBox>
           <Styled.SendButton onClick={HandleToSend}>보내기</Styled.SendButton>
         </Styled.SendBox>

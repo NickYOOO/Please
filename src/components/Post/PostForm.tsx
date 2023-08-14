@@ -21,7 +21,7 @@ export interface onChangeFormfuncType {
 }
 
 export interface IFormData {
-  userProfileImg: string,
+  userProfileImg: string;
   email: string;
   username: string;
   status: string;
@@ -76,7 +76,9 @@ const PostForm: React.FC = () => {
   });
 
   useEffect(() => {
-    setFormData(prev => ({ ...prev, email: logInUserData.email, username: logInUserData.username, userProfileImg: logInUserData.imgUrl }));
+    if (logInUserData !== null) {
+      setFormData(prev => ({ ...prev, email: logInUserData.email, username: logInUserData.username, userProfileImg: logInUserData.imgUrl }));
+    }
   }, [logInUserData]);
 
   // const getUser = async (id: string | number) => {
@@ -90,12 +92,12 @@ const PostForm: React.FC = () => {
   // };
   const onChangeFormHandler: onChangeFormfuncType = (type, data): void => {
     setFormData(prev => ({ ...prev, [type]: data }));
-    console.log(formData)
+    console.log(formData);
   };
 
-  const [imgFile, setImgFile] = useState<File | null>(null)
+  const [imgFile, setImgFile] = useState<File | null>(null);
 
-  const [preview, setPreview] = useState<string | null>(null)
+  const [preview, setPreview] = useState<string | null>(null);
 
   const onChangeAddFile = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {

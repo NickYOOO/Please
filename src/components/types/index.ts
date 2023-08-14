@@ -33,5 +33,5 @@ export interface logInUserProps {
 
 export interface UserData extends logInUserProps {
   imgUrl: string;
-  password: string
+  password: string;
 }

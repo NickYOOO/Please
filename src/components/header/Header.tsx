@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import check from '../../assets/img/check.svg';
 import Logo from '../../assets/img/logo.svg';
+import useLogInUser from '../../hooks/useLoginUser';
 import Modal from '../common/modal/Modal';
 import Msg from '../Msg/Msg';
 import * as Styled from './Header.styles';
@@ -23,7 +24,8 @@ const Header: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false); // 쪽지함 모달
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-
+  const navigate = useNavigate();
+  const userData = useLogInUser();
   useEffect(() => {
     const storedResponse = localStorage.getItem('response');
     if (storedResponse) {
@@ -34,17 +36,13 @@ const Header: React.FC = () => {
     } else {
       checkAndRedirectToLogin();
     }
-  }, [pathname]);
+  }, [pathname, userData]);
 
   const checkAndRedirectToLogin = () => {
-    const storedResponse = localStorage.getItem('response');
-    if (!storedResponse) {
-      const protectedPaths = ['/post', '/detail/', '/user/', '/report'];
-      const currentPath = window.location.pathname;
-
-      if (protectedPaths.some(path => currentPath.startsWith(path))) {
-        window.location.href = '/login';
-      }
+    const protectedPaths = ['/post', '/detail/', '/user/', '/report'];
+    const currentPath = window.location.pathname;
+    if (protectedPaths.some(path => currentPath.startsWith(path))) {
+      navigate('/login');
     }
   };
 
