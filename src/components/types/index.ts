@@ -28,9 +28,10 @@ export interface logInUserProps {
   email: string;
   username: string;
   id: number | string;
+  imgUrl: string;
 }
 
 export interface UserData extends logInUserProps {
-  imgUrl: string,
-  password: string
+  imgUrl: string;
+  password: string;
 }

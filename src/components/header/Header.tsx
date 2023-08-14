@@ -3,7 +3,6 @@ import { useCookies } from 'react-cookie';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import check from '../../assets/img/check.svg';
 import Logo from '../../assets/img/logo.svg';
-import ProfileImg from '../../assets/img/profile.png';
 import useLogInUser from '../../hooks/useLoginUser';
 import Modal from '../common/modal/Modal';
 import Msg from '../Msg/Msg';
@@ -12,6 +11,7 @@ import * as Styled from './Header.styles';
 interface User {
   id: string;
   userName: string;
+  img: string;
 }
 
 const Header: React.FC = () => {
@@ -27,7 +27,13 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const userData = useLogInUser();
   useEffect(() => {
-    if (userData === null) {
+    const storedResponse = localStorage.getItem('response');
+    if (storedResponse) {
+      const parsedResponse = JSON.parse(storedResponse);
+      const username = parsedResponse.user.username;
+      setUser({ userName: username, id: parsedResponse.user.id, img: parsedResponse.user.imgUrl });
+      setIsLoggedIn(true);
+    } else {
       checkAndRedirectToLogin();
     }
   }, [pathname, userData]);
@@ -88,7 +94,7 @@ const Header: React.FC = () => {
       {isLoggedIn ? (
         <>
           <Styled.LoginUserBox onClick={toggleDropdown}>
-            <img src={ProfileImg} alt="Profile" />
+            <img src={user?.img} alt="Profile" />
             <div>
               {user?.userName}님
               <Styled.DropdownMenu style={{ display: isDropdownOpen ? 'block' : 'none' }}>

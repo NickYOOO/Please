@@ -21,6 +21,7 @@ export interface onChangeFormfuncType {
 }
 
 export interface IFormData {
+  userProfileImg: string;
   email: string;
   username: string;
   status: string;
@@ -54,8 +55,9 @@ const Update: React.FC = () => {
     },
   });
 
-  const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '반려동물', '벌레 퇴치', '기타'];
+  const categories = ['배달', '청소', '조립', '역할 대행', '동행·돌봄', '벌레 퇴치', '기타'];
   const [formData, setFormData] = useState<IFormData>({
+    userProfileImg: '',
     email: '',
     username: '',
     status: 'help',
@@ -66,7 +68,6 @@ const Update: React.FC = () => {
     date: null,
     time: '',
     price: '0',
-
     position: {
       lat: 0,
       lng: 0,

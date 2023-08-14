@@ -1,4 +1,4 @@
-import axios from 'axios'; 
+import axios from 'axios';
 import { UserData } from '../components/types';
 
 const URL = process.env.REACT_APP_SERVER_URL;
@@ -8,12 +8,11 @@ export const getUsers = async () => {
   return response.data;
 };
 
-export const getUserId = async (id: string | undefined) => {
+export const getUserId = async (id: string | undefined | number) => {
   const response = await axios.get(`${URL}/users/${id}`);
   return response.data;
 };
 
 export const updateUser = async (newUser: UserData) => {
-  console.log(newUser)
-  await axios.patch(`${process.env.REACT_APP_SERVER_URL}/users/${newUser.id}`, newUser)
-}
+  await axios.patch(`${process.env.REACT_APP_SERVER_URL}/users/${newUser.id}`, newUser);
+};

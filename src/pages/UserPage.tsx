@@ -20,43 +20,19 @@ import { IFormData } from '../components/Post/PostForm';
 import useLogInUser from '../hooks/useLoginUser';
 
 const ITEMS_PER_PAGE = 3;
+
 const UserPage = () => {
   const logInUser = useLogInUser();
   const navigation = useNavigate();
   const [page, setPage] = useState(1);
   const params = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const openModal = () => {
     setIsModalOpen(true);
   };
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-  const getMyPosts = async (email: string) => {
-    try {
-      const response = await axios.get(`http://localhost:3001/posts?email=${email}`);
-      // console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.log('Fetch 데이터 오류', error);
-      return [];
-    }
-  };
-  const fetchPostsByPage = async (email: string, page: number) => {
-    const startIndex = (page - 1) * ITEMS_PER_PAGE;
-    // console.log(startIndex);
-    try {
-      const allPosts = await getMyPosts(email);
-
-      console.log(allPosts);
-      const endIndex = startIndex + ITEMS_PER_PAGE;
-      const slicedData = allPosts.slice(startIndex, endIndex);
-      console.log(slicedData);
-      return slicedData;
-    } catch (error) {
-      console.log('Fetch 데이터 오류', error);
-      return [];
-    }
   };
 
   const [showMyPosts, setShowMyPosts] = useState(true);
@@ -108,7 +84,6 @@ const UserPage = () => {
     setShowMyPosts(false);
   };
   const { isLoading: UsersIsLoading, isError: UsersIsError, data: UsersData } = useQuery('users', () => getUserId(params.id));
-  const { isLoading: PostsIstLoading, isError: PostsIsError, data: PostsData } = useQuery(['posts', logInUser?.email, page], () => fetchPostsByPage(logInUser!.email, page), { enabled: !!logInUser?.email });
   const itemClickHandler = (id: string | undefined) => {
     navigation(`/detail/${id}`);
   };
@@ -154,12 +129,6 @@ const UserPage = () => {
 
     return <StyledImg src={imageSrc} alt="이미지" />;
   };
-  if (PostsIstLoading) {
-    return <h1>로딩 중입니다..</h1>;
-  }
-  if (PostsIsError) {
-    return <h1>오류가 발생했습니다..</h1>;
-  }
 
   return (
     <StyledBox>
@@ -244,8 +213,6 @@ const StyledBox = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  /* margin-top: 40px; */
   min-height: calc(100vh - 186px);
 `;
 const StyledUpperBox = styled.div`
@@ -257,59 +224,50 @@ const StyledUpperBox = styled.div`
   margin: 60px 0 50px;
 `;
 export const StyledPhotoBox = styled.div`
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
 
   img {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     margin: 0 auto;
     border-radius: 50%;
     object-fit: cover;
-    cursor: pointer;
   }
 `;
 const StyledUserInfoBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   width: 50%;
-
   padding: 20px;
-  /* background-color: #d5e6eb; */
 
   & > h2 {
     margin-bottom: 15px;
   }
   & > p {
     color: #444444;
-
     font-size: 13px;
   }
 `;
 const StyledBottomBox = styled.div`
   width: 700px;
   height: 420px;
-
   padding: 25px;
-
   border: 5px solid #f9f7f1;
   border-radius: 30px;
-  /* background-color: #d5e6eb; */
 `;
 const StyledCategoryBox = styled.div`
   display: flex;
-
   padding-bottom: 30px;
 
   & > p {
     color: #444444;
-
     margin-right: 20px;
     font-size: 13px;
   }
 `;
+
 const StyledListBox = styled.div`
   width: 100%;
   height: 250px;
@@ -319,6 +277,7 @@ const StyledListBox = styled.div`
   gap: 25px;
   /* background-color: #d5e6eb; */
 `;
+
 const StyledListItemBox = styled.div`
   width: 180px;
   height: 300px;
@@ -336,9 +295,9 @@ const StyledImg = styled.img`
 
 const StyledH2tag = styled.h2`
   margin-bottom: 5px;
-  /* font-size: '13px'; */
   font-family: 'Pretendard-Regular';
 `;
+
 const StyledParagraph = styled.p`
   margin-bottom: 5px;
   font-size: 13px;
