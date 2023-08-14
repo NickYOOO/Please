@@ -12,15 +12,15 @@
 
 ### 🧷 목차
 
-- 1. [프로젝트 소개](#프로젝트-소개)
-- 2. [배포 주소](#배포-주소)
-- 3. [와이어 프레임](#와이어-프레임)
-- 4. [기술스택](#기술스택)
-- 5. [Project Structure](#project-structure)
-- 6. [API Table](#api-table)
-- 7. [페이지](#페이지)
+- [프로젝트 소개](#프로젝트-소개)
+- [배포 주소](#배포-주소)
+- [와이어 프레임](#와이어-프레임)
+- [기술스택](#기술스택)
+- [Project Structure](#project-structure)
+- [API Table](#api-table)
+- [페이지](#페이지)
 
-### 🧷 프로젝트 소개
+### 프로젝트 소개
 
 **부탁해 PLEASE** (우리 동네 심부름 서비스)
 
@@ -32,20 +32,20 @@
 
 어려움이 있을 때 부탁해 PLEASE를 통해 쉽고 빠르게 해결해 보세요!
 
-### 🧷 배포 주소
+### 배포 주소
 
 추가예정
 
-### 🧷 와이어 프레임
+### 와이어 프레임
 
 ![image](https://github.com/NickYOOO/Please/assets/125546973/8aec0d44-6080-4ea9-bd5a-0ab7658773c4)
 ![image](https://github.com/NickYOOO/Please/assets/125546973/0874383b-8a19-44f1-973c-ac938c0bddf5)
 
-### 🧷 기술스택
+### 기술스택
 
 <img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white"><img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white"><img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=white"><img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white"><img src="https://img.shields.io/badge/styledcomponents-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white"><img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white"><img src="https://img.shields.io/badge/axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white"><img src="https://img.shields.io/badge/kakaomap-FFCD00?style=for-the-badge&logo=kakao&logoColor=white"><img src="https://img.shields.io/badge/typescript-ffffff?style=for-the-badge&logo=typescript">
 
-### 🧷 Project Structure
+### Project Structure
 
 ```sh
 📦db.json                   # json 서버
@@ -70,7 +70,7 @@
 
 ```
 
-### 🧷 API Table
+### API Table
 
 | API 이름     | Method   | Request                                                                                                                                 | Response                                                                                                                               |
 | ------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -86,7 +86,7 @@
 | 쪽지 작성    | `POST`   | {uId : string, fromUserId : string, toUserId : string, content : string, time : timestamp}                                              |
 | 쪽지 조회    | `GET`    |                                                                                                                                         | {uId : string, fromUserId : string, toUserId : string, content : string, time : timestamp}                                             |
 
-### 🧷 페이지
+### 페이지
 
 #### 메인 페이지
 
