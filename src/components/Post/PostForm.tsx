@@ -137,6 +137,9 @@ const PostForm: React.FC = () => {
     } else if (!formData.title.trim() || !formData.content.trim()) {
       setErrMsg('제목과 내용을 모두 입력해주세요');
       return;
+    } else if (!formData.date) {
+      setErrMsg('날짜를 지정해주세요')
+      return
     }
 
     try {
