@@ -18,9 +18,9 @@ const DetailPage: React.FC = () => {
 
   if (isLoading) {
     return (
-      <LoaderWrap>
+      <CustomLoaderWrap>
         <ReactLoading type="spin" color="#3382d9" />
-      </LoaderWrap>
+      </CustomLoaderWrap>
     );
   }
 
@@ -54,11 +54,10 @@ const StyledBox = styled.div`
   }
 `;
 
-const LoaderWrap = styled.div`
-  width: 100%;
-  height: 80%;
+const CustomLoaderWrap = styled.div`
   display: flex;
   justify-content: center;
-  text-align: center;
   align-items: center;
+  padding-top: 100px;
+  min-height: calc(100vh - 186px);
 `;

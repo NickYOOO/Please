@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import ReactLoading from 'react-loading';
 import { useQuery } from 'react-query';
 import { styled } from 'styled-components';
 import Paging from '../components/pagination/Pagination';
@@ -92,11 +93,15 @@ const UserPage = () => {
     category: string;
   };
   if (UsersIsLoading) {
-    return <p>로딩중입니다....!</p>;
+    return (
+      <CustomLoaderWrap>
+        <ReactLoading type="spin" color="#3382d9" />
+      </CustomLoaderWrap>
+    );
   }
 
   if (UsersIsError) {
-    return <p>오류가 발생하였습니다...!</p>;
+    return <CustomLoaderWrap>오류가 발생하였습니다...!</CustomLoaderWrap>;
   }
   const ImageComponent: React.FC<ImageComponentProps> = ({ category }) => {
     let imageSrc: string;
@@ -215,6 +220,14 @@ const StyledBox = styled.div`
   align-items: center;
   min-height: calc(100vh - 186px);
 `;
+const CustomLoaderWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+  min-height: calc(100vh - 186px);
+`;
+
 const StyledUpperBox = styled.div`
   display: flex;
   justify-content: space-around;
