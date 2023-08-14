@@ -81,18 +81,8 @@ const PostForm: React.FC = () => {
     }
   }, [logInUserData]);
 
-  // const getUser = async (id: string | number) => {
-  //   try {
-
-  //     return response.data;
-  //   } catch (error) {
-  //     console.log('Fetch 데이터 오류', error);
-  //     return [];
-  //   }
-  // };
   const onChangeFormHandler: onChangeFormfuncType = (type, data): void => {
     setFormData(prev => ({ ...prev, [type]: data }));
-    console.log(formData);
   };
 
   const [imgFile, setImgFile] = useState<File | null>(null);
@@ -138,8 +128,8 @@ const PostForm: React.FC = () => {
       setErrMsg('제목과 내용을 모두 입력해주세요');
       return;
     } else if (!formData.date) {
-      setErrMsg('날짜를 지정해주세요')
-      return
+      setErrMsg('날짜를 지정해주세요');
+      return;
     }
 
     try {

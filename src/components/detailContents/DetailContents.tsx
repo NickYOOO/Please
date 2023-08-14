@@ -82,8 +82,6 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
       const fetchBookmarkData = async () => {
         try {
           // const bookmarks = await getBookmark(logInUser.email);
-          // 여기서 가져온 북마크 데이터를 원하는 방식으로 처리할 수 있습니다.
-          // 예를 들어, 컴포넌트의 상태나 상태 업데이트 함수로 설정할 수 있습니다.
         } catch (error) {
           console.error('Error fetching bookmark data:', error);
         }
@@ -103,12 +101,8 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const handleChange = (value: string) => {
     switch (value) {
       case 'help':
-        console.log('help');
-        // post status help로 patch
         break;
       case 'done':
-        console.log('done');
-        // post status done으로 patch
         break;
     }
   };
@@ -125,7 +119,6 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
       case 'delete':
         deletePost(data?.id);
         window.location.href = '/board';
-        // 컨펌 모달
         break;
     }
   };
@@ -136,45 +129,6 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const openModal = () => {
     setIsModalOpen(true);
   };
-
-  // 찜하기 기능
-  // const queryClient = useQueryClient();
-
-  // const { data: likes = [] } = useQuery<Like[], Error>('likes', getLikes);
-
-  // const likeMutation = useMutation(patchLikes, {
-  //   onMutate: (updatedLike: Like) => {
-  //     // Optimistic Update
-  //     const prevLikes = queryClient.getQueryData<Like[]>('likes');
-  //     const likeIndex = prevLikes?.findIndex(like => like.id === updatedLike.id);
-
-  //     if (likeIndex !== undefined && prevLikes) {
-  //       // 해당 like 객체에 대한 옵티미스틱 업데이트
-  //       const updatedLikes = [...prevLikes];
-  //       if (updatedLike.likes % 2 !== 0) {
-  //         // 찜하기가 되어있으면 -1
-  //         updatedLikes[likeIndex] = { ...updatedLikes[likeIndex], likes: updatedLike.likes - 1 };
-  //       } else {
-  //         // 찜하기가 안되어있으면 +1
-  //         updatedLikes[likeIndex] = { ...updatedLikes[likeIndex], likes: updatedLike.likes + 1 };
-  //       }
-
-  //       // 업데이트된 데이터로 쿼리 데이터 갱신
-  //       queryClient.setQueryData<Like[]>('likes', updatedLikes);
-  //     }
-
-  //     return prevLikes;
-  //   },
-  // });
-
-  // const handleLike = (like: Like) => {
-  //   // 업데이트된 좋아요 상태를 전달하여 뮤테이션 실행
-  //   if (like.likes % 2 !== 0) {
-  //     likeMutation.mutate({ ...like, likes: like.likes - 1 });
-  //   } else {
-  //     likeMutation.mutate({ ...like, likes: like.likes + 1 });
-  //   }
-  // };
 
   const postsMutation = useMutation(addBookmark, {
     onSuccess: () => {
@@ -189,10 +143,7 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
   const handleBookmark = async (id: string | undefined) => {
     try {
       if (isPostBookmarked) {
-        // 북마크 해제 로직
-        // 예: await removeBookmark(id);
       } else {
-        // 북마크 추가 로직
         setBookmark(true);
         await postsMutation.mutateAsync({
           email: bookmarkEmail,
@@ -232,10 +183,6 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
       console.error('Error sending message:', error);
     }
   };
-
-  // if (!itemList) {
-  //   return <div>아이템이 없습니다</div>;
-  // }
 
   return (
     <Styled.ContentsBox>
@@ -314,17 +261,8 @@ const DetailContents: React.FC<DetailContentsProps> = ({ data }) => {
         </Modal>
         <Styled.DetailButton onClick={() => handleBookmark(id)}>
           {isPostBookmarked ? '찜하기 해제' : '찜하기'}&nbsp;&nbsp;
-          {/* {isPostBookmarked ? <FaBookmark size="20" color="white" /> : <FiBookmark size="20" color="#black" />} */}
           {bookmark ? <FaBookmark size="20" color="#black" /> : <FiBookmark size="20" color="white" />}
         </Styled.DetailButton>
-        {/* {likes?.map(like => (
-          <div key={like.id}>
-            <Styled.DetailButton onClick={() => handleLike(like)}>
-              찜하기&nbsp;{like.likes}&nbsp;
-              {like.likes % 2 !== 0 ? <FiBookmark size="20" color="white" /> : <FaBookmark size="20" color="#black" />}
-            </Styled.DetailButton>
-          </div>
-        ))} */}
       </Styled.DetailButtons>
     </Styled.ContentsBox>
   );

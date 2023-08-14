@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { logInUserProps } from '../components/types';
 
 const useLogInUser = (): logInUserProps | null => {
-  // const [userData, setUserData] = useState({ email: '', username: '', imgUrl:'', id: '' });
-
   const [userData, setUserData] = useState<logInUserProps | null>(null);
   useEffect(() => {
     const storedResponse = localStorage.getItem('response');

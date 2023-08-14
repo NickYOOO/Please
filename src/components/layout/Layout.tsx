@@ -8,7 +8,6 @@ interface LayoutProps {
 }
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
-  // console.log(location.pathname);
   if ('/' === location.pathname) return <>{children}</>;
 
   return (

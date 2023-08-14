@@ -72,7 +72,6 @@ const useFormValidation = () => {
             msg = '이메일 형식이 올바르지 않습니다.';
             currentState = false;
           } else {
-            // 서버에 이메일 중복 여부 확인
             const isDuplicated = await isEmailDuplicated({ email: value });
             if (isDuplicated) {
               msg = '이미 존재하는 이메일입니다.';
@@ -133,7 +132,7 @@ const useFormValidation = () => {
             confirmPasswordState: currentState,
           }));
 
-          const isFormValid = validationState.usernameState && validationState.emailState && validationState.passwordState && currentState; // 비밀번호 확인 입력란의 상태
+          const isFormValid = validationState.usernameState && validationState.emailState && validationState.passwordState && currentState;
 
           setValidationState(prev => ({
             ...prev,

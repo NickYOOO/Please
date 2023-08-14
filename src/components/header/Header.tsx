@@ -22,10 +22,11 @@ const Header: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
   const { pathname } = useLocation();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMessageModalOpen, setIsMessageModalOpen] = useState(false); // 쪽지함 모달
+  const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const navigate = useNavigate();
   const userData = useLogInUser();
+
   useEffect(() => {
     const storedResponse = localStorage.getItem('response');
     if (storedResponse) {
