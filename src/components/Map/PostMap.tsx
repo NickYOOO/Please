@@ -90,9 +90,7 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
   };
 
   const handleSearch = () => {
-    console.log('map');
     if (!map || !searchKeyword) return;
-
 
     const ps = new kakao.maps.services.Places();
 
@@ -118,7 +116,7 @@ const PostMap = ({ onChangeFormHandler }: PostDatePickerProps) => {
       <MapContainer>
         <SearchBox>
           <input type="text" value={searchKeyword} onChange={handleSearchInputChange} onKeyPress={handleOnKeyPress} />
-          <button type='button' onClick={handleSearch}>
+          <button type="button" onClick={handleSearch}>
             <BiSearchAlt size={20} />
           </button>
         </SearchBox>

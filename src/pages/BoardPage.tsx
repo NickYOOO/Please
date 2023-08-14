@@ -14,12 +14,7 @@ import role from '../assets/categoryImg/role.jpeg';
 
 import { IFormData } from '../components/Post/PostForm';
 
-const LIMIT = 12; //페이지 스크롤
-
-// 예시
-// 1번 페이지는 0~19
-// 2번 페이지는 20~39
-// 3번 페이지는 40~59
+const LIMIT = 12;
 
 const BoardPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
@@ -33,19 +28,8 @@ const BoardPage = () => {
       },
     });
 
-  // data는 현재까지 가져온 모든 페이지의 데이터들
-  // fetchNextPage 다음 페이지를 가져오는 함수
-  // hasNextPage 더 많은 페이지가 있는지 여부 나타냄
-  // isFetchingNextPage 다음 페이지를 가져오는 중인지 여부 나타냄
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery<any>('posts', fetchPosts, {
-    // getNextPageParam 다음 페이지의 매개 변수 결정
-    // getNextPageParam 함수가 내부적으로 useInfiniteQuery에 의해 호출되며,
-    // 그 결과에 따라 fetchNextPage 함수가 호출되어 다음 페이지를 가져옴
     getNextPageParam: (lastPage, allPages) => {
-      // 마지막 페이지의 데이터에서 data 속성 중 posts 속성 가져옴
-      // 만약 data가 존재하지 않으면 undefined를 반환
-      // console.log(lastPage, allPages);
-
       const nextPage = allPages.length + 1;
       return nextPage;
     },
@@ -64,6 +48,7 @@ const BoardPage = () => {
         fetching = false;
       }
     };
+
     document.addEventListener('scroll', handleScroll);
     return () => {
       document.removeEventListener('scroll', handleScroll);
@@ -81,10 +66,7 @@ const BoardPage = () => {
       </CustomLoaderWrap>
     );
   }
-  // console.log(data);
-  // console.log(data.pages[0].data);
 
-  // flatMap 함수를 사용하여 모든 페이지의 데이터를 하나의 배열로 결합
   const allPosts = data.pages.flatMap(page => page.data.map((post: IFormData) => post));
 
   const itemClickHandler = (id: string | undefined) => {
@@ -92,8 +74,9 @@ const BoardPage = () => {
   };
 
   type ImageComponentProps = {
-    category: string; // 카테고리의 타입을 여기에 지정
+    category: string;
   };
+
   const ImageComponent: React.FC<ImageComponentProps> = ({ category }) => {
     let imageSrc: string;
 

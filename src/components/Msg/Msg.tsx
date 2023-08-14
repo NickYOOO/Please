@@ -41,7 +41,6 @@ const Msg: React.FC = () => {
   };
 
   const handleToReply = (id: string) => {
-    console.log('답장');
     console.log(id);
   };
 
@@ -54,7 +53,6 @@ const Msg: React.FC = () => {
 
   const handleToDelete = async (id: string) => {
     try {
-      await deleteMsg(id);
       await deleteMsgMutation.mutateAsync(id);
     } catch (error) {
       console.error('쪽지 삭제 오류:', error);

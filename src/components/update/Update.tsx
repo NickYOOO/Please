@@ -118,7 +118,6 @@ const Update: React.FC = () => {
     if (!storedData) {
       navigate('/login');
     } else {
-      console.log('게시글작성하기');
     }
   }, [imgFile, navigate]);
 
@@ -128,9 +127,9 @@ const Update: React.FC = () => {
   useEffect(() => {
     const fetchPostData = async () => {
       try {
-        const postData = await getPostId(params.id); // getPost 함수로 포스트 데이터 가져오기
-        setFormData(postData); // 가져온 데이터로 formData 설정
-        setDataFetched(true); // 데이터를 가져왔음을 표시
+        const postData = await getPostId(params.id);
+        setFormData(postData);
+        setDataFetched(true);
       } catch (error) {
         console.log(error);
       }

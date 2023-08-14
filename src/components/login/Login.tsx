@@ -20,7 +20,7 @@ const Login = () => {
   });
 
   const [isClearModalOpen, setIsClearModalOpen] = useState(false);
-  const [checkUser, setCheckUser] = useState(false); // 이 부분 추가
+  const [checkUser, setCheckUser] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies();
   const navigate = useNavigate();
 
@@ -39,7 +39,6 @@ const Login = () => {
       password: formData.password,
     });
 
-
     localStorage.setItem('response', JSON.stringify(response.data));
 
     return response.data.accessToken;
@@ -48,7 +47,6 @@ const Login = () => {
   const checkUserRegisted = async (formData: FieldType) => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/users?email=${formData.email}`);
-      console.log(response);
       return response.data.length > 0;
     } catch (error) {
       console.error('사용자 조회 오류:', error);
@@ -64,7 +62,6 @@ const Login = () => {
     try {
       const checkUser = await checkUserRegisted(formData);
       setCheckUser(checkUser);
-      console.log(checkUser);
 
       if (!checkUser) {
         openClearModal();

@@ -9,7 +9,6 @@ interface PagingProps {
 const Paging = ({ page, setPage, totalItemsCount }: PagingProps) => {
   const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
-    // console.log(pageNumber);
   };
 
   return (

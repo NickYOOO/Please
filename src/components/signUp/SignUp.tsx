@@ -40,13 +40,6 @@ const SignUp = () => {
         imgUrl: 'https://cdn-icons-png.flaticon.com/512/95/95641.png',
       });
 
-      // const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/login`, {
-      //   email: formState.email,
-      //   password: formState.password,
-      // });
-      // console.log(response.data.accessToken);
-      // setCookie('accessToken', data['accessToken'], { path: '/' });
-
       openClearModal();
       setTimeout(() => {
         setIsClearModalOpen(false);
