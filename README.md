@@ -87,3 +87,41 @@
 | 쪽지 조회    | `GET`    |                                                                                                                                         | {uId : string, fromUserId : string, toUserId : string, content : string, time : timestamp}                                             |
 
 ### 🧷 페이지
+
+#### 메인 페이지
+
+<img width="1440" alt="image" src="https://github.com/setItUpLater/comeit/assets/125546973/97ed100b-f315-4d13-801b-9b19ae3e2f07">
+
+#### 로그인/회원가입 페이지
+
+![image](https://github.com/NickYOOO/Please/assets/125546973/7e626b3e-0c58-49e0-803f-3d12ac7e4123)
+![image](https://github.com/NickYOOO/Please/assets/125546973/4da42f9c-4ce8-4a45-8123-76405cc839f5)
+![image](https://github.com/NickYOOO/Please/assets/125546973/68101d29-68d8-4454-9341-427f7e9385cc)
+
+유효성 검증 있음, 로그인 또는 회원가입 성공 시 자동 페이지 이동.
+
+#### 요청 게시판 페이지
+
+![image](https://github.com/NickYOOO/Please/assets/125546973/6b8d7162-b135-4dbf-93c4-7427473ad5f1)
+<img width="1440" alt="스크린샷 2023-08-14 오전 11 11 24" src="https://github.com/NickYOOO/Please/assets/125546973/23a47870-c636-4d17-a6cb-a66055509135">
+
+카테고리별 요청 게시물 분류, 리액트쿼리 useInfiniteQuery를 적용한 무한스크롤 구현
+
+#### 게시물 상세 페이지
+
+<img width="1440" alt="스크린샷 2023-08-14 오전 11 07 51" src="https://github.com/NickYOOO/Please/assets/125546973/3a4fa6d1-51f6-41d6-a0d0-5464debefc59">
+
+게시글 작성 시 마커로 지정한 위치 기준 반경 300m 위치가 표시됨.
+정확한 위치는 개인 정보 보호차 표시하지 않음.
+
+#### 마이페이지
+
+![image](https://github.com/NickYOOO/Please/assets/125546973/551765d7-b12c-4352-95cc-36203e038360)
+
+닉네임과 유저 사진 수정 가능, 내가 쓴 게시물과 찜한 게시물 확인할 수 있음.
+
+#### 쪽지 기능 (받은 쪽지/보낸 쪽지)
+
+![image](https://github.com/NickYOOO/Please/assets/125546973/7872b43e-9c0d-45ca-9a32-d6ddf1b85bb0)
+
+![image](https://github.com/NickYOOO/Please/assets/125546973/b3708026-de1b-4f70-beb8-45aeb5942f37)
